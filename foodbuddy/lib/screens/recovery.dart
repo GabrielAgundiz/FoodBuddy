@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:foodbuddy/screens/register.dart';
-import 'package:foodbuddy/screens/recovery.dart';
-class LoginPage extends StatefulWidget {
+import 'package:foodbuddy/screens/login.dart';
+
+class RecoverPasswordPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RecoverPasswordPageState createState() => _RecoverPasswordPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
   final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'Accede',
+                  'Recupera',
                   style: GoogleFonts.roboto(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -51,35 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(
-                      labelText: 'Contraseña',
-                      hintText: '••••••••',
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: IconButton(
-                        icon: Icon(obscureText
-                            ? Icons.visibility_off
-                            : Icons.remove_red_eye),
-                        onPressed: () {
-                          setState(() {
-                            obscureText = !obscureText;
-                          });
-                        },
-                      ),
-                      border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                    ),
-                    obscureText: obscureText,
-                  ),
-                ),
                 SizedBox(height: 40.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -87,11 +56,9 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.green[400],
                     foregroundColor: Colors.white,
                   ),
-                  child: Text('Iniciar sesión'),
+                  child: Text('Enviar contraseña temporal'),
                   onPressed: () {
-                    // Validate user information
-                    // If the information is valid, navigate to the next screen
-                    // If the information is not valid, display an error message
+                    // Validate email and send recovery link
                   },
                 ),
                 SizedBox(height: 40.0),
@@ -99,34 +66,19 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RecoverPasswordPage()),
-                    );
-                  },
-                  child: Text(
-                    '¿Olvidaste tu contraseña?',
-                    style: GoogleFonts.roboto(
-                      color: Color(0xFF5DB075),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20.0),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => RegisterPage()),
+                      MaterialPageRoute(builder: (context) => LoginPage()),
                     );
                   },
                   child: RichText(
                     text: TextSpan(
-                      text: '¿Aún no tienes una cuenta? ',
+                      text: '¿Ya recordaste tu contraseña? ',
                       style: GoogleFonts.roboto(
                         fontSize: 16,
                         color: Colors.black,
                       ),
                       children: [
                         TextSpan(
-                          text: 'Regístrate',
+                          text: 'Accede',
                           style: GoogleFonts.roboto(
                             fontSize: 16,
                             color: Color(0xFF5DB075),
