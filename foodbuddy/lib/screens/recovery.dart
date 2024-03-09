@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RecoverPasswordPage extends StatefulWidget {
   @override
@@ -9,6 +10,22 @@ class RecoverPasswordPage extends StatefulWidget {
 
 class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
   final _emailController = TextEditingController();
+  @override
+  void dispose(){
+    _emailController.dispose();
+
+    super.dispose();
+  }
+
+  Future resetPassword() async{
+
+    try {await FirebaseAuth.instance
+      .sendPasswordResetEmail(email: _emailController.text.trim());}
+      on FirebaseAuthException catch(e){
+        // print(e);
+
+      }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +74,7 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
                     foregroundColor: Colors.white,
                   ),
                   child: Text('Enviar contraseña temporal'),
-                  onPressed: () {
-                    // Validate email and send recovery link
-                  },
+                  onPressed: resetPassword,
                 ),
                 SizedBox(height: 40.0),
                 GestureDetector(

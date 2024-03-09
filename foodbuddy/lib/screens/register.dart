@@ -15,7 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   bool obscureText = true;
-  
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -28,14 +28,19 @@ class _RegisterPageState extends State<RegisterPage> {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
 
-
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
     } on FirebaseAuthException catch (e) {
-      //throw e;
+      // print(e);
+
+      // Utils.showSnackBar('Error message', messengerKey);
     }
   }
 
@@ -43,141 +48,158 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Theme(
-          data: ThemeData(
-            fontFamily: 'Roboto',
-          ),
-          child: Container(
-            padding: EdgeInsets.all(20.0),
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'Regístrate',
-                    style: GoogleFonts.roboto(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(height: 40.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        labelText: 'Nombre',
-                        hintText: 'Ingresa tu nombre',
-                        prefixIcon: Icon(Icons.person),
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: SingleChildScrollView(
+          child: Theme(
+            data: ThemeData(
+              fontFamily: 'Roboto',
+            ),
+            child: Container(
+              padding: EdgeInsets.all(20.0),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Regístrate',
+                      style: GoogleFonts.roboto(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        hintText: 'example@email.com',
-                        prefixIcon: Icon(Icons.email),
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    SizedBox(height: 40.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                     // validator: (email) =>
-                     //     email != null && !EmailValidator.validate(email)
-                     //         ? 'Ingresa un correo valido'
-                     //         : null,
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: TextFormField(
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        labelText: 'Contraseña',
-                        hintText: '••••••••',
-                        prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(obscureText
-                              ? Icons.visibility_off
-                              : Icons.remove_red_eye),
-                          onPressed: () {
-                            setState(() {
-                              obscureText = !obscureText;
-                            });
-                          },
+                      child: TextFormField(
+                        controller: _nameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Nombre',
+                          hintText: 'Ingresa tu nombre',
+                          prefixIcon: Icon(Icons.person),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
                         ),
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        validator: (value) => value!.isNotEmpty
+                            ? null
+                            : 'Este campo es requerido',
                       ),
-                      obscureText: obscureText,
-                     // autovalidateMode: AutovalidateMode.onUserInteraction,
-                   //   validator: (value) => value != null && value.length < 8
-                     //     ? 'Ingresa minimo 8 digitos'
-                     //     : null,
                     ),
-                  ),
-                  SizedBox(height: 40.0),
-                  ElevatedButton(
+                    SizedBox(height: 20.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: _emailController,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'example@email.com',
+                          prefixIcon: Icon(Icons.email),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                        ),
+                        validator: (email) => EmailValidator.validate(email!)
+                            ? null
+                            : 'Ingresa un correo valido',
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextFormField(
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          labelText: 'Contraseña',
+                          hintText: '••••••••',
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(obscureText
+                                ? Icons.visibility_off
+                                : Icons.remove_red_eye),
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
+                          ),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                        ),
+                        obscureText: obscureText,
+                        validator: (value) => value!.length >= 8
+                            ? null
+                            : 'Ingresa minimo 8 digitos',
+                      ),
+                    ),
+                    SizedBox(height: 40.0),
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 50),
+                        minimumSize: const Size(double.infinity, 50),
                         backgroundColor: Colors.green[400],
                         foregroundColor: Colors.white,
                       ),
                       child: Text('Registrarse'),
                       onPressed: () async {
-                        await signUp();
-                        Navigator.pushReplacement(
+                        if (formKey.currentState!.validate()) {
+                          try {
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                              email: _emailController.text.trim(),
+                              password: _passwordController.text.trim(),
+                            );
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            //  print(e);
+
+                            // Utils.showSnackBar('Error message', messengerKey);
+                          }
+                        }
+                      },
+                    ),
+                    SizedBox(height: 40.0),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => LoginPage()),
                         );
-                      }),
-                  SizedBox(height: 40.0),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
-                      );
-                    },
-                    child: RichText(
-                      text: TextSpan(
-                        text: '¿Ya tienes una cuenta? ',
-                        style: GoogleFonts.roboto(
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: 'Accede',
-                            style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              color: Color(0xFF5DB075),
-                            ),
+                      },
+                      child: RichText(
+                        text: TextSpan(
+                          text: '¿Ya tienes una cuenta? ',
+                          style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            color: Colors.black,
                           ),
-                        ],
+                          children: [
+                            TextSpan(
+                              text: 'Accede',
+                              style: GoogleFonts.roboto(
+                                fontSize: 16,
+                                color: const Color(0xFF5DB075),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -186,3 +208,15 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
+//class Utils {
+ // static void showSnackBar(String? text, GlobalKey<ScaffoldMessengerState> messengerKey) {
+  //  if (text == null) return;
+
+ //   final snackBar = SnackBar(content: Text(text), backgroundColor: Colors.red);
+
+ //   messengerKey.currentState!
+  //    ..removeCurrentSnackBar()
+  //    ..showSnackBar(snackBar);
+//  }
+//}
