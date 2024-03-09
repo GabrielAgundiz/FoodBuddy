@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => Center(
+        builder: (context) => const Center(
           child: CircularProgressIndicator(),
         ),
       );
@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
               fontFamily: 'Roboto',
             ),
             child: Container(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Form(
                 key: formKey,
                 child: Column(
@@ -76,7 +76,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    const SizedBox(height: 40.0),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : 'Este campo es requerido',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : 'Ingresa un correo valido',
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    const SizedBox(height: 20.0),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -129,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         decoration: InputDecoration(
                           labelText: 'Contraseña',
                           hintText: '••••••••',
-                          prefixIcon: Icon(Icons.lock),
+                          prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: Icon(obscureText
                                 ? Icons.visibility_off
@@ -150,14 +150,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             : 'Ingresa minimo 8 digitos',
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    const SizedBox(height: 40.0),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 50),
                         backgroundColor: Colors.green[400],
                         foregroundColor: Colors.white,
                       ),
-                      child: Text('Registrarse'),
+                      child: const Text('Registrarse'),
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           try {
@@ -179,7 +179,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         }
                       },
                     ),
-                    SizedBox(height: 40.0),
+                    const SizedBox(height: 40.0),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(

@@ -5,9 +5,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inicio'),
+        title: const Text('Inicio'),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'Bienvenido a la página de inicio',
           style: TextStyle(fontSize: 24),
@@ -16,16 +16,16 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.store),
             label: 'Inicio',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Negocios',
+            icon: Icon(Icons.search),
+            label: 'Buscar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'Educación',
+            icon: Icon(Icons.person),
+            label: 'Perfil',
           ),
         ],
        // currentIndex: _selectedIndex,

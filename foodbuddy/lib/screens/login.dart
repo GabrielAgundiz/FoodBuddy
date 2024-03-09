@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             fontFamily: 'Roboto',
           ),
           child: Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -67,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
                       hintText: 'example@email.com',
                       prefixIcon: Icon(Icons.email),
@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                           :null,
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
                       hintText: '••••••••',
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                         icon: Icon(obscureText
                             ? Icons.visibility_off
@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       border: InputBorder.none,
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                          const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     obscureText: obscureText,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -122,14 +122,14 @@ class _LoginPageState extends State<LoginPage> {
                       :null,
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 50),
+                    minimumSize: const Size(double.infinity, 50),
                     backgroundColor: Colors.green[400],
                     foregroundColor: Colors.white,
                   ),
-                  child: Text('Iniciar sesión'),
+                  child: const Text('Iniciar sesión'),
                   onPressed: () async {
                     try {
                       await signIn();
@@ -141,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (e is FirebaseAuthException &&
                           e.code == 'wrong-password') {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text('Contraseña incorrecta'),
                             backgroundColor: Colors.red,
                           ),
@@ -150,7 +150,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -162,11 +162,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     '¿Olvidaste tu contraseña?',
                     style: GoogleFonts.roboto(
-                      color: Color(0xFF5DB075),
+                      color: const Color(0xFF5DB075),
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -186,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
                           text: 'Regístrate',
                           style: GoogleFonts.roboto(
                             fontSize: 16,
-                            color: Color(0xFF5DB075),
+                            color: const Color(0xFF5DB075),
                           ),
                         ),
                       ],

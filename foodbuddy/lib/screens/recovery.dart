@@ -25,7 +25,7 @@ Future resetPassword() async {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => Center(
+      builder: (context) => const Center(
         child: CircularProgressIndicator(),
       ),
     );
@@ -47,7 +47,7 @@ Future resetPassword() async {
             fontFamily: 'Roboto',
           ),
           child: Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -59,7 +59,7 @@ Future resetPassword() async {
                     color: Colors.black,
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -67,7 +67,7 @@ Future resetPassword() async {
                   ),
                   child: TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
                       hintText: 'example@email.com',
                       prefixIcon: Icon(Icons.email),
@@ -80,17 +80,17 @@ Future resetPassword() async {
                             : 'Ingresa un correo valido',
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(double.infinity, 50),
+                    minimumSize: const Size(double.infinity, 50),
                     backgroundColor: Colors.green[400],
                     foregroundColor: Colors.white,
                   ),
                   child: Text('Enviar contraseña temporal'),
                   onPressed: resetPassword,
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
