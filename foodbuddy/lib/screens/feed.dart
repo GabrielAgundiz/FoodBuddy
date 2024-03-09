@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+class FeedPage extends StatelessWidget {
+  
 
-class ProfilePage extends StatelessWidget {
-    
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil'),
+        title: const Text('Inicio'),
       ),
       body: const Center(
         child: Text(
-          'Bienvenido a tu perfil',
+          'Bienvenido a la página de inicio',
           style: TextStyle(fontSize: 24),
         ),
       ),
+
+      );
     
-    );
   }
 }

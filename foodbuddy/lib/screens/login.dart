@@ -3,11 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/register.dart';
 import 'package:foodbuddy/screens/recovery.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:foodbuddy/screens/home.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:foodbuddy/widgets/utils.dart';
+import 'package:foodbuddy/screens/home.dart';
 
 class LoginPage extends StatefulWidget {
+  
   @override
   _LoginPageState createState() => _LoginPageState();
   Widget build(BuildContext context) => Scaffold(

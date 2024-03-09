@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:foodbuddy/screens/feed.dart';
+import 'package:foodbuddy/screens/search.dart';
+import 'package:foodbuddy/screens/profile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final screens = [FeedPage(), SearchPage(), ProfilePage()];
+    Color selectedColor = Colors.green[400]!;
+    Color unselectedColor = Colors.grey[600]!;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Inicio'),
-      ),
-      body: const Center(
-        child: Text(
-          'Bienvenido a la página de inicio',
-          style: TextStyle(fontSize: 24),
-        ),
+      body: IndexedStack(
+        index: selectedIndex,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        
+        currentIndex: selectedIndex,
+        onTap: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
+        },
+        elevation: 0,
+        selectedItemColor: selectedColor,
+        unselectedItemColor: unselectedColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.store),
@@ -28,9 +48,6 @@ class HomePage extends StatelessWidget {
             label: 'Perfil',
           ),
         ],
-       // currentIndex: _selectedIndex,
-        selectedItemColor: Colors.green[400],
-       // onTap: _onItemTapped,
       ),
     );
   }
