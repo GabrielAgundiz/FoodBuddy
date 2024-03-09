@@ -81,7 +81,7 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
                           text: 'Accede',
                           style: GoogleFonts.roboto(
                             fontSize: 16,
-                            color: Color(0xFF5DB075),
+                            color: const Color(0xFF5DB075),
                           ),
                         ),
                       ],

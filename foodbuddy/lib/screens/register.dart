@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/login.dart';
-
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageState createState() => _RegisterPageState();
+
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -107,11 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     foregroundColor: Colors.white,
                   ),
                   child: Text('Registrarse'),
-                  onPressed: () {
-                    // Validate user information
-                    //// If the information is valid, navigate to the next screen
-                    ///// If the information is not valid, display an error message
-                  },
+                  onPressed: (){},
                 ),
                 SizedBox(height: 40.0),
                 GestureDetector(
