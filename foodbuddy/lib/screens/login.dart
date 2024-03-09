@@ -2,15 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/register.dart';
 import 'package:foodbuddy/screens/recovery.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:foodbuddy/screens/home.dart';
+import 'package:email_validator/email_validator.dart';
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
+  Widget build(BuildContext context) => Scaffold(
+        body: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return HomePage();
+              } else {
+                return LoginPage();
+              }
+            }),
+      );
 }
 
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool obscureText = true;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+
+    super.dispose();
+  }
+
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+    } on FirebaseAuthException catch (e) {
+      throw e;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +83,10 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
+                    validator: (email) =>
+                        email !=null && !EmailValidator.validate(email)
+                          ? 'Ingresa un correo valido'
+                          :null,
                   ),
                 ),
                 SizedBox(height: 20.0),
@@ -78,6 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     obscureText: obscureText,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => value !=null && value.length <8
+                      ? 'Ingresa minimo 8 digitos'
+                      :null,
                   ),
                 ),
                 SizedBox(height: 40.0),
@@ -88,10 +130,24 @@ class _LoginPageState extends State<LoginPage> {
                     foregroundColor: Colors.white,
                   ),
                   child: Text('Iniciar sesión'),
-                  onPressed: () {
-                    // Validate user information
-                    // If the information is valid, navigate to the next screen
-                    // If the information is not valid, display an error message
+                  onPressed: () async {
+                    try {
+                      await signIn();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    } catch (e) {
+                      if (e is FirebaseAuthException &&
+                          e.code == 'wrong-password') {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Contraseña incorrecta'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    }
                   },
                 ),
                 SizedBox(height: 40.0),
@@ -99,7 +155,8 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RecoverPasswordPage()),
+                      MaterialPageRoute(
+                          builder: (context) => RecoverPasswordPage()),
                     );
                   },
                   child: Text(
