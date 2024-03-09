@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
        // currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.green[400],
        // onTap: _onItemTapped,
       ),
     );

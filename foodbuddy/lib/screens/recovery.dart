@@ -12,6 +12,7 @@ class RecoverPasswordPage extends StatefulWidget {
 
 class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
   final _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -20,23 +21,26 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
     super.dispose();
   }
 
-Future resetPassword() async {
-  try {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
-    Navigator.pop(context);
-  } on FirebaseAuthException catch (e) {
-    print(e);
-    Utils.showSnackBar(e.message);
-    Navigator.pop(context);
+  Future resetPassword() async {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) return;
+    try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: _emailController.text.trim());
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      Utils.showSnackBar(e.message);
+      Navigator.pop(context);
+    }
   }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -60,63 +64,80 @@ Future resetPassword() async {
                   ),
                 ),
                 const SizedBox(height: 40.0),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'example@email.com',
-                      prefixIcon: Icon(Icons.email),
-                      border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                Form(
+                 key: _formKey,
+                 child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                     validator: (email) => EmailValidator.validate(email!)
-                            ? null
-                            : 'Ingresa un correo valido',
-                  ),
-                ),
-                const SizedBox(height: 40.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 50),
-                    backgroundColor: Colors.green[400],
-                    foregroundColor: Colors.white,
-                  ),
-                  child: Text('Enviar contraseña temporal'),
-                  onPressed: resetPassword,
-                ),
-                const SizedBox(height: 40.0),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      text: '¿Ya recordaste tu contraseña? ',
-                      style: GoogleFonts.roboto(
-                        fontSize: 16,
-                        color: Colors.black,
+                    child: TextFormField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        hintText: 'example@email.com',
+                        prefixIcon: Icon(Icons.email),
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
-                      children: [
-                        TextSpan(
-                          text: 'Accede',
-                          style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            color: const Color(0xFF5DB075),
-                          ),
+                      validator: (email) => EmailValidator.validate(email!)
+                          ? null
+                          : 'Ingresa un correo valido',
+                    ),
+                  ),),
+                  const SizedBox(height: 40.0),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Colors.green[400],
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Recuperar contraseña'),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        try {
+                          await resetPassword();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
+                          );
+                        } on FirebaseAuthException catch (e) {
+                          print(e);
+                          Utils.showSnackBar(e.message);
+                        }
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 40.0),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        text: '¿Ya recordaste tu contraseña? ',
+                        style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          color: Colors.black,
                         ),
-                      ],
+                        children: [
+                          TextSpan(
+                            text: 'Accede',
+                            style: GoogleFonts.roboto(
+                              fontSize: 16,
+                              color: const Color(0xFF5DB075),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+              //  ),
               ],
             ),
           ),

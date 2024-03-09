@@ -13,7 +13,25 @@ class ProfilePage extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       ),
-    
+    bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Buscar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Perfil',
+          ),
+        ],
+       // currentIndex: _selectedIndex,
+        selectedItemColor: Colors.green[400],
+       // onTap: _onItemTapped,
+      ),
     );
   }
 }
