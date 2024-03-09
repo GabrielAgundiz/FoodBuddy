@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:foodbuddy/widgets/utils.dart';
 
 class RecoverPasswordPage extends StatefulWidget {
   @override
@@ -10,22 +12,31 @@ class RecoverPasswordPage extends StatefulWidget {
 
 class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
   final _emailController = TextEditingController();
+
   @override
-  void dispose(){
+  void dispose() {
     _emailController.dispose();
 
     super.dispose();
   }
 
-  Future resetPassword() async{
-
-    try {await FirebaseAuth.instance
-      .sendPasswordResetEmail(email: _emailController.text.trim());}
-      on FirebaseAuthException catch(e){
-        // print(e);
-
-      }
+Future resetPassword() async {
+  try {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
+    Navigator.pop(context);
+  } on FirebaseAuthException catch (e) {
+    print(e);
+    Utils.showSnackBar(e.message);
+    Navigator.pop(context);
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +75,9 @@ class _RecoverPasswordPageState extends State<RecoverPasswordPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
+                     validator: (email) => EmailValidator.validate(email!)
+                            ? null
+                            : 'Ingresa un correo valido',
                   ),
                 ),
                 SizedBox(height: 40.0),

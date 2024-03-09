@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:foodbuddy/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:foodbuddy/widgets/utils.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -29,6 +30,13 @@ class _RegisterPageState extends State<RegisterPage> {
     if (!isValid) return;
 
     try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
@@ -38,9 +46,9 @@ class _RegisterPageState extends State<RegisterPage> {
         MaterialPageRoute(builder: (context) => LoginPage()),
       );
     } on FirebaseAuthException catch (e) {
-      // print(e);
+      print(e);
 
-      // Utils.showSnackBar('Error message', messengerKey);
+      Utils.showSnackBar(e.message);
     }
   }
 
@@ -164,9 +172,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   builder: (context) => LoginPage()),
                             );
                           } on FirebaseAuthException catch (e) {
-                            //  print(e);
+                            print(e);
 
-                            // Utils.showSnackBar('Error message', messengerKey);
+                            Utils.showSnackBar(e.message);
                           }
                         }
                       },
@@ -208,15 +216,3 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
-//class Utils {
- // static void showSnackBar(String? text, GlobalKey<ScaffoldMessengerState> messengerKey) {
-  //  if (text == null) return;
-
- //   final snackBar = SnackBar(content: Text(text), backgroundColor: Colors.red);
-
- //   messengerKey.currentState!
-  //    ..removeCurrentSnackBar()
-  //    ..showSnackBar(snackBar);
-//  }
-//}
