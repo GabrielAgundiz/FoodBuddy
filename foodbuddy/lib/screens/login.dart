@@ -4,6 +4,7 @@ import 'package:foodbuddy/screens/register.dart';
 import 'package:foodbuddy/screens/recovery.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodbuddy/screens/home.dart';
+import 'package:email_validator/email_validator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -82,6 +83,10 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
+                    validator: (email) =>
+                        email !=null && !EmailValidator.validate(email)
+                          ? 'Ingresa un correo valido'
+                          :null,
                   ),
                 ),
                 SizedBox(height: 20.0),
@@ -111,6 +116,10 @@ class _LoginPageState extends State<LoginPage> {
                           EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     ),
                     obscureText: obscureText,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) => value !=null && value.length <8
+                      ? 'Ingresa minimo 8 digitos'
+                      :null,
                   ),
                 ),
                 SizedBox(height: 40.0),
