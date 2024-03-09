@@ -5,6 +5,7 @@ import 'package:foodbuddy/screens/recovery.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:foodbuddy/screens/home.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:foodbuddy/widgets/utils.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -25,6 +26,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
   bool obscureText = true;
 
   @override
@@ -36,13 +39,28 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future signIn() async {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) return;
     try {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
     } on FirebaseAuthException catch (e) {
-      throw e;
+      print(e);
+
+      Utils.showSnackBar(e.message);
     }
   }
 
@@ -56,6 +74,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: Container(
             padding: const EdgeInsets.all(20.0),
+            child: Form(
+              key: formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -118,7 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: obscureText,
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) => value !=null && value.length <8
-                      ? 'Ingresa minimo 8 digitos'
+                      ? 'Contraseña Incorrecta'
                       :null,
                   ),
                 ),
@@ -133,10 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     try {
                       await signIn();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
-                      );
+                     
                     } catch (e) {
                       if (e is FirebaseAuthException &&
                           e.code == 'wrong-password') {
@@ -195,6 +212,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             ),
+          ),
           ),
         ),
       ),
