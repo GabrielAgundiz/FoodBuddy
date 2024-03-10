@@ -24,16 +24,16 @@ class _HomePageState extends State<HomePage> {
         children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        
         currentIndex: selectedIndex,
         onTap: (value) {
           setState(() {
             selectedIndex = value;
           });
         },
-        elevation: 0,
+        elevation: 10,
         selectedItemColor: selectedColor,
         unselectedItemColor: unselectedColor,
+        backgroundColor: Colors.white.withOpacity(1), // Agrega esta linea
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.store),

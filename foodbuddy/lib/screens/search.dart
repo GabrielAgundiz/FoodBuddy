@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,12 +8,13 @@ class SearchPage extends StatelessWidget {
         title: const Text('Busqueda'),
       ),
       body: const Center(
-        child: Text(
-          'Bienvenido a busqueda',
-          style: TextStyle(fontSize: 24),
+        child: SingleChildScrollView(
+          child: Text(
+            'Bienvenido a busqueda',
+            style: TextStyle(fontSize: 24),
+          ),
         ),
       ),
-     
     );
   }
 }

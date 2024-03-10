@@ -9,12 +9,13 @@ class FeedPage extends StatelessWidget {
         title: const Text('Inicio'),
       ),
       body: const Center(
+        child: SingleChildScrollView(
         child: Text(
           'Bienvenido a la página de inicio',
           style: TextStyle(fontSize: 24),
         ),
       ),
-
+      ),
       );
     
   }

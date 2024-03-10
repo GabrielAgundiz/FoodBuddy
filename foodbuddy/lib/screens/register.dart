@@ -4,6 +4,8 @@ import 'package:foodbuddy/screens/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:foodbuddy/widgets/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -41,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => LoginPage()),
@@ -161,11 +164,25 @@ class _RegisterPageState extends State<RegisterPage> {
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
                           try {
-                            await FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
+                            final UserCredential userCredential =
+                                await FirebaseAuth.instance
+                                    .createUserWithEmailAndPassword(
                               email: _emailController.text.trim(),
                               password: _passwordController.text.trim(),
                             );
+                            final User? user = userCredential.user;
+
+                            await FirebaseFirestore.instance
+                                .collection('client')
+                                .doc(user?.uid)
+                                .set({
+                              'uid': user!.uid,
+                              'name': _nameController.text,
+                              'email': _emailController.text,
+                              'password': _passwordController
+                                  .text, // Remove the password field from Firestore
+                            });
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
