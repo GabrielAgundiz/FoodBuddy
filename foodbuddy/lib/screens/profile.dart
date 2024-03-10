@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:foodbuddy/screens/settings.dart';
+import 'package:foodbuddy/screens/notifies.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -39,11 +39,11 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text('Perfil'),
         actions: <Widget>[
           IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.notifications),
               onPressed: () {
                Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
+                MaterialPageRoute(builder: (context) => NotifiesPage()),
             );
               })
         ],

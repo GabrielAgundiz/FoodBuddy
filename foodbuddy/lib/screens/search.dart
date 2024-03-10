@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               Container(
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Row(
                     children: [
                       Expanded(
@@ -154,8 +154,8 @@ class _SearchPageState extends State<SearchPage> {
 
   searchSuggestionsTiem(String text) {
     return Container(
-      margin: EdgeInsets.only(left: 8),
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+      margin: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(30)),
       child: Text(

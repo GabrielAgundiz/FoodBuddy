@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/feed.dart';
 import 'package:foodbuddy/screens/search.dart';
 import 'package:foodbuddy/screens/profile.dart';
-import 'package:foodbuddy/screens/settings.dart';
-
+import 'package:foodbuddy/screens/notifies.dart';
+import 'package:foodbuddy/screens/wishlist.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    final screens = [FeedPage(), SearchPage(), ProfilePage(), SettingsPage()];
+    final screens = [FeedPage(), SearchPage(), SavesPage(), ProfilePage()];
     Color selectedColor = Colors.green[400]!;
     Color unselectedColor = Colors.grey[600]!;
     return Scaffold(
@@ -42,6 +42,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Buscar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
+            label: 'Guardados',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
