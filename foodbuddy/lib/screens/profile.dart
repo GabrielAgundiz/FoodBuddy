@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodbuddy/screens/settings.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -36,9 +37,18 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Perfil'),
+        actions: <Widget>[
+          IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () {
+               Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SettingsPage()),
+            );
+              })
+        ],
       ),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        
         stream: client,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -49,7 +59,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
           return Column(
             children: [
-              
               Container(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -158,7 +167,6 @@ class _ProfilePageState extends State<ProfilePage> {
           );
         },
       ),
-    
     );
   }
 }

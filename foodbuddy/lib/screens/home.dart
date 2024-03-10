@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/feed.dart';
 import 'package:foodbuddy/screens/search.dart';
 import 'package:foodbuddy/screens/profile.dart';
+import 'package:foodbuddy/screens/settings.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,10 +13,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    final screens = [FeedPage(), SearchPage(), ProfilePage()];
+    final screens = [FeedPage(), SearchPage(), ProfilePage(), SettingsPage()];
     Color selectedColor = Colors.green[400]!;
     Color unselectedColor = Colors.grey[600]!;
     return Scaffold(
