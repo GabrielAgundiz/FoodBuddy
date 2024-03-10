@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     final screens = [FeedPage(), SearchPage(), SavesPage(), ProfilePage()];
     Color selectedColor = Colors.green[400]!;
     Color unselectedColor = Colors.grey[600]!;
+    
     return Scaffold(
       body: IndexedStack(
         index: selectedIndex,
