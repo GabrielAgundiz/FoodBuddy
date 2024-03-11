@@ -30,36 +30,38 @@ class _NotifiesPageState extends State<NotifiesPage> {
       body: ListView.builder(
         itemCount: notifications.length,
         itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Dismissible(
-                key: Key(notifications[index]),
-                onDismissed: (DismissDirection dir) {
-                  setState(() {
-                    notifications.removeAt(index);
-                  });
-                },
-                background: Container(
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 16),
-                  color: Colors.red,
-                  child: const Icon(
-                    Icons.delete,
-                    color: Colors.white,
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                Dismissible(
+                  key: Key(notifications[index]),
+                  onDismissed: (DismissDirection dir) {
+                    setState(() {
+                      notifications.removeAt(index);
+                    });
+                  },
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.only(right: 16),
+                    color: Colors.red,
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                child: Card(
-                  margin: const EdgeInsets.all(8),
-                  child: ListTile(
-                    leading: const Icon(Icons.notifications),
-                    title: Text(
-                      notifications[index],
-                      style: const TextStyle(fontSize: 16),
+                  child: Card(
+                    margin: const EdgeInsets.all(8),
+                    child: ListTile(
+                      leading: const Icon(Icons.notifications),
+                      title: Text(
+                        notifications[index],
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

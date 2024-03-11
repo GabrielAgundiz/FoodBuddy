@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),
-            label: 'Guardados',
+            label: 'Favoritos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
