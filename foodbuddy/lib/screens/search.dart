@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/home.dart';
-import 'package:foodbuddy/widgets/ctfl.dart';
+import 'package:foodbuddy/widgets/ctfl.dart'; // Importa el widget personalizado CostomTextFormFild
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-    static List previousSearchs = [];
+  const SearchPage({Key? key}) : super(key: key);
+  static List previousSearchs = []; // Lista para almacenar búsquedas anteriores
 
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-
-  TextEditingController searchController = TextEditingController();
+  TextEditingController searchController =
+      TextEditingController(); // Controlador para el campo de búsqueda
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Busqueda'),
+          title: const Text('Busqueda'), // Título de la barra de navegación
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -33,6 +33,7 @@ class _SearchPageState extends State<SearchPage> {
                     children: [
                       Expanded(
                         child: CostomTextFormFild(
+                          // Widget personalizado para el campo de texto de búsqueda
                           hint: "Buscar",
                           prefixIcon: Icons.search_rounded,
                           controller: searchController,
@@ -40,24 +41,28 @@ class _SearchPageState extends State<SearchPage> {
                           suffixIcon:
                               searchController == null ? null : Icons.cancel,
                           onTapSuffixIcon: () {
-                            searchController.clear();
+                            searchController
+                                .clear(); // Limpia el campo de búsqueda al hacer clic en el icono de cancelar
                           },
                           onChanged: (pure) {
                             setState(() {});
                           },
                           onEditingComplete: () {
-                            SearchPage.previousSearchs.add(searchController.text);
+                            SearchPage.previousSearchs.add(searchController
+                                .text); // Agrega la búsqueda actual a la lista de búsquedas anteriores
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => HomePage()));
+                                    builder: (context) =>
+                                        HomePage())); // Navega a la página de inicio con los resultados de la búsqueda
                           },
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
-                          Icons.tune,
+                          Icons
+                              .tune, // Icono para ajustar los filtros de búsqueda
                         ),
                       ),
                     ],
@@ -73,7 +78,8 @@ class _SearchPageState extends State<SearchPage> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: SearchPage.previousSearchs.length,
-                    itemBuilder: (context, index) => previousSearchsItem(index)),
+                    itemBuilder: (context, index) => previousSearchsItem(
+                        index)), // Construye los elementos de la lista de búsquedas anteriores
               ),
               const SizedBox(
                 height: 8,
@@ -87,19 +93,20 @@ class _SearchPageState extends State<SearchPage> {
                   children: [
                     Text(
                       "Busquedas Recomendadas",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(color: Colors.black, fontWeight: FontWeight.w600 ),
+                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                          color: Colors.black, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
                       height: 24,
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem("Sushi"),
-                        searchSuggestionsTiem("Hamburguesas"),
-                        searchSuggestionsTiem("Pasta"),
+                        searchSuggestionsTiem(
+                            "Sushi"), // Elemento de sugerencia de búsqueda
+                        searchSuggestionsTiem(
+                            "Hamburguesas"), // Elemento de sugerencia de búsqueda
+                        searchSuggestionsTiem(
+                            "Pasta"), // Elemento de sugerencia de búsqueda
                       ],
                     ),
                     const SizedBox(
@@ -119,22 +126,26 @@ class _SearchPageState extends State<SearchPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap: () {},
+        onTap:
+            () {}, // Acción al hacer clic en el elemento de la lista (no implementada aquí)
         child: Dismissible(
           key: GlobalKey(),
-          onDismissed: (DismissDirection dir){
-            setState((){});
-            SearchPage.previousSearchs.removeAt(index);
+          onDismissed: (DismissDirection dir) {
+            setState(() {});
+            SearchPage.previousSearchs.removeAt(
+                index); // Elimina la búsqueda anterior de la lista al deslizar
           },
           child: Row(
             children: [
               const Icon(
-                Icons.restore,
+                Icons
+                    .restore, // Icono para mostrar que es una búsqueda anterior
                 color: Colors.grey,
               ),
               const SizedBox(width: 10),
               Text(
-                SearchPage.previousSearchs[index],
+                SearchPage.previousSearchs[
+                    index], // Muestra el texto de la búsqueda anterior
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
@@ -142,7 +153,8 @@ class _SearchPageState extends State<SearchPage> {
               ),
               const Spacer(),
               const Icon(
-                Icons.call_made_outlined,
+                Icons
+                    .call_made_outlined, // Icono para mostrar la dirección de la acción (no implementado aquí)
                 color: Colors.grey,
               ),
             ],
@@ -157,13 +169,14 @@ class _SearchPageState extends State<SearchPage> {
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(30)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(
+              30)), // Estilo del contenedor que contiene la sugerencia de búsqueda
       child: Text(
-        text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText2!
-            .copyWith(color: Colors.green),
+        text, // Texto de la sugerencia de búsqueda
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+            color:
+                Colors.green), // Estilo del texto de la sugerencia de búsqueda
       ),
     );
   }

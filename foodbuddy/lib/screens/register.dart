@@ -1,57 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:foodbuddy/screens/login.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:email_validator/email_validator.dart';
-import 'package:foodbuddy/widgets/utils.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:foodbuddy/screens/login.dart'; // Importa la pantalla de inicio de sesión.
+import 'package:firebase_auth/firebase_auth.dart'; // Importa la autenticación de Firebase.
+import 'package:email_validator/email_validator.dart'; // Importa un paquete para validar direcciones de correo electrónico.
+import 'package:foodbuddy/widgets/utils.dart'; // Importa utilidades personalizadas.
+import 'package:firebase_core/firebase_core.dart'; // Importa la inicialización de Firebase.
+import 'package:cloud_firestore/cloud_firestore.dart'; // Importa Cloud Firestore para la base de datos.
 
 class RegisterPage extends StatefulWidget {
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  _RegisterPageState createState() =>
+      _RegisterPageState(); // Define el estado para la página de registro.
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-  bool obscureText = true;
+  final _nameController =
+      TextEditingController(); // Controlador para el campo de nombre.
+  final _emailController =
+      TextEditingController(); // Controlador para el campo de correo electrónico.
+  final _passwordController =
+      TextEditingController(); // Controlador para el campo de contraseña.
+  final formKey = GlobalKey<FormState>(); // Clave global para el formulario.
+  bool obscureText =
+      true; // Variable para controlar la visibilidad de la contraseña.
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
+    _emailController.dispose(); // Limpia el controlador de correo electrónico.
+    _passwordController.dispose(); // Limpia el controlador de contraseña.
 
     super.dispose();
   }
 
   Future signUp() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
+    final isValid = formKey.currentState!.validate(); // Valida el formulario.
+    if (!isValid) return; // Si no es válido, retorna.
 
     try {
       showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(), // Muestra un diálogo de carga.
         ),
       );
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
+        email: _emailController.text
+            .trim(), // Obtiene el correo electrónico del controlador y elimina espacios en blanco.
+        password: _passwordController.text
+            .trim(), // Obtiene la contraseña del controlador y elimina espacios en blanco.
       );
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
+        MaterialPageRoute(
+            builder: (context) =>
+                LoginPage()), // Navega a la pantalla de inicio de sesión.
       );
     } on FirebaseAuthException catch (e) {
       print(e);
 
-      Utils.showSnackBar(e.message);
+      Utils.showSnackBar(
+          e.message); // Muestra un mensaje de error en forma de Snackbar.
     }
   }
 
@@ -81,94 +91,138 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     const SizedBox(height: 40.0),
                     Container(
+                      // Campo de entrada para el nombre.
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            Colors.grey[200], // Color de fondo del contenedor.
+                        borderRadius: BorderRadius.circular(
+                            10), // Bordes redondeados del contenedor.
                       ),
                       child: TextFormField(
-                        controller: _nameController,
+                        controller:
+                            _nameController, // Controlador del campo de texto para el nombre.
                         decoration: const InputDecoration(
-                          labelText: 'Nombre',
-                          hintText: 'Ingresa tu nombre',
-                          prefixIcon: Icon(Icons.person),
-                          border: InputBorder.none,
+                          labelText: 'Nombre', // Etiqueta del campo de texto.
+                          hintText:
+                              'Ingresa tu nombre', // Texto de sugerencia dentro del campo de texto.
+                          prefixIcon: Icon(Icons
+                              .person), // Icono del prefijo para el nombre.
+                          border: InputBorder
+                              .none, // Sin borde alrededor del campo de texto.
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                              horizontal: 16,
+                              vertical:
+                                  12), // Espaciado interno del campo de texto.
                         ),
-                        validator: (value) => value!.isNotEmpty
+                        validator: (value) => value!
+                                .isNotEmpty // Validación para comprobar si el campo no está vacío.
                             ? null
-                            : 'Este campo es requerido',
+                            : 'Este campo es requerido', // Mensaje de error si el campo está vacío.
                       ),
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      // Campo de entrada para el correo electrónico.
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            Colors.grey[200], // Color de fondo del contenedor.
+                        borderRadius: BorderRadius.circular(
+                            10), // Bordes redondeados del contenedor.
                       ),
                       child: TextFormField(
-                        controller: _emailController,
+                        controller:
+                            _emailController, // Controlador del campo de texto para el correo electrónico.
                         decoration: const InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'example@email.com',
-                          prefixIcon: Icon(Icons.email),
-                          border: InputBorder.none,
+                          labelText: 'Email', // Etiqueta del campo de texto.
+                          hintText:
+                              'example@email.com', // Texto de sugerencia dentro del campo de texto.
+                          prefixIcon: Icon(Icons
+                              .email), // Icono del prefijo para el correo electrónico.
+                          border: InputBorder
+                              .none, // Sin borde alrededor del campo de texto.
                           contentPadding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                              horizontal: 16,
+                              vertical:
+                                  12), // Espaciado interno del campo de texto.
                         ),
-                        validator: (email) => EmailValidator.validate(email!)
+                        validator: (email) => EmailValidator.validate(
+                                email!) // Validación del correo electrónico utilizando el paquete 'email_validator'.
                             ? null
-                            : 'Ingresa un correo valido',
+                            : 'Ingresa un correo valido', // Mensaje de error si el correo electrónico no es válido.
                       ),
                     ),
                     const SizedBox(height: 20.0),
                     Container(
+                      // Campo de entrada para la contraseña.
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(10),
+                        color:
+                            Colors.grey[200], // Color de fondo del contenedor.
+                        borderRadius: BorderRadius.circular(
+                            10), // Bordes redondeados del contenedor.
                       ),
                       child: TextFormField(
-                        controller: _passwordController,
+                        controller:
+                            _passwordController, // Controlador del campo de texto para la contraseña.
                         decoration: InputDecoration(
-                          labelText: 'Contraseña',
-                          hintText: '••••••••',
-                          prefixIcon: const Icon(Icons.lock),
+                          labelText:
+                              'Contraseña', // Etiqueta del campo de texto.
+                          hintText:
+                              '••••••••', // Texto de sugerencia dentro del campo de texto para la contraseña.
+                          prefixIcon: const Icon(Icons
+                              .lock), // Icono del prefijo para la contraseña.
                           suffixIcon: IconButton(
-                            icon: Icon(obscureText
-                                ? Icons.visibility_off
-                                : Icons.remove_red_eye),
+                            // Ícono del sufijo para alternar la visibilidad de la contraseña.
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.remove_red_eye,
+                            ),
                             onPressed: () {
                               setState(() {
-                                obscureText = !obscureText;
+                                obscureText =
+                                    !obscureText; // Cambia la visibilidad de la contraseña.
                               });
                             },
                           ),
-                          border: InputBorder.none,
+                          border: InputBorder
+                              .none, // Sin borde alrededor del campo de texto.
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
+                              horizontal: 16,
+                              vertical:
+                                  12), // Espaciado interno del campo de texto.
                         ),
-                        obscureText: obscureText,
-                        validator: (value) => value!.length >= 8
+                        obscureText:
+                            obscureText, // Indica si el texto debe ser ocultado (contraseña).
+                        validator: (value) => value!.length >=
+                                8 // Validación para comprobar si la contraseña tiene al menos 8 caracteres.
                             ? null
-                            : 'Ingresa minimo 8 digitos',
+                            : 'Ingresa mínimo 8 caracteres', // Mensaje de error si la contraseña no cumple con el requisito de longitud.
                       ),
                     ),
                     const SizedBox(height: 40.0),
                     ElevatedButton(
+                      // Botón para registrarse.
                       style: ElevatedButton.styleFrom(
-                        minimumSize: const Size(double.infinity, 50),
-                        backgroundColor: Colors.green[400],
-                        foregroundColor: Colors.white,
+                        minimumSize: const Size(
+                            double.infinity, 50), // Tamaño mínimo del botón.
+                        backgroundColor:
+                            Colors.green[400], // Color de fondo del botón.
+                        foregroundColor:
+                            Colors.white, // Color del texto del botón.
                       ),
-                      child: const Text('Registrarse'),
+                      child:
+                          const Text('Registrarse'), // Texto dentro del botón.
                       onPressed: () async {
                         if (formKey.currentState!.validate()) {
+                          // Valida el formulario antes de continuar.
                           try {
                             final UserCredential userCredential =
                                 await FirebaseAuth.instance
                                     .createUserWithEmailAndPassword(
-                              email: _emailController.text.trim(),
-                              password: _passwordController.text.trim(),
+                              email: _emailController.text
+                                  .trim(), // Obtiene el correo electrónico del controlador y elimina espacios en blanco.
+                              password: _passwordController.text
+                                  .trim(), // Obtiene la contraseña del controlador y elimina espacios en blanco.
                             );
                             final User? user = userCredential.user;
 
@@ -180,24 +234,27 @@ class _RegisterPageState extends State<RegisterPage> {
                               'name': _nameController.text,
                               'email': _emailController.text,
                               'password': _passwordController
-                                  .text, // Remove the password field from Firestore
+                                  .text, // Elimina el campo de contraseña de Firestore
                             });
 
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginPage()),
+                                  builder: (context) =>
+                                      LoginPage()), // Navega a la pantalla de inicio de sesión.
                             );
                           } on FirebaseAuthException catch (e) {
                             print(e);
 
-                            Utils.showSnackBar(e.message);
+                            Utils.showSnackBar(e
+                                .message); // Muestra un mensaje de error en forma de Snackbar.
                           }
                         }
                       },
                     ),
                     const SizedBox(height: 40.0),
                     GestureDetector(
+                      // Enlace para ir a la página de inicio de sesión.
                       onTap: () {
                         Navigator.push(
                           context,
