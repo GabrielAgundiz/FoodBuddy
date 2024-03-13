@@ -5,9 +5,10 @@ import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
 
+// Página de alimentación (Feed)
 class FeedPage extends StatelessWidget {
-  String currentCat = "Todos";
-  final List<String> categories = [
+  String currentCat = "Todos"; // Categoría actualmente seleccionada
+  final List<String> categories = [ // Lista de categorías disponibles
     'Todos',
     'Vegano',
     'Vegetariano',
@@ -19,7 +20,7 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feed', style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text('Feed', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de aplicación
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,7 +29,7 @@ class FeedPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const HomeAppbar(),
+                const HomeAppbar(), // Barra de aplicación personalizada (widget HomeAppbar)
                 const SizedBox(
                   height: 20,
                 ),
@@ -49,7 +50,7 @@ class FeedPage extends StatelessWidget {
                   height: 30,
                 ),
                 const Text(
-                  "Categorias",
+                  "Categorias", // Título de la sección de categorías
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -58,7 +59,7 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Categorias(categories: categories, currentCat: currentCat),
+                Categorias(categories: categories, currentCat: currentCat), // Widget para mostrar las categorías disponibles
                 const SizedBox(
                   height: 20,
                 ),
@@ -66,7 +67,7 @@ class FeedPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Para tu antojo",
+                      "Para tu antojo", // Título de la sección "Para tu antojo"
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -74,15 +75,15 @@ class FeedPage extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                         Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const CategoryScreen()),
+                              builder: (context) => const CategoryScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
                         );
                       },
                       child: Text(
-                        "Ver todos",
-                        style: TextStyle(color: Colors.green[400]),
+                        "Ver todos", // Etiqueta del botón "Ver todos"
+                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
                       ),
                     )
                   ],
@@ -90,7 +91,7 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Antojo(),
+                const Antojo(), // Widget para mostrar alimentos según los antojos
               ],
             ),
           ),
