@@ -54,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        HomePage())); // Navega a la página de inicio con los resultados de la búsqueda
+                                        const HomePage())); // Navega a la página de inicio con los resultados de la búsqueda
                           },
                         ),
                       ),

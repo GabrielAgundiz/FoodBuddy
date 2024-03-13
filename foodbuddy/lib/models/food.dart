@@ -1,6 +1,7 @@
 class Food {
   String name;
   String image;
+  String ingredients;
   double cal;
   double time;
   double rate;
@@ -15,6 +16,7 @@ class Food {
     required this.rate,
     required this.reviews,
     required this.isLiked,
+    required this.ingredients,
   });
 }
 
@@ -27,6 +29,7 @@ final List<Food> foods = [
     rate: 4.4,
     reviews: 23,
     isLiked: false,
+    ingredients: "Ramen, Elote, Pasta de miso, Salsa de soja, Aceite de sesamo, Ajo picado, Chile picado, Jengibre rallado, Espinacas",
   ),
   Food(
     name: "Ensalada Mediterranea",
@@ -36,6 +39,7 @@ final List<Food> foods = [
     rate: 4.4,
     reviews: 23,
     isLiked: true,
+    ingredients: "Lechuga fresca, Tomates cherry, Pepino cortado, Aceitunas kalamata, Queso feta, Cebolla roja, Albahaca picada, Jugo de limon, Aceite de oliva",
   ),
   Food(
     name: "Tacos de Setas",
@@ -45,6 +49,7 @@ final List<Food> foods = [
     rate: 4.2,
     reviews: 10,
     isLiked: false,
+    ingredients: "Setas frescas, Tortillas de maiz, Aceite de oliva, Cebolla picada, Ajo picado, Chile picado, Comino en polvo, Salsas al gusto",
   ),
   Food(
     name: "Boneless de Coliflor",
@@ -54,6 +59,7 @@ final List<Food> foods = [
     rate: 4.6,
     reviews: 90,
     isLiked: true,
+    ingredients: "Colifor fresa, Harina de trigo, Pan rallado, Huevos batidos, Salsa picante o salsa bbq, Mantequlla, Sal, Pimienta",
   ),
   Food(
     name: "Sopes Vegetales",
@@ -63,6 +69,7 @@ final List<Food> foods = [
     rate: 4.0,
     reviews: 76,
     isLiked: false,
+    ingredients: "Calabacin cortado, Zanahoria rallada, Champinones en rodajas, Pimientos picados, Cebolla picada, Chiles jalapenos, Maiz desgranado, Queso, Salsa roja",
   ),
   Food(
     name: "Croquetas de Espinaca",
@@ -72,5 +79,6 @@ final List<Food> foods = [
     rate: 4.4,
     reviews: 23,
     isLiked: false,
+    ingredients: "Espinacas, Harina de trigo, Leche, Mantequilla, Queso rallado, Cebolla picada, Ajo picado, Aceite vegetal",
   ),
 ];

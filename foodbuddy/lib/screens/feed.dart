@@ -4,7 +4,6 @@ import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
-import 'package:foodbuddy/models/food.dart';
 
 class FeedPage extends StatelessWidget {
   String currentCat = "Todos";
@@ -29,7 +28,7 @@ class FeedPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                HomeAppbar(),
+                const HomeAppbar(),
                 const SizedBox(
                   height: 20,
                 ),
@@ -78,7 +77,7 @@ class FeedPage extends StatelessWidget {
                          Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CategoryScreen()),
+                              builder: (context) => const CategoryScreen()),
                         );
                       },
                       child: Text(
@@ -91,7 +90,7 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Antojo(),
+                const Antojo(),
               ],
             ),
           ),
