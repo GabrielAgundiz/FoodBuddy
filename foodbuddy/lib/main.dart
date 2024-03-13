@@ -9,14 +9,6 @@ Future main() async {
   runApp(MyApp());
 }
 
-class AppState extends StatelessWidget {
-  const AppState({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Multiprovider();//regresa provider
-  }
-}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
