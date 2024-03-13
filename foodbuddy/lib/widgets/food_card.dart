@@ -3,12 +3,17 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 
 // Este widget representa un platillo individual en la lista de platillos.
-class Platillo extends StatelessWidget {
+class Platillo extends StatefulWidget {
   final Food food;
 
   // Constructor para el widget Platillo que recibe un objeto de tipo Food.
-  const Platillo({super.key, required this.food});
+  const Platillo({Key? key, required this.food}) : super(key: key);
 
+  @override
+  _PlatilloState createState() => _PlatilloState();
+}
+
+class _PlatilloState extends State<Platillo> {
   @override
   Widget build(BuildContext context) {
     // GestureDetector detecta gestos como toques.
@@ -17,7 +22,7 @@ class Platillo extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => DescScreen(food: food),
+          builder: (context) => DescScreen(food: widget.food),
         ),
       ),
       child: SizedBox(
@@ -36,7 +41,7 @@ class Platillo extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
                       image: NetworkImage(
-                        food.image,
+                        widget.food.image,
                       ),
                       fit: BoxFit.fill,
                     ),
@@ -47,7 +52,7 @@ class Platillo extends StatelessWidget {
                 ),
                 // Nombre del platillo.
                 Text(
-                  food.name,
+                  widget.food.name,
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -65,7 +70,7 @@ class Platillo extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "${food.cal} Cal",
+                      "${widget.food.cal} Cal",
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -81,7 +86,7 @@ class Platillo extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      "${food.time} Min",
+                      "${widget.food.time} Min",
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -97,15 +102,17 @@ class Platillo extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      "${food.rate}/5",
-                      style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                      "${widget.food.rate}/5",
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.grey.shade600),
                     ),
                     const SizedBox(
                       width: 5,
                     ),
                     Text(
-                      "(${food.reviews} Reviews)",
-                      style: TextStyle(fontSize: 12, color: Colors.grey.shade400),
+                      "(${widget.food.reviews} Reviews)",
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.grey.shade400),
                     ),
                   ],
                 ),
@@ -116,14 +123,18 @@ class Platillo extends StatelessWidget {
               top: 1,
               right: 1,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    widget.food.isLiked = !widget.food.isLiked;
+                  });
+                },
                 style: IconButton.styleFrom(
                   backgroundColor: Colors.white,
                   fixedSize: const Size(25, 25),
                 ),
                 iconSize: 20,
                 // El icono cambia según si el platillo está marcado como "me gusta".
-                icon: food.isLiked
+                icon: widget.food.isLiked
                     ? const Icon(
                         Icons.favorite,
                         color: Colors.red,
