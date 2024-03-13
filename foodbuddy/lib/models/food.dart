@@ -127,4 +127,16 @@ final List<Food> foods = [
         "Espinacas, Harina de trigo, Leche, Mantequilla, Queso rallado, Cebolla picada, Ajo picado, Aceite vegetal",
          category: 'Vegetariano'
   ),
+  Food(
+    name: "Berengenas rellenas",
+    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    cal: 140,
+    time: 25,
+    rate: 4.4,
+    reviews: 23,
+    isLiked: false,
+    ingredients:
+        "Berengenas",
+         category: 'Vegetariano'
+  ),
 ];
