@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
+import 'package:foodbuddy/screens/veganscreen.dart';
+import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
+import 'package:foodbuddy/widgets/veganos.dart';
+import 'package:foodbuddy/widgets/vegetarianos.dart';
 
 // Página de alimentación (Feed)
 class FeedPage extends StatelessWidget {
@@ -91,7 +95,71 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Antojo(), // Widget para mostrar alimentos según los antojos
+                const Antojo(), 
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Para vegetarianos", // Título de la sección Vegetarianos
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const VegetarianScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                        );
+                      },
+                      child: Text(
+                        "Ver todos", // Etiqueta del botón "Ver todos"
+                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Vegetarianos(),// Widget para mostrar alimentos según los vegetarianos
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Para veganos", // Título de la sección Veganos
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const VeganScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                        );
+                      },
+                      child: Text(
+                        "Ver todos", // Etiqueta del botón "Ver todos"
+                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Veganos(),// Widget para mostrar alimentos según los vegetarianos
               ],
             ),
           ),
