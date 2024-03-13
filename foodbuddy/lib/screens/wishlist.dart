@@ -5,7 +5,7 @@ class SavesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Guardados'),
+        title: const Text('Favoritos', style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: const Center(
         child: SingleChildScrollView(

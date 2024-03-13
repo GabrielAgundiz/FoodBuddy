@@ -19,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Busqueda'), // Título de la barra de navegación
+          title: const Text('Busqueda', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de navegación
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,

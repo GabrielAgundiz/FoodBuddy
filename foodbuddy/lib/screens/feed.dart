@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
@@ -19,7 +20,7 @@ class FeedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feed'),
+        title: const Text('Feed', style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -73,7 +74,13 @@ class FeedPage extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CategoryScreen()),
+                        );
+                      },
                       child: Text(
                         "Ver todos",
                         style: TextStyle(color: Colors.green[400]),

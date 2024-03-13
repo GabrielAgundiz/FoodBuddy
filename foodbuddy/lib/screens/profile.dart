@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-            'Perfil'), // Título de la barra de la aplicación, que muestra "Perfil"
+            'Perfil', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de la aplicación, que muestra "Perfil"
         actions: <Widget>[
           // Lista de acciones en la barra de la aplicación
           IconButton(
