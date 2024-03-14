@@ -259,4 +259,124 @@ final List<Food> foods = [
         "Guten, Sin Conservadores, Sin lácteos",
          category: 'Diabetico'
   ),
+  Food(
+    name: "Carpaccio de bacalao con olivada",
+    image: "https://content.clara.es/medio/2017/11/16/carpaccio-de-bacalao__600x900.jpg",
+    cal: 237,
+    time: 20,
+    rate: 4.2,
+    reviews: 26,
+    isLiked: false,
+    ingredients:
+        "Frutas, verduras, setas, olivada de aceitunas",
+         category: 'Diabetico'
+  ),
+  Food(
+    name: "Paella light",
+    image: "https://content.clara.es/medio/2017/11/16/paella-light__600x900.jpg",
+    cal: 250,
+    time: 17,
+    rate: 4.5,
+    reviews: 40,
+    isLiked: true,
+    ingredients:
+        "Arroz, aceite, marisco, gambas",
+         category: 'Diabetico'
+  ),
+  Food(
+    name: "Aguacate relleno de ensalada y salmón",
+    image: "https://content.clara.es/medio/2017/11/16/aguacate-relleno-de-ensalada-y-salmon__600x900.jpg",
+    cal: 320,
+    time: 15,
+    rate: 4.3,
+    reviews: 28,
+    isLiked: false,
+    ingredients:
+        "Aguacate, ensalada, salmon ahumado",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Lasaña fría de bonito",
+    image: "https://content.clara.es/medio/2017/11/16/lasana-fria-de-bonito-baja-en-calorias__600x900.jpg",
+    cal: 335,
+    time: 20,
+    rate: 4.1,
+    reviews: 30,
+    isLiked: false,
+    ingredients:
+        "Verdura asada, Bechamel",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Ensalada de patatas y sardinas",
+    image: "https://content.clara.es/medio/2017/11/16/ensalada-de-patatas-sardinas-y-curry__600x900.jpg",
+    cal: 360,
+    time: 20,
+    rate: 4.2,
+    reviews: 17,
+    isLiked: false,
+    ingredients:
+        "Patatas, sardinas, apio",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Espaguetis con gambas y almejas",
+    image: "https://content.clara.es/medio/2017/11/16/espaguetis-con-gambas-y-almejas-bajos-en-calorias__600x900.jpg",
+    cal: 394,
+    time: 20,
+    rate: 4.2,
+    reviews: 25,
+    isLiked: false,
+    ingredients:
+        "Pasta con salsa, queso, almejas",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Canelones light de champiñones",
+    image: "https://content.clara.es/medio/2022/09/23/recetas-con-champinones-canelones_3e928f42_1000x1500.jpg",
+    cal: 275,
+    time: 25,
+    rate: 4.3,
+    reviews: 35,
+    isLiked: false,
+    ingredients:
+        "Setas, Bechamel ligera, leche desnatada",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Arroz integral con verduras de temporada",
+    image: "https://content.clara.es/medio/2022/09/23/recetas-con-arroz-integral-verduras-temporada_9f42f733_1000x1500.jpg",
+    cal: 220,
+    time: 25,
+    rate: 4.3,
+    reviews: 27,
+    isLiked: false,
+    ingredients:
+        "Arros, verduras",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Parrillada de verduras con vinagreta",
+    image: "https://content.clara.es/medio/2017/11/16/trucos-adelgazar-rapido-parrillada-de-verduras__600x900.jpg",
+    cal: 157,
+    time: 24,
+    rate: 4.4,
+    reviews: 32,
+    isLiked: false,
+    ingredients:
+        "Vinagreta de tomate, calabaza, apio",
+         category: 'Vegano'
+  ),
+  Food(
+    name: "Crema de garbanzos",
+    image: "https://content.clara.es/medio/2017/11/16/crema-de-garbanzos__600x900.jpg",
+    cal: 215,
+    time: 25,
+    rate: 4.3,
+    reviews: 32,
+    isLiked: true,
+    ingredients:
+        "Garbanzos, verduras, hortalizas",
+         category: 'Vegano'
+  ),
 ];
