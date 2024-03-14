@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/screens/diabeticscreen.dart';
+import 'package:foodbuddy/screens/veganscreen.dart';
+import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/ctfl.dart'; // Importa el widget personalizado CostomTextFormFild
 
 class SearchPage extends StatefulWidget {
@@ -124,9 +127,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem("Sushi"),
-                        searchSuggestionsTiem("Hamburguesas"),
-                        searchSuggestionsTiem("Pasta"),
+                        searchSuggestionsTiem("Vegetarianos"), 
+                        searchSuggestionsTiem("Veganos"),
+                        searchSuggestionsTiem("Diabeticos"),
                       ],
                     ),
                     const SizedBox(
@@ -184,19 +187,46 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget searchSuggestionsTiem(String text) {
-    return Container(
+  return GestureDetector(
+    onTap: () {
+      // Aquí debes manejar la navegación a la pantalla correspondiente
+      switch (text) {
+        case "Vegetarianos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VegetarianScreen()),
+          );
+          break;
+        case "Veganos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VeganScreen()),
+          );
+          break;
+        case "Diabeticos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DiabeticScreen()),
+          );
+          break;
+        default:
+          // Por si acaso, no debería entrar aquí
+          break;
+      }
+    },
+    child: Container(
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+      ),
       child: Text(
         text,
-        style: Theme.of(context)
-            .textTheme
-            .bodyText2!
-            .copyWith(color: Colors.green),
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.green),
       ),
-    );
-  }
+    ),
+  );
+}
+
 }

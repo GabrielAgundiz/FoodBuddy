@@ -18,7 +18,7 @@ class FeedPage extends StatelessWidget {
     'Vegano',
     'Vegetariano',
     'Diabetico',
-    'Fitness',
+    
   ];
 
   @override
