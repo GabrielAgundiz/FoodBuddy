@@ -229,10 +229,34 @@ final List<Food> foods = [
     cal: 500,
     time: 20,
     rate: 4.5,
-    reviews: 4,
+    reviews: 54,
     isLiked: false,
     ingredients:
         "Atún spicy, Aguacate, Pepino, Edamames, Cebolla, Ajonjolí, Wasabi, Chipotle",
          category: 'Vegano'
+  ),
+  Food(
+    name: "Nieve gourmet chocolate saludable",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/a04da0921c91fea50e32b738e064b3bb/a19bb09692310dfd41e49a96c424b3a6.jpeg",
+    cal: 390,
+    time: 5,
+    rate: 4.5,
+    reviews: 24,
+    isLiked: false,
+    ingredients:
+        "Leche de Almendras, Crema, Huevo, Agua, Leche de Coco, Cacao Organico, Azucar Morena, Vainilla, Fruta del Monje, Sal",
+         category: 'Diabetico'
+  ),
+    Food(
+    name: "Muffin chocolate keto",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/34dfdbbfe7735512e47a336ed3bd3d9e/7f4ae9ca0446cbc23e71d8d395a98428.jpeg",
+    cal: 36,
+    time: 10,
+    rate: 4.5,
+    reviews: 30,
+    isLiked: false,
+    ingredients:
+        "Guten, Sin Conservadores, Sin lácteos",
+         category: 'Diabetico'
   ),
 ];
