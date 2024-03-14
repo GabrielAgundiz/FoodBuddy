@@ -19,7 +19,8 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   String currentCat = "Todos"; // Categoría actualmente seleccionada
-  final List<String> categories = [ // Lista de categorías disponibles
+  final List<String> categories = [
+    // Lista de categorías disponibles
     'Todos',
     'Vegano',
     'Vegetariano',
@@ -36,7 +37,10 @@ class _FeedPageState extends State<FeedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Feed', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de aplicación
+        title: const Text(
+          'Feed',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ), // Título de la barra de aplicación
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -83,131 +87,154 @@ class _FeedPageState extends State<FeedPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Para tu antojo", // Título de la sección "Para tu antojo"
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                if (currentCat == 'Todos') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Para tu antojo", // Título de la sección "Para tu antojo"
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CategoryScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
-                        );
-                      },
-                      child: Text(
-                        "Ver todos", // Etiqueta del botón "Ver todos"
-                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const CategoryScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                          );
+                        },
+                        child: Text(
+                          "Ver todos", // Etiqueta del botón "Ver todos"
+                          style: TextStyle(
+                              color: Colors
+                                  .green[400]), // Color del texto del botón
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Antojo(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+                if (currentCat == 'Todos' || currentCat == 'Vegano') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Para veganos", // Título de la sección Veganos
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Antojo(), 
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Para vegetarianos", // Título de la sección Vegetarianos
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const VeganScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                          );
+                        },
+                        child: Text(
+                          "Ver todos", // Etiqueta del botón "Ver todos"
+                          style: TextStyle(
+                              color: Colors
+                                  .green[400]), // Color del texto del botón
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Veganos(), // Widget para mostrar alimentos según los veganos
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+                if (currentCat == 'Todos' || currentCat == 'Vegetariano') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Para vegetarianos", // Título de la sección Vegetarianos
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const VegetarianScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
-                        );
-                      },
-                      child: Text(
-                        "Ver todos", // Etiqueta del botón "Ver todos"
-                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const VegetarianScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                          );
+                        },
+                        child: Text(
+                          "Ver todos", // Etiqueta del botón "Ver todos"
+                          style: TextStyle(
+                              color: Colors
+                                  .green[400]), // Color del texto del botón
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Vegetarianos(), // Widget para mostrar alimentos según los vegetarianos
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
+                if (currentCat == 'Todos' || currentCat == 'Diabetico') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Para diabeticos", // Título de la sección Diabeticos
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Vegetarianos(),// Widget para mostrar alimentos según los vegetarianos
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Para veganos", // Título de la sección Veganos
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const VeganScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
-                        );
-                      },
-                      child: Text(
-                        "Ver todos", // Etiqueta del botón "Ver todos"
-                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Veganos(),// Widget para mostrar alimentos según los veganos
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Para diabeticos", // Título de la sección Veganos
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DiabeticScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
-                        );
-                      },
-                      child: Text(
-                        "Ver todos", // Etiqueta del botón "Ver todos"
-                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Diabeticos(),// Widget para mostrar alimentos según los veganos
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const DiabeticScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                          );
+                        },
+                        child: Text(
+                          "Ver todos", // Etiqueta del botón "Ver todos"
+                          style: TextStyle(
+                              color: Colors
+                                  .green[400]), // Color del texto del botón
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Diabeticos(), // Widget para mostrar alimentos según los diabeticos
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ],
               ],
             ),
           ),
