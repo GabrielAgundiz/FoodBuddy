@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
+import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';
@@ -138,6 +139,7 @@ class _SearchPageState extends State<SearchPage> {
                         Row(
                           children: [
                             searchSuggestionsTiem("Diabeticos"),
+                            searchSuggestionsTiem("Antojos"),
                           ],
                         )
                       ],
@@ -217,6 +219,12 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => DiabeticScreen()),
+            );
+            break;
+            case "Antojos":
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CategoryScreen()),
             );
             break;
           default:
