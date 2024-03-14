@@ -3,19 +3,19 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 
 // Widget Veganos que muestra una lista de alimentos.
-class Veganos extends StatefulWidget {
-  const Veganos({Key? key});
+class Diabeticos extends StatefulWidget {
+  const Diabeticos({Key? key});
 
   @override
-  _VeganosState createState() => _VeganosState();
+  _DiabeticosState createState() => _DiabeticosState();
 }
 
-class _VeganosState extends State<Veganos> {
+class _DiabeticosState extends State<Diabeticos> {
   @override
   Widget build(BuildContext context) {
-    // Filtrar la lista de alimentos para obtener solo los veganos
+    // Filtrar la lista de alimentos para obtener solo los Diabeticos
     final List<Food> vegetarianFoods =
-        foods.where((food) => food.category == 'Vegano').toList();
+        foods.where((food) => food.category == 'Diabetico').toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

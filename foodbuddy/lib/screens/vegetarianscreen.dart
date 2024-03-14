@@ -19,7 +19,7 @@ class _VegetarianScreenState extends State<VegetarianScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Para tu antojo', // Título de la barra de aplicación
+          'Para vegetarianos', // Título de la barra de aplicación
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),

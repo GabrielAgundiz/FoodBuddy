@@ -3,23 +3,23 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/widgets/food_card.dart'; // Importa el widget Platillo
 
 // Pantalla de categorías
-class VeganScreen extends StatefulWidget {
-  const VeganScreen({super.key});
+class DiabeticScreen extends StatefulWidget {
+  const DiabeticScreen({super.key});
 
   @override
-  State<VeganScreen> createState() => _CategoryScreenState();
+  State<DiabeticScreen> createState() => _DiabeticScreenState();
 }
 
-class _CategoryScreenState extends State<VeganScreen> {
+class _DiabeticScreenState extends State<DiabeticScreen> {
   @override
   Widget build(BuildContext context) {
-    // Filtrar la lista de alimentos para obtener solo los veganos
-    final List<Food> veganFoods = foods.where((food) => food.category == 'Vegano').toList();
+    // Filtrar la lista de alimentos para obtener solo los vegetarianos
+    final List<Food> vegetarianFoods = foods.where((food) => food.category == 'Diabetico').toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Para veganos', // Título de la barra de aplicación
+          'Para diabetico', // Título de la barra de aplicación
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -42,9 +42,9 @@ class _CategoryScreenState extends State<VeganScreen> {
                     mainAxisSpacing: 20, // Espacio vertical entre elementos de la cuadrícula
                   ),
                   itemBuilder: (context, index) => Platillo( // Constructor de cada elemento de la cuadrícula
-                    food: veganFoods[index], // Pasa cada alimento vegano al widget Platillo
+                    food: vegetarianFoods[index], // Pasa cada alimento vegetariano al widget Platillo
                   ),
-                  itemCount: veganFoods.length, // Número total de elementos en la cuadrícula
+                  itemCount: vegetarianFoods.length, // Número total de elementos en la cuadrícula
                 ),
               ],
             ),
