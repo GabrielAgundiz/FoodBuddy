@@ -14,7 +14,7 @@ class _DiabeticScreenState extends State<DiabeticScreen> {
   @override
   Widget build(BuildContext context) {
     // Filtrar la lista de alimentos para obtener solo los vegetarianos
-    final List<Food> vegetarianFoods = foods.where((food) => food.category == 'Vegetariano').toList();
+    final List<Food> vegetarianFoods = foods.where((food) => food.category == 'Diabetico').toList();
 
     return Scaffold(
       appBar: AppBar(
