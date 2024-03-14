@@ -141,7 +141,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Fut Roll",
-    image: "https://tb-static.uber.com/prod/image-proc/process…ae496387098/f0d1762b91fd823a1aa9bd0dab5c648d.jpeg",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/a730d9532778265fb9902ae496387098/f0d1762b91fd823a1aa9bd0dab5c648d.jpeg",
     cal: 753,
     time: 15,
     rate: 4.2,
@@ -225,7 +225,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Spicy Tuna Poke",
-    image: "https://tb-static.uber.com/prod/image-proc/process…9e6f8d7f1c5/5954bcb006b10dbfd0bc160f6370faf3.jpeg",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/d850cef33f0b5961ab6d39e6f8d7f1c5/5954bcb006b10dbfd0bc160f6370faf3.jpeg",
     cal: 500,
     time: 20,
     rate: 4.5,
