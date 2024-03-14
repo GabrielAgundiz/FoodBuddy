@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
+import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
@@ -159,7 +160,39 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Veganos(),// Widget para mostrar alimentos según los vegetarianos
+                const Veganos(),// Widget para mostrar alimentos según los veganos
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Para diabeticos", // Título de la sección Veganos
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const DiabeticScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                        );
+                      },
+                      child: Text(
+                        "Ver todos", // Etiqueta del botón "Ver todos"
+                        style: TextStyle(color: Colors.green[400]), // Color del texto del botón
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Veganos(),// Widget para mostrar alimentos según los veganos
               ],
             ),
           ),
