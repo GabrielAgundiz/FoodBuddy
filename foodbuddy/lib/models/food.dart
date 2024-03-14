@@ -93,7 +93,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Berengenas rellenas",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://cdn.recetasderechupete.com/wp-content/uploads/2021/08/Berenjenas-rellenas-de-atun-1200x828.jpg",
     cal: 140,
     time: 25,
     rate: 4.4,
@@ -105,7 +105,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Ensalada Caprese con melocoton",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://img-global.cpcdn.com/recipes/91a864f6bc3af36c/680x482cq70/ensalada-caprese-de-melocoton-foto-principal.jpg",
     cal: 450,
     time: 30,
     rate: 4.8,
@@ -117,7 +117,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Torta Bacon Chicken Compo",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F464785624030271063%2F&psig=AOvVaw0BQPe1ylAoHmK_2jGD7wz2&ust=1710454614981000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNjWsY-i8oQDFQAAAAAdAAAAABAE",
+    image: "https://i.pinimg.com/564x/5a/d2/ee/5ad2ee1dcd1ee70d18b0e4218e497124.jpg",
     cal: 750,
     time: 30,
     rate: 4.8,
@@ -129,7 +129,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Grilled Chicken Pomodoro Combo",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://img0.didiglobal.com/static/soda_public/do1_CbEmzDUDRTkVeasIzqcj?x-s3-process=image/resize,m_mfit,w_750,image/format,webp",
     cal: 600,
     time: 30,
     rate: 4.6,
@@ -140,15 +140,15 @@ final List<Food> foods = [
          category: 'Vegetariano'
   ),
   Food(
-    name: "Mexicalia",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    name: "Fut Roll",
+    image: "https://tb-static.uber.com/prod/image-proc/process…ae496387098/f0d1762b91fd823a1aa9bd0dab5c648d.jpeg",
     cal: 753,
     time: 15,
     rate: 4.2,
     reviews: 27,
     isLiked: false,
     ingredients:
-        "Lechuga, Tomate, Maíz, Cilantro, Guacamole, Totopos",
+        "Arroz frito, Aguacate, Camarón",
          category: 'Vegetariano'
   ),
   Food(
