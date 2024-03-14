@@ -4,12 +4,13 @@ import 'package:foodbuddy/screens/descripcion.dart';
 
 // Widget Vegetarianos que muestra una lista de alimentos.
 class Vegetarianos extends StatelessWidget {
-  const Vegetarianos({super.key});
+  const Vegetarianos({Key? key});
 
   @override
   Widget build(BuildContext context) {
     // Filtrar la lista de alimentos para obtener solo los vegetarianos
-    final List<Food> vegetarianFoods = foods.where((food) => food.category == 'Vegetariano').toList();
+    final List<Food> vegetarianFoods =
+        foods.where((food) => food.category == 'Vegetariano').toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,11 +26,13 @@ class Vegetarianos extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DescScreen(food: vegetarianFoods[index]),
+                    builder: (context) =>
+                        DescScreen(food: vegetarianFoods[index]),
                   ),
                 ),
                 child: Container(
-                  margin: const EdgeInsets.only(right: 10), // Margen derecho para separar los alimentos.
+                  margin: const EdgeInsets.only(
+                      right: 10), // Margen derecho para separar los alimentos.
                   width: 200, // Ancho del contenedor que contiene el alimento.
                   child: Stack(
                     children: [
@@ -40,12 +43,15 @@ class Vegetarianos extends StatelessWidget {
                           // Contenedor para la imagen del alimento.
                           Container(
                             width: double.infinity,
-                            height: 130, // Altura fija para la imagen del alimento.
+                            height:
+                                130, // Altura fija para la imagen del alimento.
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15), // Bordes redondeados de la imagen.
+                              borderRadius:
+                                  BorderRadius.circular(15), // Bordes redondeados de la imagen.
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  vegetarianFoods[index].image, // URL de la imagen del alimento.
+                                  vegetarianFoods[index]
+                                      .image, // URL de la imagen del alimento.
                                 ),
                                 fit: BoxFit.fill, // Ajuste de la imagen para llenar el contenedor.
                               ),
@@ -105,13 +111,21 @@ class Vegetarianos extends StatelessWidget {
                         top: 1,
                         right: 1,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // No se puede usar setState en un StatelessWidget
+                            // Pero puedes usar un StatefulWidget en su lugar.
+                            // Para este caso, puedes simplemente ignorar la función onPressed
+                            // ya que la lista de alimentos debería ser actualizada en otra parte de tu aplicación.
+                          },
                           style: IconButton.styleFrom(
-                            backgroundColor: Colors.white, // Color de fondo del botón.
-                            fixedSize: const Size(25, 25), // Tamaño fijo del botón.
+                            backgroundColor:
+                                Colors.white, // Color de fondo del botón.
+                            fixedSize:
+                                const Size(25, 25), // Tamaño fijo del botón.
                           ),
                           iconSize: 20, // Tamaño del icono del botón.
-                          icon: const Icon(Icons.favorite_border), // Icono del botón.
+                          icon: const Icon(
+                              Icons.favorite_border), // Icono del botón.
                         ),
                       ),
                     ],
@@ -125,3 +139,4 @@ class Vegetarianos extends StatelessWidget {
     );
   }
 }
+

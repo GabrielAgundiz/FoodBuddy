@@ -3,13 +3,19 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 
 // Widget Veganos que muestra una lista de alimentos.
-class Veganos extends StatelessWidget {
-  const Veganos({super.key});
+class Veganos extends StatefulWidget {
+  const Veganos({Key? key});
 
   @override
+  _VeganosState createState() => _VeganosState();
+}
+
+class _VeganosState extends State<Veganos> {
+  @override
   Widget build(BuildContext context) {
-    // Filtrar la lista de alimentos para obtener solo los vegano
-    final List<Food> vegetarianFoods = foods.where((food) => food.category == 'Vegano').toList();
+    // Filtrar la lista de alimentos para obtener solo los veganos
+    final List<Food> vegetarianFoods =
+        foods.where((food) => food.category == 'Vegano').toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,11 +31,13 @@ class Veganos extends StatelessWidget {
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DescScreen(food: vegetarianFoods[index]),
+                    builder: (context) =>
+                        DescScreen(food: vegetarianFoods[index]),
                   ),
                 ),
                 child: Container(
-                  margin: const EdgeInsets.only(right: 10), // Margen derecho para separar los alimentos.
+                  margin:
+                      const EdgeInsets.only(right: 10), // Margen derecho para separar los alimentos.
                   width: 200, // Ancho del contenedor que contiene el alimento.
                   child: Stack(
                     children: [
@@ -42,10 +50,12 @@ class Veganos extends StatelessWidget {
                             width: double.infinity,
                             height: 130, // Altura fija para la imagen del alimento.
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15), // Bordes redondeados de la imagen.
+                              borderRadius: BorderRadius.circular(
+                                  15), // Bordes redondeados de la imagen.
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  vegetarianFoods[index].image, // URL de la imagen del alimento.
+                                  vegetarianFoods[index]
+                                      .image, // URL de la imagen del alimento.
                                 ),
                                 fit: BoxFit.fill, // Ajuste de la imagen para llenar el contenedor.
                               ),
@@ -105,13 +115,27 @@ class Veganos extends StatelessWidget {
                         top: 1,
                         right: 1,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              vegetarianFoods[index].isLiked =
+                                  !vegetarianFoods[index].isLiked;
+                            });
+                          },
                           style: IconButton.styleFrom(
-                            backgroundColor: Colors.white, // Color de fondo del botón.
-                            fixedSize: const Size(25, 25), // Tamaño fijo del botón.
+                            backgroundColor:
+                                Colors.white, // Color de fondo del botón.
+                            fixedSize:
+                                const Size(25, 25), // Tamaño fijo del botón.
                           ),
                           iconSize: 20, // Tamaño del icono del botón.
-                          icon: const Icon(Icons.favorite_border), // Icono del botón.
+                          icon: Icon(
+                            vegetarianFoods[index].isLiked
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: vegetarianFoods[index].isLiked
+                                ? Colors.red
+                                : null,
+                          ), // Icono del botón.
                         ),
                       ),
                     ],

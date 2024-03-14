@@ -3,9 +3,14 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 
 // Widget Antojo que muestra una lista de alimentos.
-class Antojo extends StatelessWidget {
-  const Antojo({super.key});
+class Antojo extends StatefulWidget {
+  const Antojo({Key? key});
 
+  @override
+  _AntojoState createState() => _AntojoState();
+}
+
+class _AntojoState extends State<Antojo> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +31,8 @@ class Antojo extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  margin: const EdgeInsets.only(right: 10), // Margen derecho para separar los alimentos.
+                  margin: const EdgeInsets.only(
+                      right: 10), // Margen derecho para separar los alimentos.
                   width: 200, // Ancho del contenedor que contiene el alimento.
                   child: Stack(
                     children: [
@@ -37,14 +43,18 @@ class Antojo extends StatelessWidget {
                           // Contenedor para la imagen del alimento.
                           Container(
                             width: double.infinity,
-                            height: 130, // Altura fija para la imagen del alimento.
+                            height:
+                                130, // Altura fija para la imagen del alimento.
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15), // Bordes redondeados de la imagen.
+                              borderRadius: BorderRadius.circular(
+                                  15), // Bordes redondeados de la imagen.
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  foods[index].image, // URL de la imagen del alimento.
+                                  foods[index]
+                                      .image, // URL de la imagen del alimento.
                                 ),
-                                fit: BoxFit.fill, // Ajuste de la imagen para llenar el contenedor.
+                                fit: BoxFit
+                                    .fill, // Ajuste de la imagen para llenar el contenedor.
                               ),
                             ),
                           ),
@@ -102,13 +112,26 @@ class Antojo extends StatelessWidget {
                         top: 1,
                         right: 1,
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              foods[index].isLiked = !foods[index].isLiked;
+                            });
+                          },
                           style: IconButton.styleFrom(
-                            backgroundColor: Colors.white, // Color de fondo del botón.
-                            fixedSize: const Size(25, 25), // Tamaño fijo del botón.
+                            backgroundColor:
+                                Colors.white, // Color de fondo del botón.
+                            fixedSize:
+                                const Size(25, 25), // Tamaño fijo del botón.
                           ),
                           iconSize: 20, // Tamaño del icono del botón.
-                          icon: const Icon(Icons.favorite_border), // Icono del botón.
+                          icon: Icon(
+                            foods[index].isLiked
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: foods[index].isLiked
+                                ? Colors.red
+                                : null,
+                          ), // Icono del botón.
                         ),
                       ),
                     ],
