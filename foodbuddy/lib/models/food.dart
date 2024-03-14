@@ -93,7 +93,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Berengenas rellenas",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://cdn.recetasderechupete.com/wp-content/uploads/2021/08/Berenjenas-rellenas-de-atun-1200x828.jpg",
     cal: 140,
     time: 25,
     rate: 4.4,
@@ -105,7 +105,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Ensalada Caprese con melocoton",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://img-global.cpcdn.com/recipes/91a864f6bc3af36c/680x482cq70/ensalada-caprese-de-melocoton-foto-principal.jpg",
     cal: 450,
     time: 30,
     rate: 4.8,
@@ -117,7 +117,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Torta Bacon Chicken Compo",
-    image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F464785624030271063%2F&psig=AOvVaw0BQPe1ylAoHmK_2jGD7wz2&ust=1710454614981000&source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqFwoTCNjWsY-i8oQDFQAAAAAdAAAAABAE",
+    image: "https://i.pinimg.com/564x/5a/d2/ee/5ad2ee1dcd1ee70d18b0e4218e497124.jpg",
     cal: 750,
     time: 30,
     rate: 4.8,
@@ -129,7 +129,7 @@ final List<Food> foods = [
   ),
   Food(
     name: "Grilled Chicken Pomodoro Combo",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    image: "https://img0.didiglobal.com/static/soda_public/do1_CbEmzDUDRTkVeasIzqcj?x-s3-process=image/resize,m_mfit,w_750,image/format,webp",
     cal: 600,
     time: 30,
     rate: 4.6,
@@ -140,15 +140,15 @@ final List<Food> foods = [
          category: 'Vegetariano'
   ),
   Food(
-    name: "Mexicalia",
-    image: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn.recetasderechupete.com%2Fwp-content%2Fuploads%2F2021%2F08%2FBerenjenas-rellenas-de-atun-1200x828.jpg&tbnid=AcG3E2WIRJuWwM&vet=12ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd..i&imgrefurl=https%3A%2F%2Fwww.abc.es%2Frecetasderechupete%2Fberenjenas-rellenas-de-atun-con-queso-gratinado-al-horno%2F42592%2F&docid=oLKol0CUChlDqM&w=1200&h=828&q=berenjenas%20rellenas&ved=2ahUKEwjvtMb1nPKEAxX91MkDHXbfBhQQMygAegQIARBd",
+    name: "Fut Roll",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/a730d9532778265fb9902ae496387098/f0d1762b91fd823a1aa9bd0dab5c648d.jpeg",
     cal: 753,
     time: 15,
     rate: 4.2,
     reviews: 27,
     isLiked: false,
     ingredients:
-        "Lechuga, Tomate, Maíz, Cilantro, Guacamole, Totopos",
+        "Arroz frito, Aguacate, Camarón",
          category: 'Vegetariano'
   ),
   Food(
@@ -225,14 +225,38 @@ final List<Food> foods = [
   ),
   Food(
     name: "Spicy Tuna Poke",
-    image: "https://tb-static.uber.com/prod/image-proc/process…9e6f8d7f1c5/5954bcb006b10dbfd0bc160f6370faf3.jpeg",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/d850cef33f0b5961ab6d39e6f8d7f1c5/5954bcb006b10dbfd0bc160f6370faf3.jpeg",
     cal: 500,
     time: 20,
     rate: 4.5,
-    reviews: 4,
+    reviews: 54,
     isLiked: false,
     ingredients:
         "Atún spicy, Aguacate, Pepino, Edamames, Cebolla, Ajonjolí, Wasabi, Chipotle",
          category: 'Vegano'
+  ),
+  Food(
+    name: "Nieve gourmet chocolate saludable",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/a04da0921c91fea50e32b738e064b3bb/a19bb09692310dfd41e49a96c424b3a6.jpeg",
+    cal: 390,
+    time: 5,
+    rate: 4.5,
+    reviews: 24,
+    isLiked: false,
+    ingredients:
+        "Leche de Almendras, Crema, Huevo, Agua, Leche de Coco, Cacao Organico, Azucar Morena, Vainilla, Fruta del Monje, Sal",
+         category: 'Diabetico'
+  ),
+    Food(
+    name: "Muffin chocolate keto",
+    image: "https://tb-static.uber.com/prod/image-proc/processed_images/34dfdbbfe7735512e47a336ed3bd3d9e/7f4ae9ca0446cbc23e71d8d395a98428.jpeg",
+    cal: 36,
+    time: 10,
+    rate: 4.5,
+    reviews: 30,
+    isLiked: false,
+    ingredients:
+        "Guten, Sin Conservadores, Sin lácteos",
+         category: 'Diabetico'
   ),
 ];
