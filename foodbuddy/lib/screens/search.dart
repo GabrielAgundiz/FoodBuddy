@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:foodbuddy/screens/home.dart';
+import 'package:foodbuddy/models/food.dart';
+import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/screens/diabeticscreen.dart';
+import 'package:foodbuddy/screens/veganscreen.dart';
+import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/ctfl.dart'; // Importa el widget personalizado CostomTextFormFild
 
 class SearchPage extends StatefulWidget {
@@ -13,13 +17,40 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController searchController =
       TextEditingController(); // Controlador para el campo de búsqueda
+  Future<List<Food>> buscarEnBaseDeDatos(String searchTerm) async {
+    // Simulación de búsqueda en una base de datos
+    await Future.delayed(const Duration(
+        seconds:
+            1)); // Simulación de retraso de 1 segundo para imitar una búsqueda en una base de datos remota
+
+    // Filtro de alimentos que contienen el término de búsqueda en su nombre
+    List<Food> searchResults = foods
+        .where((food) =>
+            food.name.toLowerCase().contains(searchTerm.toLowerCase()))
+        .toList();
+
+    return searchResults;
+  }
+
+  void navigateToDescScreen(Food food) {
+    // Navegar a DescScreen con el objeto Food seleccionado
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DescScreen(food: food),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Busqueda'), // Título de la barra de navegación
+          title: const Text(
+            'Busqueda',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ), // Título de la barra de navegación
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -41,28 +72,25 @@ class _SearchPageState extends State<SearchPage> {
                           suffixIcon:
                               searchController == null ? null : Icons.cancel,
                           onTapSuffixIcon: () {
-                            searchController
-                                .clear(); // Limpia el campo de búsqueda al hacer clic en el icono de cancelar
+                            searchController.clear();
                           },
                           onChanged: (pure) {
                             setState(() {});
                           },
-                          onEditingComplete: () {
-                            SearchPage.previousSearchs.add(searchController
-                                .text); // Agrega la búsqueda actual a la lista de búsquedas anteriores
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomePage())); // Navega a la página de inicio con los resultados de la búsqueda
+                          onEditingComplete: () async {
+                            SearchPage.previousSearchs
+                                .add(searchController.text);
+                            List<Food> searchResults =
+                                await buscarEnBaseDeDatos(
+                                    searchController.text);
+                            setState(() {}); // Actualiza el estado para mostrar los resultados
                           },
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
-                          Icons
-                              .tune, // Icono para ajustar los filtros de búsqueda
+                          Icons.tune, // Icono para ajustar los filtros de búsqueda
                         ),
                       ),
                     ],
@@ -72,14 +100,12 @@ class _SearchPageState extends State<SearchPage> {
               const SizedBox(
                 height: 8,
               ),
-              Container(
-                color: Colors.white,
+              Expanded(
                 child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: SearchPage.previousSearchs.length,
-                    itemBuilder: (context, index) => previousSearchsItem(
-                        index)), // Construye los elementos de la lista de búsquedas anteriores
+                  itemCount: SearchPage.previousSearchs.length,
+                  itemBuilder: (context, index) =>
+                      previousSearchsItem(index, context),
+                ),
               ),
               const SizedBox(
                 height: 8,
@@ -101,12 +127,9 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem(
-                            "Sushi"), // Elemento de sugerencia de búsqueda
-                        searchSuggestionsTiem(
-                            "Hamburguesas"), // Elemento de sugerencia de búsqueda
-                        searchSuggestionsTiem(
-                            "Pasta"), // Elemento de sugerencia de búsqueda
+                        searchSuggestionsTiem("Vegetarianos"), 
+                        searchSuggestionsTiem("Veganos"),
+                        searchSuggestionsTiem("Diabeticos"),
                       ],
                     ),
                     const SizedBox(
@@ -122,30 +145,30 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  previousSearchsItem(int index) {
+  Widget previousSearchsItem(int index, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
-        onTap:
-            () {}, // Acción al hacer clic en el elemento de la lista (no implementada aquí)
+        onTap: () {
+          // Al hacer clic en el elemento, navegar a DescScreen con el elemento de búsqueda seleccionado
+          navigateToDescScreen(
+              foods.firstWhere((food) => food.name == SearchPage.previousSearchs[index]));
+        },
         child: Dismissible(
           key: GlobalKey(),
           onDismissed: (DismissDirection dir) {
             setState(() {});
-            SearchPage.previousSearchs.removeAt(
-                index); // Elimina la búsqueda anterior de la lista al deslizar
+            SearchPage.previousSearchs.removeAt(index);
           },
           child: Row(
             children: [
               const Icon(
-                Icons
-                    .restore, // Icono para mostrar que es una búsqueda anterior
+                Icons.restore,
                 color: Colors.grey,
               ),
               const SizedBox(width: 10),
               Text(
-                SearchPage.previousSearchs[
-                    index], // Muestra el texto de la búsqueda anterior
+                SearchPage.previousSearchs[index],
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
@@ -153,8 +176,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               const Spacer(),
               const Icon(
-                Icons
-                    .call_made_outlined, // Icono para mostrar la dirección de la acción (no implementado aquí)
+                Icons.call_made_outlined,
                 color: Colors.grey,
               ),
             ],
@@ -164,20 +186,47 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  searchSuggestionsTiem(String text) {
-    return Container(
+  Widget searchSuggestionsTiem(String text) {
+  return GestureDetector(
+    onTap: () {
+      // Aquí debes manejar la navegación a la pantalla correspondiente
+      switch (text) {
+        case "Vegetarianos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VegetarianScreen()),
+          );
+          break;
+        case "Veganos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => VeganScreen()),
+          );
+          break;
+        case "Diabeticos":
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DiabeticScreen()),
+          );
+          break;
+        default:
+          // Por si acaso, no debería entrar aquí
+          break;
+      }
+    },
+    child: Container(
       margin: const EdgeInsets.only(left: 8),
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(
-              30)), // Estilo del contenedor que contiene la sugerencia de búsqueda
-      child: Text(
-        text, // Texto de la sugerencia de búsqueda
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(
-            color:
-                Colors.green), // Estilo del texto de la sugerencia de búsqueda
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
       ),
-    );
-  }
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.green),
+      ),
+    ),
+  );
+}
+
 }

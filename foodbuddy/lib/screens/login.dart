@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
         password: _passwordController.text
             .trim(), // Obtiene la contraseña del controlador y elimina espacios en blanco.
       );
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => HomePage()), // Navega a la página de inicio.

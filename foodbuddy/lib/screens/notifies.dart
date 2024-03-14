@@ -30,7 +30,7 @@ class _NotifiesPageState extends State<NotifiesPage> {
     return Scaffold(
       appBar: AppBar(
         title:
-            const Text('Notificaciones'), // Título de la barra de aplicación.
+            const Text('Notificaciones', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de aplicación.
       ),
       body: ListView.builder(
         // Construye una lista de elementos de manera eficiente.
