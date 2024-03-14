@@ -6,20 +6,31 @@ import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
+import 'package:foodbuddy/widgets/diabetico.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
 import 'package:foodbuddy/widgets/veganos.dart';
 import 'package:foodbuddy/widgets/vegetarianos.dart';
 
 // Página de alimentación (Feed)
-class FeedPage extends StatelessWidget {
+class FeedPage extends StatefulWidget {
+  @override
+  _FeedPageState createState() => _FeedPageState();
+}
+
+class _FeedPageState extends State<FeedPage> {
   String currentCat = "Todos"; // Categoría actualmente seleccionada
   final List<String> categories = [ // Lista de categorías disponibles
     'Todos',
     'Vegano',
     'Vegetariano',
     'Diabetico',
-    
   ];
+
+  void updateCurrentCategory(String category) {
+    setState(() {
+      currentCat = category;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +75,11 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Categorias(categories: categories, currentCat: currentCat), // Widget para mostrar las categorías disponibles
+                Categorias(
+                  categories: categories,
+                  currentCat: currentCat,
+                  updateCurrentCategory: updateCurrentCategory,
+                ), // Widget para mostrar las categorías disponibles
                 const SizedBox(
                   height: 20,
                 ),
@@ -192,7 +207,7 @@ class FeedPage extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Veganos(),// Widget para mostrar alimentos según los veganos
+                const Diabeticos(),// Widget para mostrar alimentos según los veganos
               ],
             ),
           ),
