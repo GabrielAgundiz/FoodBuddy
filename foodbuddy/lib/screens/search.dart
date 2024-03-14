@@ -83,14 +83,16 @@ class _SearchPageState extends State<SearchPage> {
                             List<Food> searchResults =
                                 await buscarEnBaseDeDatos(
                                     searchController.text);
-                            setState(() {}); // Actualiza el estado para mostrar los resultados
+                            setState(
+                                () {}); // Actualiza el estado para mostrar los resultados
                           },
                         ),
                       ),
                       IconButton(
                         onPressed: () {},
                         icon: const Icon(
-                          Icons.tune, // Icono para ajustar los filtros de búsqueda
+                          Icons
+                              .tune, // Icono para ajustar los filtros de búsqueda
                         ),
                       ),
                     ],
@@ -127,9 +129,17 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                     Row(
                       children: [
-                        searchSuggestionsTiem("Vegetarianos"), 
-                        searchSuggestionsTiem("Veganos"),
-                        searchSuggestionsTiem("Diabeticos"),
+                        Row(
+                          children: [
+                            searchSuggestionsTiem("Vegetarianos"),
+                            searchSuggestionsTiem("Veganos"),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            searchSuggestionsTiem("Diabeticos"),
+                          ],
+                        )
                       ],
                     ),
                     const SizedBox(
@@ -151,8 +161,8 @@ class _SearchPageState extends State<SearchPage> {
       child: InkWell(
         onTap: () {
           // Al hacer clic en el elemento, navegar a DescScreen con el elemento de búsqueda seleccionado
-          navigateToDescScreen(
-              foods.firstWhere((food) => food.name == SearchPage.previousSearchs[index]));
+          navigateToDescScreen(foods.firstWhere(
+              (food) => food.name == SearchPage.previousSearchs[index]));
         },
         child: Dismissible(
           key: GlobalKey(),
@@ -187,46 +197,48 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget searchSuggestionsTiem(String text) {
-  return GestureDetector(
-    onTap: () {
-      // Aquí debes manejar la navegación a la pantalla correspondiente
-      switch (text) {
-        case "Vegetarianos":
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VegetarianScreen()),
-          );
-          break;
-        case "Veganos":
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => VeganScreen()),
-          );
-          break;
-        case "Diabeticos":
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DiabeticScreen()),
-          );
-          break;
-        default:
-          // Por si acaso, no debería entrar aquí
-          break;
-      }
-    },
-    child: Container(
-      margin: const EdgeInsets.only(left: 8),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
+    return GestureDetector(
+      onTap: () {
+        // Aquí debes manejar la navegación a la pantalla correspondiente
+        switch (text) {
+          case "Vegetarianos":
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VegetarianScreen()),
+            );
+            break;
+          case "Veganos":
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => VeganScreen()),
+            );
+            break;
+          case "Diabeticos":
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DiabeticScreen()),
+            );
+            break;
+          default:
+            // Por si acaso, no debería entrar aquí
+            break;
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Text(
+          text,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2!
+              .copyWith(color: Colors.green),
+        ),
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.green),
-      ),
-    ),
-  );
-}
-
+    );
+  }
 }
