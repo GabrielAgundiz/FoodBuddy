@@ -6,7 +6,8 @@
     "configurations": [
 
 
-
+        
+        
         {
             "name": "foodbuddy",
             "cwd": "foodbuddy",
