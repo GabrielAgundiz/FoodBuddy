@@ -1,13 +1,9 @@
 class Restaurants {
   String name;
   String image;
-  String ingredients; // Cambiado a una lista para los ingredientes
-  String category;
-  double cal;
-  double time;
   double rate;
   int reviews;
-  bool isLiked;
+  String address;
 
   Restaurants({
     required this.name,
