@@ -5,11 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/foodbuddy/lib/service/food_service.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/foodbuddy/lib/state/states.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/models/food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/models/food.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/models/restaurants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/models/restaurants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/catscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/catscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/diabeticscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/diabeticscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/vegetarianscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/vegetarianscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/wishlist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/wishlist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/antojo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/antojo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/diabetico.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/diabetico.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/veganos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/veganos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/vegetarianos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/vegetarianos.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" afterDir="false" />
@@ -36,6 +55,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2dOLtbqs9x9FgSjoNA2uKMPC1AZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -49,14 +69,26 @@
     "com.google.services.firebase.aqiPopupShown": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/tools",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "dart.settings",
+    "settings.editor.selected.configurable": "flutter.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/foodbuddy/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

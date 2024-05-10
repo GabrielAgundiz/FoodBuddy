@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/service/food_service.dart'; // Importa el servicio FoodService
 
-// Widget Veganos que muestra una lista de alimentos.
+// Widget Diabeticos que muestra una lista de alimentos.
 class Diabeticos extends StatefulWidget {
   const Diabeticos({Key? key});
 
@@ -11,12 +12,28 @@ class Diabeticos extends StatefulWidget {
 }
 
 class _DiabeticosState extends State<Diabeticos> {
+  final FoodService _foodService = FoodService(); // Instancia de tu servicio
+  List<Food> diabeticFoods =
+      []; // Lista para almacenar los alimentos para diabéticos
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDiabeticFoods();
+  }
+
+  Future<void> _loadDiabeticFoods() async {
+    List<Food> fetchedFoods = await _foodService
+        .getFoods(); // Obtener la lista de alimentos desde Firebase
+    setState(() {
+      diabeticFoods = fetchedFoods
+          .where((food) => food.category == 'Diabetico')
+          .toList(); // Filtrar los alimentos para diabéticos
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Filtrar la lista de alimentos para obtener solo los Diabeticos
-    final List<Food> vegetarianFoods =
-        foods.where((food) => food.category == 'Diabetico').toList();
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,19 +42,19 @@ class _DiabeticosState extends State<Diabeticos> {
           scrollDirection: Axis.horizontal, // Desplazamiento horizontal.
           child: Row(
             children: List.generate(
-              vegetarianFoods.length,
+              diabeticFoods.length,
               (index) => GestureDetector(
                 // Al tocar un alimento, se navega a la pantalla de descripción del alimento.
                 onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        DescScreen(food: vegetarianFoods[index]),
+                        DescScreen(food: diabeticFoods[index]),
                   ),
                 ),
                 child: Container(
-                  margin:
-                      const EdgeInsets.only(right: 10), // Margen derecho para separar los alimentos.
+                  margin: const EdgeInsets.only(
+                      right: 10), // Margen derecho para separar los alimentos.
                   width: 200, // Ancho del contenedor que contiene el alimento.
                   child: Stack(
                     children: [
@@ -48,16 +65,18 @@ class _DiabeticosState extends State<Diabeticos> {
                           // Contenedor para la imagen del alimento.
                           Container(
                             width: double.infinity,
-                            height: 130, // Altura fija para la imagen del alimento.
+                            height:
+                                130, // Altura fija para la imagen del alimento.
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                   15), // Bordes redondeados de la imagen.
                               image: DecorationImage(
                                 image: NetworkImage(
-                                  vegetarianFoods[index]
+                                  diabeticFoods[index]
                                       .image, // URL de la imagen del alimento.
                                 ),
-                                fit: BoxFit.fill, // Ajuste de la imagen para llenar el contenedor.
+                                fit: BoxFit
+                                    .fill, // Ajuste de la imagen para llenar el contenedor.
                               ),
                             ),
                           ),
@@ -66,7 +85,7 @@ class _DiabeticosState extends State<Diabeticos> {
                           ),
                           // Nombre del alimento.
                           Text(
-                            vegetarianFoods[index].name,
+                            diabeticFoods[index].name,
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -84,7 +103,7 @@ class _DiabeticosState extends State<Diabeticos> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${vegetarianFoods[index].cal} Cal",
+                                "${diabeticFoods[index].cal} Cal",
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey,
@@ -100,7 +119,7 @@ class _DiabeticosState extends State<Diabeticos> {
                                 color: Colors.grey,
                               ),
                               Text(
-                                "${vegetarianFoods[index].time} Min",
+                                "${diabeticFoods[index].time} Min",
                                 style: const TextStyle(
                                   fontSize: 12,
                                   color: Colors.grey,
@@ -117,8 +136,8 @@ class _DiabeticosState extends State<Diabeticos> {
                         child: IconButton(
                           onPressed: () {
                             setState(() {
-                              vegetarianFoods[index].isLiked =
-                                  !vegetarianFoods[index].isLiked;
+                              diabeticFoods[index].isLiked =
+                                  !diabeticFoods[index].isLiked;
                             });
                           },
                           style: IconButton.styleFrom(
@@ -129,10 +148,10 @@ class _DiabeticosState extends State<Diabeticos> {
                           ),
                           iconSize: 20, // Tamaño del icono del botón.
                           icon: Icon(
-                            vegetarianFoods[index].isLiked
+                            diabeticFoods[index].isLiked
                                 ? Icons.favorite
                                 : Icons.favorite_border,
-                            color: vegetarianFoods[index].isLiked
+                            color: diabeticFoods[index].isLiked
                                 ? Colors.red
                                 : null,
                           ), // Icono del botón.

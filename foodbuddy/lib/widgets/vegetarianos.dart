@@ -1,17 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/service/food_service.dart'; // Importa el servicio FoodService
 
 // Widget Vegetarianos que muestra una lista de alimentos.
-class Vegetarianos extends StatelessWidget {
+class Vegetarianos extends StatefulWidget {
   const Vegetarianos({Key? key});
 
   @override
-  Widget build(BuildContext context) {
-    // Filtrar la lista de alimentos para obtener solo los vegetarianos
-    final List<Food> vegetarianFoods =
-        foods.where((food) => food.category == 'Vegetariano').toList();
+  _VegetarianosState createState() => _VegetarianosState();
+}
 
+class _VegetarianosState extends State<Vegetarianos> {
+  final FoodService _foodService = FoodService(); // Instancia de tu servicio
+  List<Food> vegetarianFoods =
+      []; // Lista para almacenar los alimentos vegetarianos
+
+  @override
+  void initState() {
+    super.initState();
+    _loadVegetarianFoods();
+  }
+
+  Future<void> _loadVegetarianFoods() async {
+    List<Food> fetchedFoods = await _foodService
+        .getFoods(); // Obtener la lista de alimentos desde Firebase
+    setState(() {
+      vegetarianFoods = fetchedFoods
+          .where((food) => food.category == 'Vegetariano')
+          .toList(); // Filtrar los alimentos vegetarianos
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,14 +68,15 @@ class Vegetarianos extends StatelessWidget {
                             height:
                                 130, // Altura fija para la imagen del alimento.
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(15), // Bordes redondeados de la imagen.
+                              borderRadius: BorderRadius.circular(
+                                  15), // Bordes redondeados de la imagen.
                               image: DecorationImage(
                                 image: NetworkImage(
                                   vegetarianFoods[index]
                                       .image, // URL de la imagen del alimento.
                                 ),
-                                fit: BoxFit.fill, // Ajuste de la imagen para llenar el contenedor.
+                                fit: BoxFit
+                                    .fill, // Ajuste de la imagen para llenar el contenedor.
                               ),
                             ),
                           ),
@@ -139,4 +162,3 @@ class Vegetarianos extends StatelessWidget {
     );
   }
 }
-

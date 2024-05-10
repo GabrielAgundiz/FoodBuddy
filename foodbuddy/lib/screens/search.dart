@@ -5,7 +5,10 @@ import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
-import 'package:foodbuddy/widgets/ctfl.dart'; // Importa el widget personalizado CostomTextFormFild
+import 'package:foodbuddy/service/food_service.dart';
+import 'package:foodbuddy/widgets/ctfl.dart';
+
+import '../widgets/food_card.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -18,18 +21,31 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   TextEditingController searchController =
       TextEditingController(); // Controlador para el campo de búsqueda
+  FoodService _foodService = FoodService(); // Instancia de tu servicio
+  List<Food> searchResults =
+      []; // Lista para almacenar los resultados de la búsqueda
+  bool showGridView =
+      true; // Variable para controlar la visibilidad del GridView
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSearchResults('');
+  }
+
+  Future<void> _loadSearchResults(String searchTerm) async {
+    List<Food> foods =
+        await _foodService.getFoods(); // Obtener la lista de alimentos
+    setState(() {
+      searchResults = foods
+          .where((food) =>
+              food.name.toLowerCase().contains(searchTerm.toLowerCase()))
+          .toList(); // Aplicar filtro
+    });
+  }
+
   Future<List<Food>> buscarEnBaseDeDatos(String searchTerm) async {
-    // Simulación de búsqueda en una base de datos
-    await Future.delayed(const Duration(
-        seconds:
-            1)); // Simulación de retraso de 1 segundo para imitar una búsqueda en una base de datos remota
-
-    // Filtro de alimentos que contienen el término de búsqueda en su nombre
-    List<Food> searchResults = foods
-        .where((food) =>
-            food.name.toLowerCase().contains(searchTerm.toLowerCase()))
-        .toList();
-
+    await _loadSearchResults(searchTerm);
     return searchResults;
   }
 
@@ -74,6 +90,10 @@ class _SearchPageState extends State<SearchPage> {
                               searchController == null ? null : Icons.cancel,
                           onTapSuffixIcon: () {
                             searchController.clear();
+                            setState(() {
+                              showGridView =
+                                  false; // Ocultar el GridView al hacer clic en el campo de búsqueda
+                            });
                           },
                           onChanged: (pure) {
                             setState(() {});
@@ -84,8 +104,10 @@ class _SearchPageState extends State<SearchPage> {
                             List<Food> searchResults =
                                 await buscarEnBaseDeDatos(
                                     searchController.text);
-                            setState(
-                                () {}); // Actualiza el estado para mostrar los resultados
+                            setState(() {
+                              this.searchResults = searchResults;
+                              showGridView = true;
+                            }); // Actualiza el estado para mostrar los resultados
                           },
                         ),
                       ),
@@ -103,13 +125,22 @@ class _SearchPageState extends State<SearchPage> {
               const SizedBox(
                 height: 8,
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: SearchPage.previousSearchs.length,
-                  itemBuilder: (context, index) =>
-                      previousSearchsItem(index, context),
+              if (showGridView)
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
+                    itemCount: searchResults.length,
+                    itemBuilder: (context, index) {
+                      Food food = searchResults[index];
+                      return Platillo(food: food);
+                    },
+                  ),
                 ),
-              ),
               const SizedBox(
                 height: 8,
               ),
@@ -163,8 +194,12 @@ class _SearchPageState extends State<SearchPage> {
       child: InkWell(
         onTap: () {
           // Al hacer clic en el elemento, navegar a DescScreen con el elemento de búsqueda seleccionado
-          navigateToDescScreen(foods.firstWhere(
-              (food) => food.name == SearchPage.previousSearchs[index]));
+          String selectedSearch = SearchPage.previousSearchs[index];
+          Food selectedFood = searchResults.firstWhere(
+              (food) => food.name == selectedSearch,
+              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0,
+                  false)); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
+          navigateToDescScreen(selectedFood);
         },
         child: Dismissible(
           key: GlobalKey(),
@@ -206,25 +241,25 @@ class _SearchPageState extends State<SearchPage> {
           case "Vegetarianos":
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VegetarianScreen()),
+              MaterialPageRoute(builder: (context) => const VegetarianScreen()),
             );
             break;
           case "Veganos":
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => VeganScreen()),
+              MaterialPageRoute(builder: (context) => const VeganScreen()),
             );
             break;
           case "Diabeticos":
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DiabeticScreen()),
+              MaterialPageRoute(builder: (context) => const DiabeticScreen()),
             );
             break;
-            case "Antojos":
+          case "Antojos":
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => CategoryScreen()),
+              MaterialPageRoute(builder: (context) => const CategoryScreen()),
             );
             break;
           default:

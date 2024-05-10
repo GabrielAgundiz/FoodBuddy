@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:foodbuddy/screens/login.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:foodbuddy/screens/login.dart';
+import 'package:foodbuddy/state/states.dart';
 
 // Función principal que se ejecuta cuando se inicia la aplicación
 Future main() async {
@@ -9,7 +11,12 @@ Future main() async {
   // Inicializa la aplicación de Firebase
   await Firebase.initializeApp();
   // Ejecuta la aplicación MyApp
-  runApp(MyApp());
+  runApp(
+    BlocProvider(
+      create: (_) => FavoriteBloc(FavoriteState([])),
+      child: MyApp(),
+    ),
+  );
 }
 
 // Clase que extiende StatelessWidget y representa la aplicación completa

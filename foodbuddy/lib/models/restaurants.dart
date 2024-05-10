@@ -14,7 +14,7 @@ class Restaurants {
   });
 }
 
-final List<Restaurant> restaurants = [
+/*final List<Restaurant> restaurants = [
   Restaurant(
       name: "Don Pancho",
       image:
@@ -23,4 +23,4 @@ final List<Restaurant> restaurants = [
       reviews: 23,
       addres: "Pancho Villa #123, Monterrey, N.L."
   ),
-];
+];*/
