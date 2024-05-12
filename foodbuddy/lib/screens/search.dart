@@ -197,8 +197,8 @@ class _SearchPageState extends State<SearchPage> {
           String selectedSearch = SearchPage.previousSearchs[index];
           Food selectedFood = searchResults.firstWhere(
               (food) => food.name == selectedSearch,
-              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0,
-                  false)); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
+              orElse: () => Food('', '', '', '', '', 0, 0, 0,
+                  0)); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
           navigateToDescScreen(selectedFood);
         },
         child: Dismissible(

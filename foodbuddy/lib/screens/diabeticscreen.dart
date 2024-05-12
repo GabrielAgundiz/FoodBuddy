@@ -12,7 +12,7 @@ class DiabeticScreen extends StatefulWidget {
 
 class _DiabeticScreenState extends State<DiabeticScreen> {
   final FoodService _foodService = FoodService(); // Instancia de tu servicio
-  List<Food> vegetarianFoods =
+  List<Food> diabeticFoods =
       []; // Lista para almacenar los alimentos vegetarianos
 
   @override
@@ -25,7 +25,7 @@ class _DiabeticScreenState extends State<DiabeticScreen> {
     List<Food> foods = await _foodService
         .getFoods(); // Obtener la lista de alimentos desde Firebase
     setState(() {
-      vegetarianFoods = foods
+      diabeticFoods = foods
           .where((food) => food.category == 'Diabetico')
           .toList(); // Filtrar la lista para obtener solo los alimentos vegetarianos
     });
@@ -67,10 +67,10 @@ class _DiabeticScreenState extends State<DiabeticScreen> {
                   ),
                   itemBuilder: (context, index) => Platillo(
                     // Constructor de cada elemento de la cuadrícula
-                    food: vegetarianFoods[
+                    food: diabeticFoods[
                         index], // Pasa cada alimento vegetariano al widget Platillo
                   ),
-                  itemCount: vegetarianFoods
+                  itemCount: diabeticFoods
                       .length, // Número total de elementos en la cuadrícula
                 ),
               ],

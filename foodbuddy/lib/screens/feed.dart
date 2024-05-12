@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';

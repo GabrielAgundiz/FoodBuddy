@@ -142,14 +142,8 @@ class _AntojoState extends State<Antojo> {
                               if (favoriteState.foodIds
                                   .contains(foods[index].id)) {
                                 _removeFromFavorite(context, foods[index].id);
-                                setState(() {
-                                  foods[index].isLiked = !foods[index].isLiked;
-                                });
                               } else {
                                 _addToFavorite(context, foods[index].id);
-                                setState(() {
-                                  foods[index].isLiked = !foods[index].isLiked;
-                                });
                               }
                             },
                             style: IconButton.styleFrom(
@@ -160,10 +154,13 @@ class _AntojoState extends State<Antojo> {
                             ),
                             iconSize: 20, // Tamaño del icono del botón.
                             icon: Icon(
-                              foods[index].isLiked
+                              favoriteState.foodIds.contains(foods[index].id)
                                   ? Icons.favorite
                                   : Icons.favorite_border,
-                              color: foods[index].isLiked ? Colors.red : null,
+                              color: favoriteState.foodIds
+                                      .contains(foods[index].id)
+                                  ? Colors.red
+                                  : null,
                             ), // Icono del botón.
                           ),
                         ),

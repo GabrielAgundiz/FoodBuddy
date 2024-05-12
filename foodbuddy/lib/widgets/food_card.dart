@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/state/states.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // Este widget representa un platillo individual en la lista de platillos.
 class Platillo extends StatefulWidget {
@@ -18,30 +17,6 @@ class Platillo extends StatefulWidget {
 
 class _PlatilloState extends State<Platillo> {
   bool isLiked = false;
-
-  saveFavorite() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    setState(() {
-      isLiked = !(prefs.getBool("isLiked") ??
-          false); // Si el valor es null, se asigna false
-      prefs.setBool("isLiked", isLiked);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    cargarPreferencias();
-  }
-
-  cargarPreferencias() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isLiked = prefs.getBool("isLiked") ??
-          false; // Si el valor es null, se asigna false
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +144,7 @@ class _PlatilloState extends State<Platillo> {
                   ),
                   iconSize: 20,
                   // El icono cambia según si el platillo está marcado como "me gusta".
-                  icon: isLiked
+                  icon: favoriteState.foodIds.contains(widget.food.id)
                       ? const Icon(
                           Icons.favorite,
                           color: Colors.red,

@@ -8,10 +8,9 @@ class Food {
   final int time;
   final double rate;
   final int reviews;
-  bool isLiked;
 
   Food(this.id, this.name, this.image, this.ingredients, this.category,
-      this.cal, this.time, this.rate, this.reviews, this.isLiked);
+      this.cal, this.time, this.rate, this.reviews);
 
   Food.fromJson(String id, Map<String, dynamic> json)
       : this(
@@ -23,8 +22,7 @@ class Food {
             json['cal'].toDouble(),
             json['time'].toInt(),
             json['rate'].toDouble(),
-            json['reviews'].toInt(),
-            json['isLiked'] as bool);
+            json['reviews'].toInt());
   toJson() {
     throw Exception();
   }

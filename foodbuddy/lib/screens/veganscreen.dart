@@ -12,19 +12,22 @@ class VeganScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<VeganScreen> {
+  final FoodService _foodService = FoodService(); // Instancia de tu servicio
   List<Food> veganFoods = [];
-  @override //llamado al servicio
+
+  @override
   void initState() {
     super.initState();
-    _getFoods();
+    _loadDiabeticFoods();
   }
 
-  void _getFoods() async {
-    //metodo que se encarga de obtener los datos de nuestro servicio BooksService
-    var lastFoods = await FoodService().getFoods();
+  Future<void> _loadDiabeticFoods() async {
+    List<Food> foods = await _foodService
+        .getFoods(); // Obtener la lista de alimentos desde Firebase
     setState(() {
-      //se configura el estado de este widget añadiendo los libros a la lista vacia _book
-      veganFoods = lastFoods;
+      veganFoods = foods
+          .where((food) => food.category == 'Vegano')
+          .toList(); // Filtrar la lista para obtener solo los alimentos vegetarianos
     });
   }
 
