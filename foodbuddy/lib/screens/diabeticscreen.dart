@@ -61,7 +61,7 @@ class _DiabeticScreenState extends State<DiabeticScreen> {
                     crossAxisCount:
                         2, // Número de elementos en cada fila de la cuadrícula
                     crossAxisSpacing:
-                        20, // Espacio horizontal entre elementos de la cuadrícula
+                        15, // Espacio horizontal entre elementos de la cuadrícula
                     mainAxisSpacing:
                         20, // Espacio vertical entre elementos de la cuadrícula
                   ),

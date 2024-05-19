@@ -95,7 +95,9 @@ class _DiabeticosState extends State<Diabeticos> {
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
                               ),
+                              maxLines: 1,
                             ),
                             const SizedBox(
                               height: 10,

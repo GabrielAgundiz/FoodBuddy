@@ -215,10 +215,11 @@ class _DescripcionState extends State<DescScreen> {
                                   .split(',')
                                   .map(
                                     (ingredient) => Text(
-                                      '• $ingredient',
+                                      '• ${ingredient.trim()}',
                                       style: TextStyle(
                                           fontSize: 14,
                                           color: Colors.grey.shade700),
+                                          softWrap: true,
                                     ),
                                   )
                                   .toList(),

@@ -43,7 +43,7 @@ class _PlatilloState extends State<Platillo> {
                   // Contenedor para la imagen del platillo.
                   Container(
                     width: double.infinity,
-                    height: 99,
+                    height: MediaQuery.of(context).size.height / 8.3,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
@@ -63,10 +63,12 @@ class _PlatilloState extends State<Platillo> {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
                     ),
+                    maxLines: 1,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 4,
                   ),
                   // Información de calorías y tiempo de preparación.
                   Row(

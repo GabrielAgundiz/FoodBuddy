@@ -93,7 +93,9 @@ class _AntojoState extends State<Antojo> {
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
                               ),
+                              maxLines: 1,
                             ),
                             const SizedBox(
                               height: 10,
