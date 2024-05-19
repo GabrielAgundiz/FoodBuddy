@@ -23,8 +23,19 @@ class Food {
             json['time'].toInt(),
             json['rate'].toDouble(),
             json['reviews'].toInt());
-  toJson() {
-    throw Exception();
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'ingredients': ingredients,
+      'category': category,
+      'cal': cal,
+      'time': time,
+      'rate': rate,
+      'reviews': reviews,
+    };
   }
 }
 

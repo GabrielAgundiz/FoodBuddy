@@ -5,18 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Configuracion de los estados para agregar a lista de guardados">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/lib/models/food.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/models/food.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/diabeticscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/diabeticscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/feed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/feed.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/vegetarianscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/vegetarianscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/antojo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/antojo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/diabetico.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/diabetico.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/veganos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/veganos.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/vegetarianos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/vegetarianos.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/service/food_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/service/food_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

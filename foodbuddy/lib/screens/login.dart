@@ -1,49 +1,70 @@
-import 'package:flutter/material.dart'; // Importa el paquete flutter material.
-import 'package:google_fonts/google_fonts.dart'; // Importa el paquete google_fonts para fuentes personalizadas.
-import 'package:foodbuddy/screens/register.dart'; // Importa la pantalla de registro.
-import 'package:foodbuddy/screens/recovery.dart'; // Importa la pantalla de recuperación de contraseña.
-import 'package:firebase_auth/firebase_auth.dart'; // Importa la autenticación de Firebase.
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart'; // Importa el paquete email_validator para validar correos electrónicos.
-import 'package:foodbuddy/widgets/utils.dart'; // Importa utilidades personalizadas.
+import 'package:firebase_auth/firebase_auth.dart'; // Importa la autenticación de Firebase.
+import 'package:flutter/material.dart'; // Importa el paquete flutter material.
 import 'package:foodbuddy/screens/home.dart'; // Importa la pantalla de inicio de la aplicación.
+import 'package:foodbuddy/screens/recovery.dart'; // Importa la pantalla de recuperación de contraseña.
+import 'package:foodbuddy/screens/register.dart'; // Importa la pantalla de registro.
+import 'package:foodbuddy/widgets/utils.dart'; // Importa utilidades personalizadas.
+import 'package:google_fonts/google_fonts.dart'; // Importa el paquete google_fonts para fuentes personalizadas.
 
 class LoginPage extends StatefulWidget {
   @override
-  _LoginPageState createState() =>
-      _LoginPageState(); // Define el estado para la página de inicio de sesión.
-  Widget build(BuildContext context) => Scaffold(
-        body: StreamBuilder<User?>(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return HomePage(); // Si hay datos de usuario, muestra la página de inicio.
-              } else {
-                return LoginPage(); // Si no hay datos de usuario, muestra la página de inicio de sesión.
-              }
-            }),
-      );
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController =
-      TextEditingController(); // Controlador para el campo de correo electrónico.
-  final _passwordController =
-      TextEditingController(); // Controlador para el campo de contraseña.
-  final formKey = GlobalKey<FormState>(); // Clave global para el formulario.
-
-  bool obscureText =
-      true; // Variable para controlar la visibilidad de la contraseña.
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  bool obscureText = true;
 
   @override
   void dispose() {
-    _emailController.dispose(); // Limpia el controlador de correo electrónico.
-    _passwordController.dispose(); // Limpia el controlador de contraseña.
-
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
+  Future<bool> _isUserAuthenticate(User user) async {
+    await user.reload();
+    return user.emailVerified;
+  }
+
+  Future<void> checkCurrentUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null && await _isUserAuthenticate(user)) {
+      final credencial = user.uid;
+      final userDoc = await FirebaseFirestore.instance
+          .collection('client')
+          .doc(credencial)
+          .get();
+      print(userDoc.id);
+
+      if (userDoc.exists) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false,
+        );
+      } else {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false,
+        );
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkCurrentUser();
+  }
+
   Future signIn() async {
-    final isValid = formKey.currentState!.validate(); // Valida el formulario.
+    final isValid = formKey.currentState!.validate();
     if (!isValid) return;
     try {
       showDialog(
@@ -54,26 +75,36 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text
-            .trim(), // Obtiene el correo electrónico del controlador y elimina espacios en blanco.
-        password: _passwordController.text
-            .trim(), // Obtiene la contraseña del controlador y elimina espacios en blanco.
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) => HomePage()), // Navega a la página de inicio.
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
     } on FirebaseAuthException catch (e) {
       print(e);
-
-      Utils.showSnackBar(
-          e.message); // Muestra un mensaje de error en forma de Snackbar.
+      Utils.showSnackBar(e.message);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return HomePage();
+          } else {
+            return buildLoginForm(context);
+          }
+        },
+      ),
+    );
+  }
+
+  Widget buildLoginForm(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Theme(
@@ -97,54 +128,39 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 40.0),
                   Container(
-                    // Contenedor decorado para el campo de correo electrónico.
                     decoration: BoxDecoration(
-                      color: Colors.grey[200], // Color de fondo del contenedor.
-                      borderRadius: BorderRadius.circular(
-                          10), // Bordes redondeados del contenedor.
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      controller:
-                          _emailController, // Controlador para el campo de texto del correo electrónico.
+                      controller: _emailController,
                       decoration: const InputDecoration(
-                        labelText: 'Email', // Etiqueta del campo de texto.
-                        hintText:
-                            'example@email.com', // Texto de sugerencia dentro del campo de texto.
-                        prefixIcon: Icon(Icons
-                            .email), // Icono del prefijo para el correo electrónico.
-                        border: InputBorder
-                            .none, // Sin borde alrededor del campo de texto.
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical:
-                                12), // Espaciado interno del campo de texto.
+                        labelText: 'Email',
+                        hintText: 'example@email.com',
+                        prefixIcon: Icon(Icons.email),
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                       ),
-                      validator: (email) => email != null &&
-                              !EmailValidator.validate(
-                                  email) // Validación del correo electrónico utilizando el paquete 'email_validator'.
-                          ? 'Ingresa un correo valido' // Mensaje de error si el correo electrónico no es válido.
-                          : null, // Retorna null si el correo electrónico es válido.
+                      validator: (email) =>
+                          email != null && !EmailValidator.validate(email)
+                              ? 'Ingresa un correo valido'
+                              : null,
                     ),
                   ),
                   const SizedBox(height: 20.0),
                   Container(
-                    // Contenedor decorado para el campo de contraseña.
                     decoration: BoxDecoration(
-                      color: Colors.grey[200], // Color de fondo del contenedor.
-                      borderRadius: BorderRadius.circular(
-                          10), // Bordes redondeados del contenedor.
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextFormField(
-                      controller:
-                          _passwordController, // Controlador para el campo de texto de la contraseña.
+                      controller: _passwordController,
                       decoration: InputDecoration(
-                        labelText: 'Contraseña', // Etiqueta del campo de texto.
-                        hintText:
-                            '••••••••', // Texto de sugerencia dentro del campo de texto.
-                        prefixIcon: const Icon(Icons
-                            .lock), // Icono del prefijo para la contraseña.
+                        labelText: 'Contraseña',
+                        hintText: '••••••••',
+                        prefixIcon: const Icon(Icons.lock),
                         suffixIcon: IconButton(
-                          // Icono del sufijo para alternar la visibilidad de la contraseña.
                           icon: Icon(
                             obscureText
                                 ? Icons.visibility_off
@@ -152,53 +168,39 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           onPressed: () {
                             setState(() {
-                              obscureText =
-                                  !obscureText; // Cambia la visibilidad de la contraseña.
+                              obscureText = !obscureText;
                             });
                           },
                         ),
-                        border: InputBorder
-                            .none, // Sin borde alrededor del campo de texto.
+                        border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical:
-                                12), // Espaciado interno del campo de texto.
+                            horizontal: 16, vertical: 12),
                       ),
-                      obscureText:
-                          obscureText, // Indica si el texto debe ser ocultado (contraseña).
-                      autovalidateMode: AutovalidateMode
-                          .onUserInteraction, // Valida automáticamente la entrada del usuario.
+                      obscureText: obscureText,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) => value != null && value.length < 8
-                          ? 'Contraseña Incorrecta' // Mensaje de error si la contraseña es incorrecta (menos de 8 caracteres).
-                          : null, // Retorna null si la contraseña es válida.
+                          ? 'Contraseña Incorrecta'
+                          : null,
                     ),
                   ),
                   const SizedBox(height: 40.0),
                   ElevatedButton(
-                    // Botón elevado para iniciar sesión.
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(
-                          double.infinity, 50), // Tamaño mínimo del botón.
-                      backgroundColor:
-                          Colors.green[400], // Color de fondo del botón.
-                      foregroundColor:
-                          Colors.white, // Color del texto del botón.
+                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Colors.green[400],
+                      foregroundColor: Colors.white,
                     ),
-                    child:
-                        const Text('Iniciar sesión'), // Texto dentro del botón.
+                    child: const Text('Iniciar sesión'),
                     onPressed: () async {
                       try {
-                        await signIn(); // Intenta iniciar sesión utilizando el método signIn definido previamente.
+                        await signIn();
                       } catch (e) {
                         if (e is FirebaseAuthException &&
                             e.code == 'wrong-password') {
-                          // Si se produce un error de contraseña incorrecta, muestra un Snackbar.
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text(
-                                  'Contraseña incorrecta'), // Mensaje de error.
-                              backgroundColor:
-                                  Colors.red, // Color de fondo del Snackbar.
+                              content: Text('Contraseña incorrecta'),
+                              backgroundColor: Colors.red,
                             ),
                           );
                         }
@@ -211,8 +213,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                RecoverPasswordPage()), // Navega a la página de recuperación de contraseña.
+                            builder: (context) => RecoverPasswordPage()),
                       );
                     },
                     child: Text(
@@ -227,9 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                RegisterPage()), // Navega a la página de registro.
+                        MaterialPageRoute(builder: (context) => RegisterPage()),
                       );
                     },
                     child: RichText(
