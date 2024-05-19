@@ -134,9 +134,7 @@ class _DescripcionState extends State<DescScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Row(
                       children: [
                         const Icon(
@@ -144,6 +142,7 @@ class _DescripcionState extends State<DescScreen> {
                           size: 20,
                           color: Colors.grey,
                         ),
+                        const SizedBox(width: 5),
                         Text(
                           "${widget.food.cal} Cal",
                           style: const TextStyle(
@@ -160,6 +159,7 @@ class _DescripcionState extends State<DescScreen> {
                           size: 20,
                           color: Colors.grey,
                         ),
+                        const SizedBox(width: 5),
                         Text(
                           "${widget.food.time} Min",
                           style: const TextStyle(
@@ -167,66 +167,58 @@ class _DescripcionState extends State<DescScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Icon(Icons.star, color: Colors.yellow.shade500, size: 22),
-                        const SizedBox(
-                          width: 5,
+                        const Text(
+                          "  •  ",
+                          style: TextStyle(color: Colors.grey),
                         ),
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow.shade500,
+                          size: 22,
+                        ),
+                        const SizedBox(width: 5),
                         Text(
                           "${widget.food.rate}/5",
                           style: TextStyle(
-                              fontSize: 14, color: Colors.grey.shade600),
+                            fontSize: 14,
+                            color: Colors.grey.shade600,
+                          ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Text(
                           "(${widget.food.reviews} Reviews)",
                           style: TextStyle(
-                              fontSize: 14, color: Colors.grey.shade400),
+                            fontSize: 14,
+                            color: Colors.grey.shade400,
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20,
+              
+                    
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Ingredientes",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Ingredientes",
+                    const SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: widget.food.ingredients
+                          .split(',')
+                          .map(
+                            (ingredient) => Text(
+                              '• ${ingredient.trim()}',
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                fontSize: 14,
+                                color: Colors.grey.shade700,
+                              ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: widget.food.ingredients
-                                  .split(',')
-                                  .map(
-                                    (ingredient) => Text(
-                                      '• ${ingredient.trim()}',
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade700),
-                                          softWrap: true,
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      ],
+                          )
+                          .toList(),
                     ),
                   ],
                 ),
