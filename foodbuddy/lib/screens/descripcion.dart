@@ -47,7 +47,7 @@ class _DescripcionState extends State<DescScreen> {
                     } else {
                       _addToFavorite(context, widget.food.id);
                     }
-                  },
+                  }, 
                   style: IconButton.styleFrom(
                       shape: CircleBorder(
                           side: BorderSide(
