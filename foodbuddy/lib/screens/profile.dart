@@ -18,7 +18,6 @@ class _ProfilePageState extends State<ProfilePage> {
   String? _photoUrl; // Variable para almacenar la URL de la foto del usuario
   bool _notifications =
       false; // Variable para controlar la configuración de notificaciones
-  bool _news = false; // Variable para controlar la configuración de noticias
   String? _preferences; // Variable para almacenar las preferencias del usuario
 
   final picker =
@@ -218,23 +217,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           activeColor: Colors
                               .green, // Color del botón del interruptor cuando está activado
                         ),
-                        SwitchListTile(
-                          title: const Text(
-                              'Noticias'), // Título del interruptor para las noticias
-                          value:
-                              _news, // Valor actual del interruptor (activado o desactivado)
-                          onChanged: (value) {
-                            // Función que se ejecuta cuando el usuario cambia el estado del interruptor
-                            setState(() {
-                              // Establece el estado con el nuevo valor del interruptor
-                              _news = value;
-                            });
-                          },
-                          activeTrackColor: Colors.green.withAlpha(
-                              50), // Color de la pista del interruptor cuando está activado
-                          activeColor: Colors
-                              .green, // Color del botón del interruptor cuando está activado
-                        ),
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
@@ -255,7 +237,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'address': _address,
                                   'photo': _photoUrl,
                                   'notifications': _notifications,
-                                  'news': _news,
                                   'preferences': _preferences,
                                 });
 
