@@ -121,112 +121,114 @@ class _DescripcionState extends State<DescScreen> {
             const SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.food.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.food.name,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.local_fire_department,
-                        size: 20,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        "${widget.food.cal} Cal",
-                        style: const TextStyle(
-                          fontSize: 14,
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.local_fire_department,
+                          size: 20,
                           color: Colors.grey,
                         ),
-                      ),
-                      const Text(
-                        "  •  ",
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                      const Icon(
-                        Icons.schedule,
-                        size: 20,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        "${widget.food.time} Min",
-                        style: const TextStyle(
-                          fontSize: 14,
+                        Text(
+                          "${widget.food.cal} Cal",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        const Text(
+                          "  •  ",
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                        const Icon(
+                          Icons.schedule,
+                          size: 20,
                           color: Colors.grey,
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.star, color: Colors.yellow.shade500, size: 22),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${widget.food.rate}/5",
-                        style: TextStyle(
-                            fontSize: 14, color: Colors.grey.shade600),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "(${widget.food.reviews} Reviews)",
-                        style: TextStyle(
-                            fontSize: 14, color: Colors.grey.shade400),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Ingredientes",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
+                        Text(
+                          "${widget.food.time} Min",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: widget.food.ingredients
-                                .split(',')
-                                .map(
-                                  (ingredient) => Text(
-                                    '• $ingredient',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.grey.shade700),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Icon(Icons.star, color: Colors.yellow.shade500, size: 22),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "${widget.food.rate}/5",
+                          style: TextStyle(
+                              fontSize: 14, color: Colors.grey.shade600),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "(${widget.food.reviews} Reviews)",
+                          style: TextStyle(
+                              fontSize: 14, color: Colors.grey.shade400),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Ingredientes",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: widget.food.ingredients
+                                  .split(',')
+                                  .map(
+                                    (ingredient) => Text(
+                                      '• $ingredient',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.grey.shade700),
+                                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
