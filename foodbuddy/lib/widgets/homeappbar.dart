@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,19 +13,24 @@ class HomeAppbar extends StatelessWidget {
   // Método build para construir la interfaz de usuario del widget.
   Widget build(BuildContext context) {
     // Devuelve un Row (una fila horizontal) que contiene un Texto y un Spacer.
-    return const Row(
+    return Row(
       children: [
         // Texto que indica "¿Qué estás buscando hoy?".
-        Text(
-          "Que estas buscando hoy?",
-          style: TextStyle(
-            fontSize: 28, // Tamaño de fuente 28.
-            fontWeight: FontWeight.bold, // Fuente en negrita.
-            height: 1, // Altura del texto (1 significa la altura normal).
+        SafeArea(
+          child: Container(
+            width: MediaQuery.of(context).size.width / 1.1,
+            child: const Text(
+              "Que estas buscando hoy?",
+              style: TextStyle(
+                fontSize: 28, // Tamaño de fuente 28.
+                fontWeight: FontWeight.bold, // Fuente en negrita.
+                height: 1, // Altura del texto (1 significa la altura normal).
+              ),
+            ),
           ),
         ),
         // Spacer expande el espacio disponible entre los elementos en la fila.
-        Spacer(),
+        const Spacer(),
       ],
     );
   }

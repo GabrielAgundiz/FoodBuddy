@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodbuddy/models/food.dart';
-
 import '../state/states.dart';
 
 const kprimaryColor = Color(0xFF5DB075);

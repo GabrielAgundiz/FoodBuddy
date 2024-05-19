@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/feed.dart';    // Importando la pantalla de alimentación
+import 'package:foodbuddy/screens/restaurant.dart';
 import 'package:foodbuddy/screens/search.dart';  // Importando la pantalla de búsqueda
 import 'package:foodbuddy/screens/profile.dart';  // Importando la pantalla de perfil
 import 'package:foodbuddy/screens/wishlist.dart'; // Importando la pantalla de lista de deseos
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screens = [    // Lista de las pantallas a mostrar
       FeedPage(),
+      RestaurantPage(),
       SearchPage(),
       SavesPage(),
       ProfilePage()
@@ -44,8 +46,12 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white.withOpacity(1), // Fondo de la barra de navegación inferior
         items: const <BottomNavigationBarItem>[    // Elementos de la barra de navegación inferior
           BottomNavigationBarItem(
-            icon: Icon(Icons.store),    // Icono del elemento
+            icon: Icon(Icons.restaurant),    // Icono del elemento
             label: 'Inicio',   // Etiqueta del elemento
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store),    // Icono del elemento
+            label: 'Restaurantes',   // Etiqueta del elemento
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),

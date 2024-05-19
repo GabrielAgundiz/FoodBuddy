@@ -122,28 +122,6 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              if (showGridView)
-                Expanded(
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8.0,
-                      mainAxisSpacing: 8.0,
-                    ),
-                    itemCount: searchResults.length,
-                    itemBuilder: (context, index) {
-                      Food food = searchResults[index];
-                      return Platillo(food: food);
-                    },
-                  ),
-                ),
-              const SizedBox(
-                height: 8,
-              ),
               Container(
                 width: double.infinity,
                 color: Colors.white,
@@ -159,21 +137,17 @@ class _SearchPageState extends State<SearchPage> {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            searchSuggestionsTiem("Vegetarianos"),
-                            searchSuggestionsTiem("Veganos"),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            searchSuggestionsTiem("Diabeticos"),
-                            searchSuggestionsTiem("Antojos"),
-                          ],
-                        )
-                      ],
+                    SingleChildScrollView(
+                      scrollDirection: Axis
+                          .horizontal, // Establecemos la dirección del scroll en horizontal
+                      child: Row(
+                        children: [
+                          searchSuggestionsTiem("Vegetarianos"),
+                          searchSuggestionsTiem("Veganos"),
+                          searchSuggestionsTiem("Diabeticos"),
+                          searchSuggestionsTiem("Antojos"),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 16,
