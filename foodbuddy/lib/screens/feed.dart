@@ -1,4 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/ketoscreen.dart';
@@ -55,19 +58,7 @@ class _FeedPageState extends State<FeedPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 190,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://c.ndtvimg.com/2021-06/tau0bv3o_burger-king_625x300_24_June_21.jpg',
-                      ),
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
+                const FeedPublicityCarousel(),
                 const SizedBox(
                   height: 30,
                 ),
@@ -237,48 +228,139 @@ class _FeedPageState extends State<FeedPage> {
                     height: 20,
                   ),
                 ],
-                  if (currentCat == 'Todos' || currentCat == 'Keto') ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          "Menu Keto", // Título de la sección Menu Keto
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                if (currentCat == 'Todos' || currentCat == 'Keto') ...[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Menu Keto", // Título de la sección Menu Keto
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const KetoScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
-                            );
-                          },
-                          child: Text(
-                            "Ver todos", // Etiqueta del botón "Ver todos"
-                            style: TextStyle(
-                                color: Colors
-                                    .green[400]), // Color del texto del botón
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Keto(), // Widget para mostrar alimentos según los diabeticos
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const KetoScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                          );
+                        },
+                        child: Text(
+                          "Ver todos", // Etiqueta del botón "Ver todos"
+                          style: TextStyle(
+                              color: Colors
+                                  .green[400]), // Color del texto del botón
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Keto(), // Widget para mostrar alimentos según los diabeticos
+                  const SizedBox(
+                    height: 20,
+                  ),
                 ],
-              
+              ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FeedPublicityCarousel extends StatelessWidget {
+  const FeedPublicityCarousel({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      items: [
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            height: 190,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: NetworkImage(
+                  'https://c.ndtvimg.com/2021-06/tau0bv3o_burger-king_625x300_24_June_21.jpg',
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            height: 190,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: NetworkImage(
+                  'https://explainvisually.co/wp-content/uploads/2020/12/weganski-burger-impossible-meat-marketing.png',
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            height: 190,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: NetworkImage(
+                  'https://www.bizadmark.com/wp-content/uploads/2021/08/vegan-ad.webp',
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            width: double.infinity,
+            height: 190,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: NetworkImage(
+                  'https://www.bizadmark.com/wp-content/uploads/2021/09/plant-based-advertising.jpeg',
+                ),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ),
+      ],
+      options: CarouselOptions(
+        height: 190,
+        aspectRatio: 16 / 9,
+        viewportFraction: 1,
+        initialPage: 0,
+        enableInfiniteScroll: true,
+        reverse: false,
+        autoPlay: true,
+        autoPlayInterval: const Duration(seconds: 3),
+        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enlargeCenterPage: true,
+        scrollDirection: Axis.horizontal,
       ),
     );
   }
