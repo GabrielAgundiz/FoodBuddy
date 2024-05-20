@@ -81,8 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundImage: _photoUrl != null
                               ? FileImage(File(
                                   _photoUrl!)) // Si hay una URL de foto, carga la foto desde el archivo
-                              : const AssetImage(
-                                      'assets/images/profile_picture.png')
+                              : const NetworkImage("https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
                                   as ImageProvider, // De lo contrario, carga una imagen de perfil predeterminada
                         ),
                         const SizedBox(height: 16),
