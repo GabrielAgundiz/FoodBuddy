@@ -14,6 +14,8 @@ import 'package:foodbuddy/widgets/homeappbar.dart';
 import 'package:foodbuddy/widgets/keto.dart';
 import 'package:foodbuddy/widgets/veganos.dart';
 import 'package:foodbuddy/widgets/vegetarianos.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 // Página de alimentación (Feed)
 class FeedPage extends StatefulWidget {
@@ -191,6 +193,25 @@ class _FeedPageState extends State<FeedPage> {
                     height: 20,
                   ),
                 ],
+                GestureDetector(
+                  onTap: () async {
+                    await launchUrlString('https://www.thelittleblogofvegan.com/');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://i0.wp.com/www.thelittleblogofvegan.com/wp-content/uploads/2022/01/FOOTER-scaled.jpg?fit=2560%2C584&ssl=1',
+                        ),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20,),
                 if (currentCat == 'Todos' || currentCat == 'Diabetico') ...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
