@@ -116,7 +116,7 @@ class _FeedPageState extends State<FeedPage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   const Antojo(),
                   const SizedBox(
@@ -153,7 +153,7 @@ class _FeedPageState extends State<FeedPage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   const Veganos(), // Widget para mostrar alimentos según los veganos
                   const SizedBox(
@@ -190,7 +190,7 @@ class _FeedPageState extends State<FeedPage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   const Vegetarianos(), // Widget para mostrar alimentos según los vegetarianos
                   const SizedBox(
@@ -227,7 +227,7 @@ class _FeedPageState extends State<FeedPage> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   const Diabeticos(), // Widget para mostrar alimentos según los diabeticos
                   const SizedBox(

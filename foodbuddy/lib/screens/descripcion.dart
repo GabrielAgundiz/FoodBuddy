@@ -167,10 +167,12 @@ class _DescripcionState extends State<DescScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                        const Text(
-                          "  •  ",
-                          style: TextStyle(color: Colors.grey),
-                        ),
+                     
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
                         Icon(
                           Icons.star,
                           color: Colors.yellow.shade500,
@@ -194,8 +196,6 @@ class _DescripcionState extends State<DescScreen> {
                         ),
                       ],
                     ),
-              
-                    
                     const SizedBox(height: 20),
                     const Text(
                       "Ingredientes",

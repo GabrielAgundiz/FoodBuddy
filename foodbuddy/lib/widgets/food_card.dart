@@ -56,7 +56,7 @@ class _PlatilloState extends State<Platillo> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     // Nombre del platillo.
                     Text(
@@ -68,21 +68,18 @@ class _PlatilloState extends State<Platillo> {
                       ),
                       maxLines: 1,
                     ),
-                    const SizedBox(
-                      height: 4,
-                    ),
                     // Información de calorías y tiempo de preparación.
                     Row(
                       children: [
                         const Icon(
                           Icons.local_fire_department,
-                          size: 18,
+                          size: 16,
                           color: Colors.grey,
                         ),
                         Text(
                           "${widget.food.cal} Cal",
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: Colors.grey,
                           ),
                         ),
@@ -92,13 +89,13 @@ class _PlatilloState extends State<Platillo> {
                         ),
                         const Icon(
                           Icons.schedule,
-                          size: 18,
+                          size: 16,
                           color: Colors.grey,
                         ),
                         Text(
                           "${widget.food.time} Min",
                           style: const TextStyle(
-                            fontSize: 12,
+                            fontSize: 11,
                             color: Colors.grey,
                           ),
                         ),
@@ -107,14 +104,14 @@ class _PlatilloState extends State<Platillo> {
                     // Calificación y número de reseñas.
                     Row(
                       children: [
-                        Icon(Icons.star, color: Colors.yellow.shade500, size: 18),
+                        Icon(Icons.star, color: Colors.yellow.shade500, size: 16),
                         const SizedBox(
                           width: 5,
                         ),
                         Text(
                           "${widget.food.rate}/5",
                           style: TextStyle(
-                              fontSize: 12, color: Colors.grey.shade600),
+                              fontSize: 11, color: Colors.grey.shade600),
                         ),
                         const SizedBox(
                           width: 5,
@@ -122,7 +119,7 @@ class _PlatilloState extends State<Platillo> {
                         Text(
                           "(${widget.food.reviews} Reviews)",
                           style: TextStyle(
-                              fontSize: 12, color: Colors.grey.shade400),
+                              fontSize: 11, color: Colors.grey.shade400),
                         ),
                       ],
                     ),

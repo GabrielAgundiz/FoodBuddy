@@ -54,7 +54,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    crossAxisSpacing: 15,
+                    crossAxisSpacing: 10,
                     mainAxisSpacing: 5,
                   ),
                   itemBuilder: (context, index) => GestureDetector(
@@ -65,7 +65,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                       ),
                     ),
                     child: Container(
-                      margin: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.all(5),
                       width: MediaQuery.of(context).size.width / 2.3,
                       height: MediaQuery.of(context).size.height / 3,
                       child: Stack(
@@ -86,7 +86,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 5),
                               Text(
                                 foods[index].name,
                                 style: const TextStyle(
@@ -96,7 +96,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                 ),
                                 maxLines: 1,
                               ),
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 3),
                               Row(
                                 children: [
                                   const Icon(
