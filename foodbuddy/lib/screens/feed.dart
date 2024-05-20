@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
+import 'package:foodbuddy/screens/ketoscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/widgets/antojo.dart';
 import 'package:foodbuddy/widgets/categorias.dart';
 import 'package:foodbuddy/widgets/diabetico.dart';
 import 'package:foodbuddy/widgets/homeappbar.dart';
+import 'package:foodbuddy/widgets/keto.dart';
 import 'package:foodbuddy/widgets/veganos.dart';
 import 'package:foodbuddy/widgets/vegetarianos.dart';
 
@@ -24,6 +26,7 @@ class _FeedPageState extends State<FeedPage> {
     'Vegano',
     'Vegetariano',
     'Diabetico',
+    'Keto',
   ];
 
   void updateCurrentCategory(String category) {
@@ -234,7 +237,45 @@ class _FeedPageState extends State<FeedPage> {
                     height: 20,
                   ),
                 ],
-              ],
+                  if (currentCat == 'Todos' || currentCat == 'Keto') ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Menu Keto", // Título de la sección Menu Keto
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const KetoScreen()), // Navega a la pantalla de categoría cuando se presiona el botón "Ver todos"
+                            );
+                          },
+                          child: Text(
+                            "Ver todos", // Etiqueta del botón "Ver todos"
+                            style: TextStyle(
+                                color: Colors
+                                    .green[400]), // Color del texto del botón
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Keto(), // Widget para mostrar alimentos según los diabeticos
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ],
+              
             ),
           ),
         ),
