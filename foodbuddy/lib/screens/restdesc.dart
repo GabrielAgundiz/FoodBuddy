@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/models/restaurants.dart';
 
 const kprimaryColor = Color(0xFF5DB075);
@@ -141,49 +142,55 @@ class _RestDescScreenState extends State<RestDescScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15),
-                                      image: DecorationImage(
-                                        image: NetworkImage(
-                                            "https://content.skyscnr.com/m/2dcd7d0e6f086057/original/GettyImages-186142785.jpg?resize=2560px:1707px"),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 30),
-                                    child: Text(
-                                      "Tacos Veganos",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.local_fire_department,
-                                        size: 20,
-                                        color: Colors.grey.shade400,
-                                      ),
-                                      Text(
-                                        "287 Cal",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.grey.shade400,
+                              GestureDetector(
+                                onTap: (){},
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 60,
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              "https://content.skyscnr.com/m/2dcd7d0e6f086057/original/GettyImages-186142785.jpg?resize=2560px:1707px"),
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ],
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 30),
+                                      child: Text(
+                                        "Tacos Veganos",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            overflow: TextOverflow.ellipsis,
+                                            ),
+                                            maxLines: 1,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.local_fire_department,
+                                          size: 20,
+                                          color: Colors.grey.shade400,
+                                        ),
+                                        Text(
+                                          "287 Cal",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey.shade400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 8,),
                               Center(
