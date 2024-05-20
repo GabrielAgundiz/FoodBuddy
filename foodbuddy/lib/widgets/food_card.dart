@@ -8,7 +8,6 @@ import 'package:foodbuddy/state/states.dart';
 class Platillo extends StatefulWidget {
   final Food food;
 
-  // Constructor para el widget Platillo que recibe un objeto de tipo Food.
   const Platillo({Key? key, required this.food}) : super(key: key);
 
   @override
@@ -20,45 +19,36 @@ class _PlatilloState extends State<Platillo> {
 
   @override
   Widget build(BuildContext context) {
-    // GestureDetector detecta gestos como toques.
     return BlocBuilder<FavoriteBloc, FavoriteState>(
-        builder: (context, favoriteState) {
-      //var action = () => _addToFavorite(context, widget.food.id);
-      return GestureDetector(
-        // Al tocar el platillo, se navega a la pantalla de descripción.
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DescScreen(food: widget.food),
+      builder: (context, favoriteState) {
+        return GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DescScreen(food: widget.food),
+            ),
           ),
-        ),
-        child: Expanded(
           child: SizedBox(
             width: double.infinity,
             child: Stack(
               children: [
-                // Columna que contiene la imagen y la información del platillo.
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Contenedor para la imagen del platillo.
-                    Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height / 8.3,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            widget.food.image,
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height / 8.3,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            image: NetworkImage(widget.food.image),
+                            fit: BoxFit.fill,
                           ),
-                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    // Nombre del platillo.
+                    const SizedBox(height: 5),
                     Text(
                       widget.food.name,
                       style: const TextStyle(
@@ -68,7 +58,6 @@ class _PlatilloState extends State<Platillo> {
                       ),
                       maxLines: 1,
                     ),
-                    // Información de calorías y tiempo de preparación.
                     Row(
                       children: [
                         const Icon(
@@ -101,37 +90,35 @@ class _PlatilloState extends State<Platillo> {
                         ),
                       ],
                     ),
-                    // Calificación y número de reseñas.
                     Row(
                       children: [
-                        Icon(Icons.star, color: Colors.yellow.shade500, size: 16),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        Icon(Icons.star,
+                            color: Colors.yellow.shade500, size: 16),
+                        const SizedBox(width: 5),
                         Text(
                           "${widget.food.rate}/5",
                           style: TextStyle(
-                              fontSize: 11, color: Colors.grey.shade600),
+                            fontSize: 11,
+                            color: Colors.grey.shade600,
+                          ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Text(
                           "(${widget.food.reviews} Reviews)",
                           style: TextStyle(
-                              fontSize: 11, color: Colors.grey.shade400),
+                            fontSize: 11,
+                            color: Colors.grey.shade400,
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                // Botón de "Me gusta" en la esquina superior derecha.
                 Positioned(
                   top: 1,
                   right: 1,
                   child: IconButton(
                     onPressed: () {
-                      //saveFavorite();
                       if (favoriteState.foodIds.contains(widget.food.id)) {
                         _removeFromFavorite(context, widget.food.id);
                       } else {
@@ -143,25 +130,20 @@ class _PlatilloState extends State<Platillo> {
                       fixedSize: const Size(25, 25),
                     ),
                     iconSize: 20,
-                    // El icono cambia según si el platillo está marcado como "me gusta".
                     icon: favoriteState.foodIds.contains(widget.food.id)
-                        ? const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
+                        ? const Icon(Icons.favorite, color: Colors.red)
                         : const Icon(Icons.favorite_border),
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   void _addToFavorite(BuildContext context, String foodId) {
-    //le paso el context para obtener el bookshelfBloc
     var favoriteBloc = context.read<FavoriteBloc>();
     favoriteBloc.add(AddFoodToFavorite(foodId));
     setState(() {
@@ -170,7 +152,6 @@ class _PlatilloState extends State<Platillo> {
   }
 
   void _removeFromFavorite(BuildContext context, String foodId) {
-    //le paso el context para obtener el bookshelfBloc
     var favoriteBloc = context.read<FavoriteBloc>();
     favoriteBloc.add(RemoveFoodFromFavorite(foodId));
     setState(() {
