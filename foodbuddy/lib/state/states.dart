@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FavoriteState {
   List<String> foodIds;
@@ -6,7 +7,6 @@ class FavoriteState {
 }
 
 abstract class FavoriteEvent {
-  //se guardara una lista de los ids
   const FavoriteEvent();
 }
 
@@ -20,23 +20,29 @@ class RemoveFoodFromFavorite extends FavoriteEvent {
   const RemoveFoodFromFavorite(this.foodId);
 }
 
-class ChangeIcon extends FavoriteEvent {
-  const ChangeIcon();
-}
-
-//escuchara por los eventos
 class FavoriteBloc extends Bloc<FavoriteEvent, FavoriteState> {
-  FavoriteBloc(super.initialState) {
+  FavoriteBloc() : super(FavoriteState([])) {
+    _loadFavorites();
     on<AddFoodToFavorite>((event, emit) {
       state.foodIds.add(event.foodId);
-      //modifica la lista de bookId
-      emit(FavoriteState(state
-          .foodIds)); //avisa que el estado se modifico y hace que se reconstruya sus widgets
+      _saveFavorites(state.foodIds);
+      emit(FavoriteState(List.from(state.foodIds)));
     });
     on<RemoveFoodFromFavorite>((event, emit) {
-      state.foodIds.remove(event.foodId); //modifica la lista de bookId
-      emit(FavoriteState(state
-          .foodIds)); //avisa que el estado se modifico y hace que se reconstruya sus widgets
+      state.foodIds.remove(event.foodId);
+      _saveFavorites(state.foodIds);
+      emit(FavoriteState(List.from(state.foodIds)));
     });
+  }
+
+  Future<void> _loadFavorites() async {
+    final prefs = await SharedPreferences.getInstance();
+    final foodIds = prefs.getStringList('favorite_food_ids') ?? [];
+    emit(FavoriteState(foodIds));
+  }
+
+  Future<void> _saveFavorites(List<String> foodIds) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('favorite_food_ids', foodIds);
   }
 }
