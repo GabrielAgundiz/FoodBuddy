@@ -8,8 +8,6 @@ import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/service/food_service.dart';
 import 'package:foodbuddy/widgets/ctfl.dart';
 
-import '../widgets/food_card.dart';
-
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
   static List previousSearchs = []; // Lista para almacenar búsquedas anteriores
@@ -171,8 +169,8 @@ class _SearchPageState extends State<SearchPage> {
           String selectedSearch = SearchPage.previousSearchs[index];
           Food selectedFood = searchResults.firstWhere(
               (food) => food.name == selectedSearch,
-              orElse: () => Food('', '', '', '', '', 0, 0, 0,
-                  0)); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
+              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0,
+                  '')); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
           navigateToDescScreen(selectedFood);
         },
         child: Dismissible(
