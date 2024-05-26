@@ -23,4 +23,15 @@ class FoodService {
     //refresa un future value de la lista de libros obtenida
     return Future.value(foods);
   }
+
+  Future<List<Food>> getItemsRestaurants(String restaurant) async {
+    var result = await foodRef.where('restaurant', isEqualTo: restaurant).get();
+
+    List<Food> food = [];
+    for (var doc in result.docs) {
+      food.add(doc.data());
+    }
+    //refresa un future value de la lista de libros obtenida
+    return Future.value(food);
+  }
 }
