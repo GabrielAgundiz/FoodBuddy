@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Ajuste de parametros nulos en la busqueda">
+    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/restdesc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/restdesc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/state/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/state/states.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +169,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716690468961</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Configuración para guardar de forma local la lista de favoritos con shared Preference">
+      <option name="closed" value="true" />
+      <created>1716691104003</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1716691104003</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales">
+      <option name="closed" value="true" />
+      <created>1716691275126</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1716691275126</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -198,6 +212,8 @@
     <MESSAGE value="Configuracion para redirigir a link de comida" />
     <MESSAGE value="Configuracion para obtener los platillos de un restaurante" />
     <MESSAGE value="Ajuste de parametros nulos en la busqueda" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ajuste de parametros nulos en la busqueda" />
+    <MESSAGE value="Configuración para guardar de forma local la lista de favoritos con shared Preference" />
+    <MESSAGE value="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales" />
+    <option name="LAST_COMMIT_MESSAGE" value="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales" />
   </component>
 </project>
