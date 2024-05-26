@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodbuddy/models/food.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import '../state/states.dart';
 
 const kprimaryColor = Color(0xFF5DB075);
@@ -15,6 +17,16 @@ class DescScreen extends StatefulWidget {
 
 class _DescripcionState extends State<DescScreen> {
   late bool isLiked;
+
+  void _launchURL(String urlFood) async {
+    final url = urlFood; // Reemplaza con la URL específica
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoriteBloc, FavoriteState>(
@@ -28,7 +40,9 @@ class _DescripcionState extends State<DescScreen> {
               Expanded(
                 flex: 6,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _launchURL(widget.food.link_food);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kprimaryColor,
                     foregroundColor: Colors.white,
@@ -47,7 +61,7 @@ class _DescripcionState extends State<DescScreen> {
                     } else {
                       _addToFavorite(context, widget.food.id);
                     }
-                  }, 
+                  },
                   style: IconButton.styleFrom(
                       shape: CircleBorder(
                           side: BorderSide(
@@ -167,7 +181,6 @@ class _DescripcionState extends State<DescScreen> {
                             color: Colors.grey,
                           ),
                         ),
-                     
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -231,7 +244,6 @@ class _DescripcionState extends State<DescScreen> {
   }
 
   void _addToFavorite(BuildContext context, String foodId) {
-    //le paso el context para obtener el bookshelfBloc
     var favoriteBloc = context.read<FavoriteBloc>();
     favoriteBloc.add(AddFoodToFavorite(foodId));
     setState(() {
@@ -240,7 +252,6 @@ class _DescripcionState extends State<DescScreen> {
   }
 
   void _removeFromFavorite(BuildContext context, String foodId) {
-    //le paso el context para obtener el bookshelfBloc
     var favoriteBloc = context.read<FavoriteBloc>();
     favoriteBloc.add(RemoveFoodFromFavorite(foodId));
     setState(() {
