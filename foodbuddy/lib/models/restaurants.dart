@@ -5,9 +5,10 @@ class Restaurants {
   final double rate;
   final int reviews;
   final String address;
+  final String link_restaurant;
 
-  Restaurants(
-      this.id, this.name, this.image, this.rate, this.reviews, this.address);
+  Restaurants(this.id, this.name, this.image, this.rate, this.reviews,
+      this.address, this.link_restaurant);
 
   Restaurants.fromJson(String id, Map<String, dynamic> json)
       : this(
@@ -17,6 +18,7 @@ class Restaurants {
           json['rate'].toDouble(),
           json['reviews'].toInt(),
           json['address'] as String,
+          json['link_restaurant'] as String,
         );
 
   Map<String, dynamic> toJson() {
