@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
@@ -23,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   List<Food> searchResults =
       []; // Lista para almacenar los resultados de la búsqueda
   bool showGridView =
-      true; // Variable para controlar la visibilidad del GridView
+      false; // Variable para controlar la visibilidad del GridView
   bool showRecommendations =
       true; // Variable para controlar la visibilidad de las recomendaciones
   bool showFilterOptions =
