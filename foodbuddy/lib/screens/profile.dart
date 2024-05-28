@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io'; // Importación de la biblioteca para operaciones de entrada/salida
 import 'package:firebase_auth/firebase_auth.dart'; // Importación de la biblioteca de autenticación de Firebase
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importación de la biblioteca Firestore de Firebase
+import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/screens/notifies.dart'; // Importación de la pantalla de notificaciones
 import 'package:image_picker/image_picker.dart'; // Importación de la biblioteca para seleccionar imágenes desde el dispositivo
 
@@ -36,9 +37,27 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.logout)),
+        leading: IconButton(
+            onPressed: () {
+              if (FirebaseAuth.instance.currentUser != null) {
+                IconButton(
+                  icon: const Icon(Icons.logout),
+                  onPressed: () {
+                    // Implementa la función de cierre de sesión
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                    );
+                  },
+                );
+              }
+            },
+            icon: const Icon(Icons.logout)),
         title: const Text(
-            'Perfil', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de la aplicación, que muestra "Perfil"
+          'Perfil',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ), // Título de la barra de la aplicación, que muestra "Perfil"
         actions: <Widget>[
           // Lista de acciones en la barra de la aplicación
           IconButton(
@@ -82,7 +101,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundImage: _photoUrl != null
                               ? FileImage(File(
                                   _photoUrl!)) // Si hay una URL de foto, carga la foto desde el archivo
-                              : const NetworkImage("https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
+                              : const NetworkImage(
+                                      "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
                                   as ImageProvider, // De lo contrario, carga una imagen de perfil predeterminada
                         ),
                         const SizedBox(height: 16),
