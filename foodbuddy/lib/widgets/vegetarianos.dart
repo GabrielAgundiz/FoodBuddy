@@ -30,7 +30,7 @@ class _VegetarianosState extends State<Vegetarianos> {
         .getFoods(); // Obtener la lista de alimentos desde Firebase
     setState(() {
       vegetarianFoods = fetchedFoods
-          .where((food) => food.category == 'Vegetariana')
+          .where((food) => food.category == 'Vegetariano')
           .toList(); // Filtrar los alimentos vegetarianos
     });
   }
