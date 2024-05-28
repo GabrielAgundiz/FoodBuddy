@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
@@ -25,6 +26,13 @@ class _SearchPageState extends State<SearchPage> {
       true; // Variable para controlar la visibilidad del GridView
   bool showRecommendations =
       true; // Variable para controlar la visibilidad de las recomendaciones
+  bool showFilterOptions =
+      false; // Variable para controlar la visibilidad de las opciones de filtro
+  bool isVegan = false; // Variable para el estado del checkbox
+    bool isVegetarian = false; 
+    bool isDiabetic = false; 
+    bool isKeto = false; 
+    bool isAll = true; 
   List<String> previousSearches =
       []; // Lista para almacenar búsquedas anteriores
 
@@ -77,52 +85,181 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Row(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: CostomTextFormFild(
-                        // Widget personalizado para el campo de texto de búsqueda
-                        hint: "Buscar",
-                        prefixIcon: Icons.search_rounded,
-                        controller: searchController,
-                        filled: false,
-                        suffixIcon:
-                            searchController.text.isEmpty ? null : Icons.cancel,
-                        onTapSuffixIcon: () {
-                          searchController.clear();
-                          setState(() {
-                            showGridView =
-                                false; // Ocultar el GridView al hacer clic en el campo de búsqueda
-                            showRecommendations =
-                                true; // Mostrar recomendaciones
-                          });
-                        },
-                        onChanged: (text) {
-                          setState(() {
-                            // Actualizar resultados en tiempo real mientras se escribe
-                            buscarEnBaseDeDatos(text);
-                          });
-                        },
-                        onEditingComplete: () async {
-                          previousSearches.add(searchController.text);
-                          List<Food> searchResults =
-                              await buscarEnBaseDeDatos(searchController.text);
-                          setState(() {
-                            this.searchResults = searchResults;
-                            showGridView = true;
-                            showRecommendations =
-                                false; // Ocultar recomendaciones al realizar una búsqueda
-                          }); // Actualiza el estado para mostrar los resultados
-                        },
-                      ),
-                    ),
-                    if (!showRecommendations)
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons
-                              .tune, // Icono para ajustar los filtros de búsqueda
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CostomTextFormFild(
+                            // Widget personalizado para el campo de texto de búsqueda
+                            hint: "Buscar",
+                            prefixIcon: Icons.search_rounded,
+                            controller: searchController,
+                            filled: false,
+                            suffixIcon: searchController.text.isEmpty
+                                ? null
+                                : Icons.cancel,
+                            onTapSuffixIcon: () {
+                              searchController.clear();
+                              setState(() {
+                                showGridView =
+                                    false; // Ocultar el GridView al hacer clic en el campo de búsqueda
+                                showRecommendations =
+                                    true; // Mostrar recomendaciones
+                              });
+                            },
+                            onChanged: (text) {
+                              setState(() {
+                                // Actualizar resultados en tiempo real mientras se escribe
+                                buscarEnBaseDeDatos(text);
+                              });
+                            },
+                            onEditingComplete: () async {
+                              previousSearches.add(searchController.text);
+                              List<Food> searchResults =
+                                  await buscarEnBaseDeDatos(
+                                      searchController.text);
+                              setState(() {
+                                this.searchResults = searchResults;
+                                showGridView = true;
+                                showRecommendations =
+                                    false; // Ocultar recomendaciones al realizar una búsqueda
+                              }); // Actualiza el estado para mostrar los resultados
+                            },
+                          ),
                         ),
+                        if (!showRecommendations)
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                showFilterOptions =
+                                    !showFilterOptions; // Alternar la visibilidad de las opciones de filtro
+                              });
+                            },
+                            icon: const Icon(
+                              Icons
+                                  .tune, // Icono para ajustar los filtros de búsqueda
+                            ),
+                          ),
+                      ],
+                    ),
+                    if (showFilterOptions)
+                      Row(
+                        children: [
+                          const Text(
+                            "Categorias: ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isAll = !isAll;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Checkbox(
+                                          value: isAll,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isAll = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                        const Text("Todos"),
+                                      ],
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isVegan = !isVegan;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Checkbox(
+                                          value: isVegan,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isVegan = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                        const Text("Vegano"),
+                                      ],
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isVegetarian = !isVegetarian;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Checkbox(
+                                          value: isVegetarian,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isVegetarian = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                        const Text("Vegetariano"),
+                                      ],
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isDiabetic = !isDiabetic;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Checkbox(
+                                          value: isDiabetic,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isDiabetic = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                        const Text("Diabetico"),
+                                      ],
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        isKeto = !isKeto;
+                                      });
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Checkbox(
+                                          value: isKeto,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              isKeto = value ?? false;
+                                            });
+                                          },
+                                        ),
+                                        const Text("Keto"),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                   ],
                 ),
