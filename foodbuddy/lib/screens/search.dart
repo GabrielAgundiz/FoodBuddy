@@ -16,15 +16,12 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController searchController =
-      TextEditingController(); // Controlador para el campo de búsqueda
+  TextEditingController searchController = TextEditingController(); // Controlador para el campo de búsqueda
   FoodService _foodService = FoodService(); // Instancia de tu servicio
-  List<Food> searchResults =
-      []; // Lista para almacenar los resultados de la búsqueda
-  bool showGridView =
-      true; // Variable para controlar la visibilidad del GridView
-  List<String> previousSearches =
-      []; // Lista para almacenar búsquedas anteriores
+  List<Food> searchResults = []; // Lista para almacenar los resultados de la búsqueda
+  bool showGridView = true; // Variable para controlar la visibilidad del GridView
+  bool showRecommendations = true; // Variable para controlar la visibilidad de las recomendaciones
+  List<String> previousSearches = []; // Lista para almacenar búsquedas anteriores
 
   @override
   void initState() {
@@ -33,13 +30,9 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Future<void> _loadSearchResults(String searchTerm) async {
-    List<Food> foods =
-        await _foodService.getFoods(); // Obtener la lista de alimentos
+    List<Food> foods = await _foodService.getFoods(); // Obtener la lista de alimentos
     setState(() {
-      searchResults = foods
-          .where((food) =>
-              food.name.toLowerCase().contains(searchTerm.toLowerCase()))
-          .toList(); // Aplicar filtro
+      searchResults = foods.where((food) => food.name.toLowerCase().contains(searchTerm.toLowerCase())).toList(); // Aplicar filtro
     });
   }
 
@@ -84,13 +77,12 @@ class _SearchPageState extends State<SearchPage> {
                         prefixIcon: Icons.search_rounded,
                         controller: searchController,
                         filled: false,
-                        suffixIcon:
-                            searchController.text.isEmpty ? null : Icons.cancel,
+                        suffixIcon: searchController.text.isEmpty ? null : Icons.cancel,
                         onTapSuffixIcon: () {
                           searchController.clear();
                           setState(() {
-                            showGridView =
-                                false; // Ocultar el GridView al hacer clic en el campo de búsqueda
+                            showGridView = false; // Ocultar el GridView al hacer clic en el campo de búsqueda
+                            showRecommendations = true; // Mostrar recomendaciones
                           });
                         },
                         onChanged: (text) {
@@ -101,11 +93,11 @@ class _SearchPageState extends State<SearchPage> {
                         },
                         onEditingComplete: () async {
                           previousSearches.add(searchController.text);
-                          List<Food> searchResults =
-                              await buscarEnBaseDeDatos(searchController.text);
+                          List<Food> searchResults = await buscarEnBaseDeDatos(searchController.text);
                           setState(() {
                             this.searchResults = searchResults;
                             showGridView = true;
+                            showRecommendations = false; // Ocultar recomendaciones al realizar una búsqueda
                           }); // Actualiza el estado para mostrar los resultados
                         },
                       ),
@@ -113,46 +105,44 @@ class _SearchPageState extends State<SearchPage> {
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        Icons
-                            .tune, // Icono para ajustar los filtros de búsqueda
+                        Icons.tune, // Icono para ajustar los filtros de búsqueda
                       ),
                     ),
                   ],
                 ),
               ),
-              Container(
-                width: double.infinity,
-                color: Colors.white,
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Búsquedas Recomendadas",
-                      style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                          color: Colors.black, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis
-                          .horizontal, // Establecemos la dirección del scroll en horizontal
-                      child: Row(
-                        children: [
-                          searchSuggestionsItem("Vegetarianos"),
-                          searchSuggestionsItem("Veganos"),
-                          searchSuggestionsItem("Diabéticos"),
-                          searchSuggestionsItem("Antojos"),
-                        ],
+              if (showRecommendations)
+                Container(
+                  width: double.infinity,
+                  color: Colors.white,
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Búsquedas Recomendadas",
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.black, fontWeight: FontWeight.w600),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal, // Establecemos la dirección del scroll en horizontal
+                        child: Row(
+                          children: [
+                            searchSuggestionsItem("Vegetarianos"),
+                            searchSuggestionsItem("Veganos"),
+                            searchSuggestionsItem("Diabéticos"),
+                            searchSuggestionsItem("Antojos"),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
               Expanded(
                 child: showGridView
                     ? ListView.builder(
@@ -165,13 +155,11 @@ class _SearchPageState extends State<SearchPage> {
                               navigateToDescScreen(item);
                             },
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
+                              padding: const EdgeInsets.symmetric(horizontal: 15),
                               child: Column(
                                 children: [
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
@@ -179,8 +167,7 @@ class _SearchPageState extends State<SearchPage> {
                                             width: 60,
                                             height: 60,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
+                                              borderRadius: BorderRadius.circular(15),
                                               image: DecorationImage(
                                                 image: NetworkImage(item.image),
                                                 fit: BoxFit.fill,
@@ -189,45 +176,32 @@ class _SearchPageState extends State<SearchPage> {
                                           ),
                                           const SizedBox(width: 10),
                                           Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.5,
+                                                  maxWidth: MediaQuery.of(context).size.width * 0.5,
                                                 ),
                                                 child: Text(
                                                   item.name,
                                                   style: const TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    overflow: TextOverflow.ellipsis,
                                                   ),
                                                 ),
                                               ),
                                               Container(
                                                 constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.6,
+                                                  maxWidth: MediaQuery.of(context).size.width * 0.6,
                                                 ),
                                                 child: Text(
                                                   "${item.restaurant} - ${item.category}",
                                                   style: TextStyle(
                                                     fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
+                                                    fontWeight: FontWeight.normal,
+                                                    overflow: TextOverflow.ellipsis,
                                                     color: Colors.grey.shade400,
                                                   ),
                                                 ),
@@ -257,8 +231,7 @@ class _SearchPageState extends State<SearchPage> {
                                   const SizedBox(height: 8),
                                   Center(
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.15,
+                                      width: MediaQuery.of(context).size.width / 1.15,
                                       height: 2,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade200,
@@ -311,10 +284,7 @@ class _SearchPageState extends State<SearchPage> {
               const SizedBox(width: 10),
               Text(
                 previousSearches[index],
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Colors.black),
+                style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.black),
               ),
               const Spacer(),
               const Icon(
@@ -371,10 +341,7 @@ class _SearchPageState extends State<SearchPage> {
         ),
         child: Text(
           text,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2!
-              .copyWith(color: Colors.green),
+          style: Theme.of(context).textTheme.bodyText2!.copyWith(color: Colors.green),
         ),
       ),
     );
