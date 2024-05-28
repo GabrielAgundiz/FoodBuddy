@@ -36,6 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){}, icon: const Icon(Icons.logout)),
         title: const Text(
             'Perfil', style: TextStyle(fontWeight: FontWeight.bold),), // Título de la barra de la aplicación, que muestra "Perfil"
         actions: <Widget>[

@@ -3,10 +3,12 @@ import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
+import 'package:foodbuddy/screens/ketoscreen.dart';
 import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/service/food_service.dart';
 import 'package:foodbuddy/widgets/ctfl.dart';
+import 'package:foodbuddy/widgets/keto.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -288,6 +290,7 @@ class _SearchPageState extends State<SearchPage> {
                             searchSuggestionsItem("Veganos"),
                             searchSuggestionsItem("Diabéticos"),
                             searchSuggestionsItem("Antojos"),
+                            searchSuggestionsItem("Keto"),
                           ],
                         ),
                       ),
@@ -417,8 +420,10 @@ class _SearchPageState extends State<SearchPage> {
                           );
                         },
                       )
-                    : const Center(
-                        child: Text("Introduce un término de búsqueda"),
+                    : Center(
+                        child: Container(
+                          padding: const EdgeInsets.only(bottom: 60),
+                          child: Text("Introduce un término de búsqueda", style: TextStyle(color: Colors.grey.shade500),)),
                       ),
               ),
             ],
@@ -499,6 +504,12 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const CategoryScreen()),
+            );
+            break;
+            case "Keto":
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const KetoScreen()),
             );
             break;
           default:
