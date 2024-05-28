@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/diabeticscreen.dart';
 import 'package:foodbuddy/screens/ketoscreen.dart';
@@ -14,7 +12,6 @@ import 'package:foodbuddy/widgets/homeappbar.dart';
 import 'package:foodbuddy/widgets/keto.dart';
 import 'package:foodbuddy/widgets/veganos.dart';
 import 'package:foodbuddy/widgets/vegetarianos.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 // Página de alimentación (Feed)

@@ -154,47 +154,113 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               Expanded(
-                child: showGridView
-                    ? GridView.builder(
-                        itemCount: searchResults.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.8,
-                        ),
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              navigateToDescScreen(searchResults[index]);
-                            },
-                            child: Card(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Image.network(
-                                        searchResults[index].image,
-                                        fit: BoxFit.cover),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      searchResults[index].name,
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
+  child: showGridView
+      ? ListView.builder(
+          itemCount: searchResults.length,
+          padding: EdgeInsets.zero,
+          itemBuilder: (context, index) {
+            final item = searchResults[index];
+            return GestureDetector(
+              onTap: () {
+                navigateToDescScreen(item);
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: NetworkImage(item.image),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
-                          );
-                        },
-                      )
-                    : const Center(
-                        child: Text("Introduce un término de búsqueda"),
+                            const SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context).size.width * 0.5,
+                                  ),
+                                  child: Text(
+                                    item.name,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context).size.width * 0.6,
+                                  ),
+                                  child: Text(
+                                    "${item.restaurant} - ${item.category}",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      overflow: TextOverflow.ellipsis,
+                                      color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.local_fire_department,
+                              size: 20,
+                              color: Colors.grey.shade400,
+                            ),
+                            Text(
+                              "${item.cal} Cal",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 1.15,
+                        height: 2,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
               ),
+            );
+          },
+        )
+      : const Center(
+          child: Text("Introduce un término de búsqueda"),
+        ),
+),
+
             ],
           ),
         ),
@@ -211,7 +277,7 @@ class _SearchPageState extends State<SearchPage> {
           String selectedSearch = previousSearches[index];
           Food selectedFood = searchResults.firstWhere(
               (food) => food.name == selectedSearch,
-              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0, ''));
+              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0, '', ''));
           navigateToDescScreen(selectedFood);
         },
         child: Dismissible(

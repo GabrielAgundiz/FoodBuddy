@@ -19,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screens = [    // Lista de las pantallas a mostrar
       FeedPage(),
-      RestaurantPage(),
-      SearchPage(),
+      const RestaurantPage(),
+      const SearchPage(),
       SavesPage(),
       ProfilePage()
     ];

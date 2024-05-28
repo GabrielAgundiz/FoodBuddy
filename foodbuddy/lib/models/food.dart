@@ -9,9 +9,10 @@ class Food {
   final double rate;
   final int reviews;
   final String link_food;
+  final String restaurant;
 
   Food(this.id, this.name, this.image, this.ingredients, this.category,
-      this.cal, this.time, this.rate, this.reviews, this.link_food);
+      this.cal, this.time, this.rate, this.reviews, this.link_food, this.restaurant);
 
   Food.fromJson(String id, Map<String, dynamic> json)
       : this(
@@ -24,7 +25,8 @@ class Food {
             json['time'].toInt(),
             json['rate'].toDouble(),
             json['reviews'].toInt(),
-            json['link_food'] as String);
+            json['link_food'] as String,
+            json['restaurant'] as String,);
 
   Map<String, dynamic> toJson() {
     return {
@@ -37,6 +39,7 @@ class Food {
       'time': time,
       'rate': rate,
       'reviews': reviews,
+      'restaurant': restaurant,
     };
   }
 }

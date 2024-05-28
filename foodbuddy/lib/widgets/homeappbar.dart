@@ -17,7 +17,7 @@ class HomeAppbar extends StatelessWidget {
       children: [
         // Texto que indica "¿Qué estás buscando hoy?".
         SafeArea(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width / 1.1,
             child: const Text(
               "Que estas buscando hoy?",

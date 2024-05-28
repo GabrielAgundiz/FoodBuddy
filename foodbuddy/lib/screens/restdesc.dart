@@ -111,7 +111,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
                 children: [
                   Text(
                     widget.restaurants.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
@@ -119,7 +119,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         size: 20,
                         color: Colors.grey,
@@ -160,7 +160,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
 
 class PlatillosPrevisualizacion extends StatefulWidget {
   final String restaurants;
-  PlatillosPrevisualizacion(this.restaurants, {super.key});
+  const PlatillosPrevisualizacion(this.restaurants, {super.key});
 
   @override
   State<PlatillosPrevisualizacion> createState() =>
@@ -181,7 +181,7 @@ class _PlatillosPrevisualizacionState extends State<PlatillosPrevisualizacion> {
           List<Food> food = snapshot.data ?? [];
           return ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: food.length,
             itemBuilder: (context, index) {
               final item = food[index];
@@ -197,35 +197,38 @@ class _PlatillosPrevisualizacionState extends State<PlatillosPrevisualizacion> {
                 child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            image: DecorationImage(
-                              image: NetworkImage(item.image),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Flexible(
-                          fit: FlexFit.loose,
-                          child: Container(
-                            constraints: BoxConstraints(
-                              maxWidth: MediaQuery.of(context).size.width * 0.5,
-                            ),
-                            child: Text(
-                              item.name,
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis,
+                        Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                image: DecorationImage(
+                                  image: NetworkImage(item.image),
+                                  fit: BoxFit.fill,
+                                ),
                               ),
-                              maxLines: 1,
                             ),
-                          ),
+                            const SizedBox(width: 10),
+                            Container(
+                              constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width * 0.5,
+                              ),
+                              child: Text(
+                                item.name,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                maxLines: 1,
+                              ),
+                            ),
+                          ],
                         ),
                         Row(
                           children: [
