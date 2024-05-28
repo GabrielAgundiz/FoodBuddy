@@ -353,7 +353,7 @@ class _SearchPageState extends State<SearchPage> {
                                                       MediaQuery.of(context)
                                                               .size
                                                               .width *
-                                                          0.5,
+                                                          0.45,
                                                 ),
                                                 child: Text(
                                                   item.name,
@@ -371,7 +371,7 @@ class _SearchPageState extends State<SearchPage> {
                                                       MediaQuery.of(context)
                                                               .size
                                                               .width *
-                                                          0.5,
+                                                          0.45,
                                                 ),
                                                 child: Text(
                                                   "${item.restaurant} - ${item.category}",
