@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales">
+    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Implementacion LogOut">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/veganscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716691275126</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Implementacion LogOut">
+      <option name="closed" value="true" />
+      <created>1716881404933</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1716881404933</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,6 +222,7 @@
     <MESSAGE value="Ajuste de parametros nulos en la busqueda" />
     <MESSAGE value="Configuración para guardar de forma local la lista de favoritos con shared Preference" />
     <MESSAGE value="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales" />
-    <option name="LAST_COMMIT_MESSAGE" value="Configuración para mostrar restaurantes especificos con su lista de platillos ofrecidas y redireccion a los platillos individuales" />
+    <MESSAGE value="Implementacion LogOut" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementacion LogOut" />
   </component>
 </project>
