@@ -190,6 +190,9 @@ class _FeedPageState extends State<FeedPage> {
                     height: 20,
                   ),
                 ],
+                const SizedBox(
+                    height: 20,
+                  ),
                 GestureDetector(
                   onTap: () async {
                     await launchUrlString('https://www.thelittleblogofvegan.com/');
@@ -208,7 +211,7 @@ class _FeedPageState extends State<FeedPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(height: 30,),
                 if (currentCat == 'Todos' || currentCat == 'Diabetico') ...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
