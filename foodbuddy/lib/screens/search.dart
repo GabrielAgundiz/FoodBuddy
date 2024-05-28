@@ -30,10 +30,10 @@ class _SearchPageState extends State<SearchPage> {
   bool showFilterOptions =
       false; // Variable para controlar la visibilidad de las opciones de filtro
   bool isVegan = false; // Variable para el estado del checkbox
-    bool isVegetarian = false; 
-    bool isDiabetic = false; 
-    bool isKeto = false; 
-    bool isAll = true; 
+  bool isVegetarian = false;
+  bool isDiabetic = false;
+  bool isKeto = false;
+  bool isAll = true;
   List<String> previousSearches =
       []; // Lista para almacenar búsquedas anteriores
 
@@ -107,12 +107,18 @@ class _SearchPageState extends State<SearchPage> {
                                     false; // Ocultar el GridView al hacer clic en el campo de búsqueda
                                 showRecommendations =
                                     true; // Mostrar recomendaciones
+                                showFilterOptions =
+                                    false; // Ocultar los filtros de búsqueda
                               });
                             },
                             onChanged: (text) {
                               setState(() {
                                 // Actualizar resultados en tiempo real mientras se escribe
                                 buscarEnBaseDeDatos(text);
+                                if (text.isEmpty) {
+                                  showFilterOptions =
+                                      false; // Ocultar los filtros de búsqueda si el campo está vacío
+                                }
                               });
                             },
                             onEditingComplete: () async {
@@ -422,8 +428,11 @@ class _SearchPageState extends State<SearchPage> {
                       )
                     : Center(
                         child: Container(
-                          padding: const EdgeInsets.only(bottom: 60),
-                          child: Text("Introduce un término de búsqueda", style: TextStyle(color: Colors.grey.shade500),)),
+                            padding: const EdgeInsets.only(bottom: 60),
+                            child: Text(
+                              "Introduce un término de búsqueda",
+                              style: TextStyle(color: Colors.grey.shade500),
+                            )),
                       ),
               ),
             ],
@@ -506,7 +515,7 @@ class _SearchPageState extends State<SearchPage> {
               MaterialPageRoute(builder: (context) => const CategoryScreen()),
             );
             break;
-            case "Keto":
+          case "Keto":
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const KetoScreen()),
