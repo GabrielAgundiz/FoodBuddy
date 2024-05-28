@@ -34,27 +34,38 @@ class SavesPage extends StatelessWidget {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     } else {
                       List<Food> foods = snapshot.data!;
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 14,
-                          ),
-                          GridView.count(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            children: favoriteState.foodIds
-                                .map((foodId) => Platillo(
-                                      food: foods.firstWhere(
-                                          (food) => food.id == foodId),
-                                    ))
-                                .toList(),
-                          ),
-                        ],
-                      );
+                      if (favoriteState.foodIds.isEmpty) {
+                        return Center(
+                          child: Container(
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+                              child: Text(
+                            "Aún no tienes favoritos",
+                            style: TextStyle(color: Colors.grey.shade500),
+                          )),
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 14,
+                            ),
+                            GridView.count(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              children: favoriteState.foodIds
+                                  .map((foodId) => Platillo(
+                                        food: foods.firstWhere(
+                                            (food) => food.id == foodId),
+                                      ))
+                                  .toList(),
+                            ),
+                          ],
+                        );
+                      }
                     }
                   },
                 ),
