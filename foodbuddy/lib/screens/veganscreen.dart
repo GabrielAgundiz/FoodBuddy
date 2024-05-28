@@ -18,10 +18,10 @@ class _CategoryScreenState extends State<VeganScreen> {
   @override
   void initState() {
     super.initState();
-    _loadDiabeticFoods();
+    _loadVeganFoods();
   }
 
-  Future<void> _loadDiabeticFoods() async {
+  Future<void> _loadVeganFoods() async {
     List<Food> foods = await _foodService
         .getFoods(); // Obtener la lista de alimentos desde Firebase
     setState(() {
