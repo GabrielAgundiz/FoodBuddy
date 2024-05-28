@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:foodbuddy/models/food.dart';
-import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/models/restaurants.dart';
 import 'package:foodbuddy/screens/restdesc.dart';
 import 'package:foodbuddy/service/food_service.dart';
+import 'package:foodbuddy/service/restaurant_service.dart';
 import 'package:foodbuddy/state/states.dart';
 
 class RestaurantPage extends StatefulWidget {
@@ -15,18 +15,28 @@ class RestaurantPage extends StatefulWidget {
 
 class _RestaurantPageState extends State<RestaurantPage> {
   final FoodService _foodService = FoodService();
-  List<Food> foods = [];
+  final RestaurantService _restaurantService = RestaurantService();
+  //List<Food> foods = [];
+  List<Restaurants> restaurants = [];
 
   @override
   void initState() {
     super.initState();
-    _loadFoods();
+    //_loadFoods();
+    _loadRestaurants();
   }
 
-  Future<void> _loadFoods() async {
+  /*Future<void> _loadFoods() async {
     List<Food> fetchedFoods = await _foodService.getFoods();
     setState(() {
       foods = fetchedFoods;
+    });
+  }*/
+  Future<void> _loadRestaurants() async {
+    List<Restaurants> restaurantsObtenidos =
+        await _restaurantService.getRestaurants();
+    setState(() {
+      restaurants = restaurantsObtenidos;
     });
   }
 
@@ -61,7 +71,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RestDescScreen(),
+                        builder: (context) =>
+                            RestDescScreen(restaurants[index], index),
                       ),
                     ),
                     child: Container(
@@ -75,12 +86,13 @@ class _RestaurantPageState extends State<RestaurantPage> {
                             children: [
                               Container(
                                 width: double.infinity,
-                                height: MediaQuery.of(context).size.height / 8.3,
+                                height:
+                                    MediaQuery.of(context).size.height / 8.3,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      foods[index].image,
+                                      restaurants[index].image,
                                     ),
                                     fit: BoxFit.fill,
                                   ),
@@ -88,7 +100,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                foods[index].name,
+                                restaurants[index].name,
                                 style: const TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -104,28 +116,31 @@ class _RestaurantPageState extends State<RestaurantPage> {
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  Text(
-                                    "Direccion #123",
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.grey,
+                                  Expanded(
+                                    child: Text(
+                                      restaurants[index].address,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      maxLines: 1,
                                     ),
-                                    maxLines: 1,
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          Positioned(
+                          /*Positioned(
                             top: 1,
                             right: 1,
                             child: IconButton(
                               onPressed: () {
                                 if (favoriteState.foodIds
-                                    .contains(foods[index].id)) {
-                                  _removeFromFavorite(context, foods[index].id);
+                                    .contains(restaurants[index].id)) {
+                                  _removeFromFavorite(context, restaurants[index].id);
                                 } else {
-                                  _addToFavorite(context, foods[index].id);
+                                  _addToFavorite(context, restaurants[index].id);
                                 }
                               },
                               style: IconButton.styleFrom(
@@ -134,21 +149,21 @@ class _RestaurantPageState extends State<RestaurantPage> {
                               ),
                               iconSize: 20,
                               icon: Icon(
-                                favoriteState.foodIds.contains(foods[index].id)
+                                favoriteState.foodIds.contains(restaurants[index].id)
                                     ? Icons.favorite
                                     : Icons.favorite_border,
                                 color: favoriteState.foodIds
-                                        .contains(foods[index].id)
+                                        .contains(restaurants[index].id)
                                     ? Colors.red
                                     : null,
                               ),
                             ),
-                          ),
+                          ),*/
                         ],
                       ),
                     ),
                   ),
-                  itemCount: foods.length,
+                  itemCount: restaurants.length,
                 ),
               ),
             ),

@@ -8,11 +8,8 @@ import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/service/food_service.dart';
 import 'package:foodbuddy/widgets/ctfl.dart';
 
-import '../widgets/food_card.dart';
-
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
-  static List previousSearchs = []; // Lista para almacenar búsquedas anteriores
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -26,6 +23,8 @@ class _SearchPageState extends State<SearchPage> {
       []; // Lista para almacenar los resultados de la búsqueda
   bool showGridView =
       true; // Variable para controlar la visibilidad del GridView
+  List<String> previousSearches =
+      []; // Lista para almacenar búsquedas anteriores
 
   @override
   void initState() {
@@ -65,7 +64,7 @@ class _SearchPageState extends State<SearchPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Busqueda',
+            'Búsqueda',
             style: TextStyle(fontWeight: FontWeight.bold),
           ), // Título de la barra de navegación
         ),
@@ -74,52 +73,51 @@ class _SearchPageState extends State<SearchPage> {
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: CostomTextFormFild(
-                          // Widget personalizado para el campo de texto de búsqueda
-                          hint: "Buscar",
-                          prefixIcon: Icons.search_rounded,
-                          controller: searchController,
-                          filled: false,
-                          suffixIcon:
-                              searchController == null ? null : Icons.cancel,
-                          onTapSuffixIcon: () {
-                            searchController.clear();
-                            setState(() {
-                              showGridView =
-                                  false; // Ocultar el GridView al hacer clic en el campo de búsqueda
-                            });
-                          },
-                          onChanged: (pure) {
-                            setState(() {});
-                          },
-                          onEditingComplete: () async {
-                            SearchPage.previousSearchs
-                                .add(searchController.text);
-                            List<Food> searchResults =
-                                await buscarEnBaseDeDatos(
-                                    searchController.text);
-                            setState(() {
-                              this.searchResults = searchResults;
-                              showGridView = true;
-                            }); // Actualiza el estado para mostrar los resultados
-                          },
-                        ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CostomTextFormFild(
+                        // Widget personalizado para el campo de texto de búsqueda
+                        hint: "Buscar",
+                        prefixIcon: Icons.search_rounded,
+                        controller: searchController,
+                        filled: false,
+                        suffixIcon:
+                            searchController.text.isEmpty ? null : Icons.cancel,
+                        onTapSuffixIcon: () {
+                          searchController.clear();
+                          setState(() {
+                            showGridView =
+                                false; // Ocultar el GridView al hacer clic en el campo de búsqueda
+                          });
+                        },
+                        onChanged: (text) {
+                          setState(() {
+                            // Actualizar resultados en tiempo real mientras se escribe
+                            buscarEnBaseDeDatos(text);
+                          });
+                        },
+                        onEditingComplete: () async {
+                          previousSearches.add(searchController.text);
+                          List<Food> searchResults =
+                              await buscarEnBaseDeDatos(searchController.text);
+                          setState(() {
+                            this.searchResults = searchResults;
+                            showGridView = true;
+                          }); // Actualiza el estado para mostrar los resultados
+                        },
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons
-                              .tune, // Icono para ajustar los filtros de búsqueda
-                        ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons
+                            .tune, // Icono para ajustar los filtros de búsqueda
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
               Container(
@@ -130,7 +128,7 @@ class _SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Busquedas Recomendadas",
+                      "Búsquedas Recomendadas",
                       style: Theme.of(context).textTheme.bodyText2!.copyWith(
                           color: Colors.black, fontWeight: FontWeight.w600),
                     ),
@@ -142,10 +140,10 @@ class _SearchPageState extends State<SearchPage> {
                           .horizontal, // Establecemos la dirección del scroll en horizontal
                       child: Row(
                         children: [
-                          searchSuggestionsTiem("Vegetarianos"),
-                          searchSuggestionsTiem("Veganos"),
-                          searchSuggestionsTiem("Diabeticos"),
-                          searchSuggestionsTiem("Antojos"),
+                          searchSuggestionsItem("Vegetarianos"),
+                          searchSuggestionsItem("Veganos"),
+                          searchSuggestionsItem("Diabéticos"),
+                          searchSuggestionsItem("Antojos"),
                         ],
                       ),
                     ),
@@ -155,6 +153,48 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
+              Expanded(
+                child: showGridView
+                    ? GridView.builder(
+                        itemCount: searchResults.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 0.8,
+                        ),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              navigateToDescScreen(searchResults[index]);
+                            },
+                            child: Card(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Image.network(
+                                        searchResults[index].image,
+                                        fit: BoxFit.cover),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      searchResults[index].name,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : const Center(
+                        child: Text("Introduce un término de búsqueda"),
+                      ),
+              ),
             ],
           ),
         ),
@@ -162,24 +202,23 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget previousSearchsItem(int index, BuildContext context) {
+  Widget previousSearchesItem(int index, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: InkWell(
         onTap: () {
           // Al hacer clic en el elemento, navegar a DescScreen con el elemento de búsqueda seleccionado
-          String selectedSearch = SearchPage.previousSearchs[index];
+          String selectedSearch = previousSearches[index];
           Food selectedFood = searchResults.firstWhere(
               (food) => food.name == selectedSearch,
-              orElse: () => Food('', '', '', '', '', 0, 0, 0,
-                  0)); // Podrías usar una instancia de Food vacía si el elemento no se encuentra
+              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0, ''));
           navigateToDescScreen(selectedFood);
         },
         child: Dismissible(
-          key: GlobalKey(),
+          key: ValueKey<int>(index),
           onDismissed: (DismissDirection dir) {
             setState(() {});
-            SearchPage.previousSearchs.removeAt(index);
+            previousSearches.removeAt(index);
           },
           child: Row(
             children: [
@@ -189,7 +228,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               const SizedBox(width: 10),
               Text(
-                SearchPage.previousSearchs[index],
+                previousSearches[index],
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2!
@@ -207,7 +246,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget searchSuggestionsTiem(String text) {
+  Widget searchSuggestionsItem(String text) {
     return GestureDetector(
       onTap: () {
         // Aquí debes manejar la navegación a la pantalla correspondiente
@@ -224,7 +263,7 @@ class _SearchPageState extends State<SearchPage> {
               MaterialPageRoute(builder: (context) => const VeganScreen()),
             );
             break;
-          case "Diabeticos":
+          case "Diabéticos":
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const DiabeticScreen()),

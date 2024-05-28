@@ -1,17 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:foodbuddy/models/restaurants.dart';
+import 'package:foodbuddy/screens/descripcion.dart';
+import 'package:foodbuddy/service/food_service.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../models/food.dart';
 
 const kprimaryColor = Color(0xFF5DB075);
 
 class RestDescScreen extends StatefulWidget {
-  const RestDescScreen({super.key});
+  final Restaurants restaurants;
+  final int index;
+  const RestDescScreen(this.restaurants, this.index, {super.key});
 
   @override
   State<RestDescScreen> createState() => _RestDescScreenState();
 }
 
 class _RestDescScreenState extends State<RestDescScreen> {
+  void _launchURL(String urlRestaurant) async {
+    final url = urlRestaurant; // Reemplaza con la URL específica
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +38,9 @@ class _RestDescScreenState extends State<RestDescScreen> {
             Expanded(
               flex: 6,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _launchURL(widget.restaurants.link_restaurant);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kprimaryColor,
                   foregroundColor: Colors.white,
@@ -31,15 +48,13 @@ class _RestDescScreenState extends State<RestDescScreen> {
                 child: const Text("Ver en Delivery App"),
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
+            const SizedBox(width: 10),
           ],
         ),
       ),
       appBar: AppBar(
         title: Text(
-          "Nombre del Restaurante",
+          widget.restaurants.name,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -54,8 +69,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
                     height: MediaQuery.of(context).size.width - 20,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(
-                            'https://media-cdn.tripadvisor.com/media/photo-s/1b/f7/3a/4a/terraza-al-aire-libre.jpg'),
+                        image: NetworkImage(widget.restaurants.image),
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -76,7 +90,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
             Center(
@@ -89,24 +103,20 @@ class _RestDescScreenState extends State<RestDescScreen> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Nombre",
+                    widget.restaurants.name,
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
                       Icon(
@@ -114,100 +124,28 @@ class _RestDescScreenState extends State<RestDescScreen> {
                         size: 20,
                         color: Colors.grey,
                       ),
-                      Text(
-                        "Calle #123",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
+                      Expanded(
+                        child: Text(
+                          widget.restaurants.address,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
+                  const SizedBox(height: 20),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Platillos",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                onTap: (){},
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 60,
-                                      height: 60,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              "https://content.skyscnr.com/m/2dcd7d0e6f086057/original/GettyImages-186142785.jpg?resize=2560px:1707px"),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 30),
-                                      child: Text(
-                                        "Tacos Veganos",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            overflow: TextOverflow.ellipsis,
-                                            ),
-                                            maxLines: 1,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.local_fire_department,
-                                          size: 20,
-                                          color: Colors.grey.shade400,
-                                        ),
-                                        Text(
-                                          "287 Cal",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.grey.shade400,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 8,),
-                              Center(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width / 1.15,
-                                  height: 2,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade200,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8,),
-                            ],
-                          ),
-                        ],
+                      const Text(
+                        "Platillos",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
+                      const SizedBox(height: 10),
+                      PlatillosPrevisualizacion(widget.restaurants.name),
                     ],
                   ),
                 ],
@@ -216,6 +154,116 @@ class _RestDescScreenState extends State<RestDescScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class PlatillosPrevisualizacion extends StatefulWidget {
+  final String restaurants;
+  PlatillosPrevisualizacion(this.restaurants, {super.key});
+
+  @override
+  State<PlatillosPrevisualizacion> createState() =>
+      _PlatillosPrevisualizacionState();
+}
+
+class _PlatillosPrevisualizacionState extends State<PlatillosPrevisualizacion> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Food>>(
+      future: FoodService().getItemsRestaurants(widget.restaurants),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          List<Food> food = snapshot.data ?? [];
+          return ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: food.length,
+            itemBuilder: (context, index) {
+              final item = food[index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DescScreen(food: item),
+                    ),
+                  );
+                },
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image: NetworkImage(item.image),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          fit: FlexFit.loose,
+                          child: Container(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.5,
+                            ),
+                            child: Text(
+                              item.name,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.local_fire_department,
+                              size: 20,
+                              color: Colors.grey.shade400,
+                            ),
+                            Text(
+                              "${item.cal} Cal",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey.shade400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width / 1.15,
+                        height: 2,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

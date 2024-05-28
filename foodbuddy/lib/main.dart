@@ -5,7 +5,7 @@ import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/state/states.dart';
 
 // Función principal que se ejecuta cuando se inicia la aplicación
-Future main() async {
+Future<void> main() async {
   // Asegura que el binding de WidgetsFlutter esté inicializado antes de hacer cualquier cosa más
   WidgetsFlutterBinding.ensureInitialized();
   // Inicializa la aplicación de Firebase
@@ -13,7 +13,7 @@ Future main() async {
   // Ejecuta la aplicación MyApp
   runApp(
     BlocProvider(
-      create: (_) => FavoriteBloc(FavoriteState([])),
+      create: (_) => FavoriteBloc(),
       child: MyApp(),
     ),
   );

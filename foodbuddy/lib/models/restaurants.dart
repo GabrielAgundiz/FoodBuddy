@@ -1,17 +1,36 @@
 class Restaurants {
-  String name;
-  String image;
-  double rate;
-  int reviews;
-  String address;
+  final String id;
+  final String name;
+  final String image;
+  final double rate;
+  final int reviews;
+  final String address;
+  final String link_restaurant;
 
-  Restaurants({
-    required this.name,
-    required this.image,
-    required this.address,
-    required this.rate,
-    required this.reviews,
-  });
+  Restaurants(this.id, this.name, this.image, this.rate, this.reviews,
+      this.address, this.link_restaurant);
+
+  Restaurants.fromJson(String id, Map<String, dynamic> json)
+      : this(
+          id,
+          json['name'] as String,
+          json['image'] as String,
+          json['rate'].toDouble(),
+          json['reviews'].toInt(),
+          json['address'] as String,
+          json['link_restaurant'] as String,
+        );
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'rate': rate,
+      'reviews': reviews,
+      'address': address,
+    };
+  }
 }
 
 /*final List<Restaurant> restaurants = [
