@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert' as convert;
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/service/location_services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,7 +11,12 @@ import 'package:http/http.dart' as http;
 class MapSample extends StatefulWidget {
   final String lugar;
   final String name;
-  const MapSample(this.lugar, this.name, {super.key});
+  final Set<Factory<OneSequenceGestureRecognizer>> gestureRecognizers;
+
+  const MapSample(this.lugar, this.name,
+      {Key? key, required this.gestureRecognizers})
+      : super(key: key);
+
   @override
   State<MapSample> createState() => MapSampleState();
 }
@@ -63,6 +70,7 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        gestureRecognizers: widget.gestureRecognizers,
         mapType: MapType.normal,
         markers: _markers,
         initialCameraPosition: _initialPosition,

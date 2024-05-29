@@ -1,8 +1,9 @@
 import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // Importación de la biblioteca de almacenamiento de Firebase
+import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/screens/notifies.dart';
 import 'package:image_picker/image_picker.dart';
@@ -69,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           final clientData = snapshot.data!
               .data(); // Obtiene los datos del documento del usuario
-            _photoUrl = clientData?['photo'];
+          _photoUrl = clientData?['photo'];
           return SingleChildScrollView(
             child: Form(
               key: _formKey,
@@ -90,9 +91,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
-                            final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+                            final pickedFile = await picker.pickImage(
+                                source: ImageSource.gallery);
                             if (pickedFile != null) {
-                              String? downloadUrl = await _uploadFile(File(pickedFile.path), user?.uid);
+                              String? downloadUrl = await _uploadFile(
+                                  File(pickedFile.path), user?.uid);
                               if (downloadUrl != null) {
                                 setState(() {
                                   _photoUrl = downloadUrl;
@@ -250,7 +253,8 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<String?> _uploadFile(File file, String? userId) async {
     try {
-      final storageRef = FirebaseStorage.instance.ref().child('profile_pictures/$userId.jpg');
+      final storageRef =
+          FirebaseStorage.instance.ref().child('profile_pictures/$userId.jpg');
       await storageRef.putFile(file);
       final downloadUrl = await storageRef.getDownloadURL();
       print('Download URL: $downloadUrl');

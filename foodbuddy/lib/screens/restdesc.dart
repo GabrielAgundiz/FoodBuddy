@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/restaurants.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/service/food_service.dart';
-import 'package:foodbuddy/service/location_services.dart';
 import 'package:foodbuddy/widgets/maps.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,7 +21,6 @@ class RestDescScreen extends StatefulWidget {
 }
 
 class _RestDescScreenState extends State<RestDescScreen> {
-  final LocationService _locationService = LocationService();
   void _launchURL(String urlRestaurant) async {
     final url = urlRestaurant; // Reemplaza con la URL específica
     if (await canLaunch(url)) {
@@ -151,33 +151,24 @@ class _RestDescScreenState extends State<RestDescScreen> {
                       PlatillosPrevisualizacion(widget.restaurants.name),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: SizedBox(
+                      height:
+                          300, // Ajusta la altura del mapa según sea necesario
+                      child: MapSample(
+                        widget.restaurants.address,
+                        widget.restaurants.name,
+                        gestureRecognizers: const {
+                          Factory<OneSequenceGestureRecognizer>(
+                              EagerGestureRecognizer.new),
+                        },
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Center(
-              child: GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MapSample(
-                        widget.restaurants.address, widget.restaurants.name),
-                  ),
-                ),
-                child: SizedBox(
-                    height:
-                        300, // Ajusta la altura del mapa según sea necesario
-                    child: MapSample(
-                        widget.restaurants.address, widget.restaurants.name)),
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextButton(
-                onPressed: () async {
-                  var place =
-                      _locationService.getLugares(widget.restaurants.address);
-                },
-                child: Text("Picale")),
           ],
         ),
       ),
@@ -185,7 +176,6 @@ class _RestDescScreenState extends State<RestDescScreen> {
   }
 }
 
-//d
 class PlatillosPrevisualizacion extends StatefulWidget {
   final String restaurants;
   const PlatillosPrevisualizacion(this.restaurants, {super.key});
@@ -287,6 +277,7 @@ class _PlatillosPrevisualizacionState extends State<PlatillosPrevisualizacion> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 8),
                   ],
                 ),
               );

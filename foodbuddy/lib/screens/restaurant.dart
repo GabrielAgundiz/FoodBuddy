@@ -27,7 +27,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
   }
 
   Future<void> _loadRestaurants() async {
-    List<Restaurants> restaurantsObtenidos = await _restaurantService.getRestaurants();
+    List<Restaurants> restaurantsObtenidos =
+        await _restaurantService.getRestaurants();
     setState(() {
       restaurants = restaurantsObtenidos;
     });
@@ -137,5 +138,4 @@ class _RestaurantPageState extends State<RestaurantPage> {
       }),
     );
   }
-
 }
