@@ -185,6 +185,7 @@ class _RestDescScreenState extends State<RestDescScreen> {
   }
 }
 
+//d
 class PlatillosPrevisualizacion extends StatefulWidget {
   final String restaurants;
   const PlatillosPrevisualizacion(this.restaurants, {super.key});
