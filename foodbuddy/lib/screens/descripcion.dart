@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:foodbuddy/models/food.dart';
+import 'package:timezone/timezone.dart' as tz;
 import 'package:url_launcher/url_launcher.dart';
 
 import '../state/states.dart';
@@ -17,9 +19,18 @@ class DescScreen extends StatefulWidget {
 
 class _DescripcionState extends State<DescScreen> {
   late bool isLiked;
+// Inicialización del plugin de notificaciones locales
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeNotification();
+  }
 
   void _launchURL(String urlFood) async {
-    final url = urlFood; // Reemplaza con la URL específica
+    final url = urlFood;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -42,6 +53,7 @@ class _DescripcionState extends State<DescScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     _launchURL(widget.food.link_food);
+                    _scheduleNotification();
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kprimaryColor,
@@ -249,6 +261,7 @@ class _DescripcionState extends State<DescScreen> {
     setState(() {
       isLiked = true;
     });
+    _scheduleNotification();
   }
 
   void _removeFromFavorite(BuildContext context, String foodId) {
@@ -258,4 +271,77 @@ class _DescripcionState extends State<DescScreen> {
       isLiked = false;
     });
   }
+
+  void _scheduleNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
+      'channelId',
+      'channelName',
+      channelDescription: 'Notificación de favorito',
+      importance: Importance.max,
+      priority: Priority.high,
+      icon: 'appicon',
+    );
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    final tz.TZDateTime scheduledNotificationDateTime =
+        tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
+
+    // Agregar un mensaje de log
+    print(
+        'Programando notificación para ${scheduledNotificationDateTime.toLocal()}');
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      11,
+      'Nuevo favorito',
+      'Has añadido ${widget.food.name} a tus favoritos',
+      scheduledNotificationDateTime,
+      platformChannelSpecifics,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
+  }
+
+  // Inicializa las configuraciones de notificaciones
+  void _initializeNotification() async {
+    // Configuraciones de inicialización específicas para Android
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings(
+            'appicon'); // Nombre correcto del ícono de la tarea
+
+    // Configuraciones de inicialización para todas las plataformas
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    // Inicializa el plugin de notificaciones con las configuraciones especificadas
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+/*void _scheduleNotification() async {
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+    AndroidNotificationDetails(
+      'channelId',
+      'channelName',
+      channelDescription: 'Notificación de favorito',
+      importance: Importance.max,
+      priority: Priority.high,
+      icon: 'appicon',
+    );
+    const NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics);
+
+    // Calcula la fecha y hora en la que se debe mostrar la notificación (20 segundos después)
+    final tz.TZDateTime scheduledNotificationDateTime =
+    tz.TZDateTime.now(tz.local).add(const Duration(seconds: 2));
+
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+      0,
+      'Nuevo favorito',
+      'Has añadido ${widget.food.name} a tus favoritos',
+      scheduledNotificationDateTime,
+      platformChannelSpecifics,
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+      UILocalNotificationDateInterpretation.absoluteTime,
+    );
+  }*/
 }

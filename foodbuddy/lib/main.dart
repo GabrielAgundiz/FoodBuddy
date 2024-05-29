@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/state/states.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 // Función principal que se ejecuta cuando se inicia la aplicación
 Future<void> main() async {
@@ -10,6 +11,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Inicializa la aplicación de Firebase
   await Firebase.initializeApp();
+  tz.initializeTimeZones();
   // Ejecuta la aplicación MyApp
   runApp(
     BlocProvider(

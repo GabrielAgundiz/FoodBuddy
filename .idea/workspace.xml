@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Correcion de la adicion de la api">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/restaurant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/restaurant.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/restdesc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/restdesc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/maps.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/maps.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/linux/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +34,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -259,5 +260,12 @@
     <MESSAGE value="Adicion de api de google maps, configuración del mapa para mostrar ubicacion inicial el restaurante" />
     <MESSAGE value="Correcion de la adicion de la api" />
     <option name="LAST_COMMIT_MESSAGE" value="Correcion de la adicion de la api" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="dart-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
