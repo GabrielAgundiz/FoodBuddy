@@ -20,6 +20,14 @@ class DescScreen extends StatefulWidget {
 
 class _DescripcionState extends State<DescScreen> {
   late bool isLiked;
+
+
+  @override
+  void initState() {
+    super.initState();
+    
+  }
+
   // Inicialización del plugin de notificaciones locales
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
@@ -47,6 +55,7 @@ class _DescripcionState extends State<DescScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     _launchURL(widget.food.link_food);
+                    
                     _scheduleNotificationVisita();
                   },
                   style: ElevatedButton.styleFrom(
