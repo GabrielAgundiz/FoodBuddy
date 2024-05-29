@@ -26,15 +26,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
     _loadRestaurants();
   }
 
-  /*Future<void> _loadFoods() async {
-    List<Food> fetchedFoods = await _foodService.getFoods();
-    setState(() {
-      foods = fetchedFoods;
-    });
-  }*/
   Future<void> _loadRestaurants() async {
-    List<Restaurants> restaurantsObtenidos =
-        await _restaurantService.getRestaurants();
+    List<Restaurants> restaurantsObtenidos = await _restaurantService.getRestaurants();
     setState(() {
       restaurants = restaurantsObtenidos;
     });
@@ -131,34 +124,6 @@ class _RestaurantPageState extends State<RestaurantPage> {
                               ),
                             ],
                           ),
-                          /*Positioned(
-                            top: 1,
-                            right: 1,
-                            child: IconButton(
-                              onPressed: () {
-                                if (favoriteState.foodIds
-                                    .contains(restaurants[index].id)) {
-                                  _removeFromFavorite(context, restaurants[index].id);
-                                } else {
-                                  _addToFavorite(context, restaurants[index].id);
-                                }
-                              },
-                              style: IconButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                fixedSize: const Size(25, 25),
-                              ),
-                              iconSize: 20,
-                              icon: Icon(
-                                favoriteState.foodIds.contains(restaurants[index].id)
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: favoriteState.foodIds
-                                        .contains(restaurants[index].id)
-                                    ? Colors.red
-                                    : null,
-                              ),
-                            ),
-                          ),*/
                         ],
                       ),
                     ),
@@ -173,19 +138,4 @@ class _RestaurantPageState extends State<RestaurantPage> {
     );
   }
 
-  void _addToFavorite(BuildContext context, String foodId) {
-    var favoriteBloc = context.read<FavoriteBloc>();
-    favoriteBloc.add(AddFoodToFavorite(foodId));
-    setState(() {
-      isLiked = true;
-    });
-  }
-
-  void _removeFromFavorite(BuildContext context, String foodId) {
-    var favoriteBloc = context.read<FavoriteBloc>();
-    favoriteBloc.add(RemoveFoodFromFavorite(foodId));
-    setState(() {
-      isLiked = false;
-    });
-  }
 }
