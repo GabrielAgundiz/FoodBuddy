@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:foodbuddy/models/food.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
 import 'package:foodbuddy/state/states.dart';
@@ -16,6 +19,8 @@ class Platillo extends StatefulWidget {
 
 class _PlatilloState extends State<Platillo> {
   bool isLiked = false;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   @override
   Widget build(BuildContext context) {
@@ -149,6 +154,7 @@ class _PlatilloState extends State<Platillo> {
     setState(() {
       isLiked = true;
     });
+    _scheduleNotificationFav();
   }
 
   void _removeFromFavorite(BuildContext context, String foodId) {
@@ -157,5 +163,48 @@ class _PlatilloState extends State<Platillo> {
     setState(() {
       isLiked = false;
     });
+  }
+
+  _scheduleNotificationFav() async {
+    // Espera 5 segundos antes de mostrar la notificación
+    Timer(Duration(hours: 4), () {
+      // Detalles específicos de la notificación para Android
+      const AndroidNotificationDetails androidPlatformChannelSpecifics =
+          AndroidNotificationDetails(
+        "channelId", // ID del canal de notificación
+        "channelName", // Nombre del canal de notificación
+        "channelDescription", // Descripción del canal
+        importance: Importance.max, // Importancia máxima para la notificación
+        priority: Priority.high, // Alta prioridad para la notificación
+        icon: 'appicon', // Nombre del ícono de la tarea
+      );
+
+      // Detalles específicos de la notificación para todas las plataformas
+      const NotificationDetails platformChannelSpecifics =
+          NotificationDetails(android: androidPlatformChannelSpecifics);
+
+      // Muestra la notificación con los detalles configurados
+      flutterLocalNotificationsPlugin.show(
+        0, // ID de la notificación
+        "Regresa a tu producto", // Título de la notificación
+        "Recientemente has añadido ${widget.food.name} a tus favoritos, regresa a completar tu pedido! ", // Cuerpo de la notificación
+        platformChannelSpecifics, // Detalles específicos de la plataforma
+      );
+    });
+  }
+
+// Inicializa las configuraciones de notificaciones
+  void _initializeNotification() async {
+    // Configuraciones de inicialización específicas para Android
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings(
+            'appicon'); // Nombre correcto del ícono de la tarea
+
+    // Configuraciones de inicialización para todas las plataformas
+    final InitializationSettings initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    // Inicializa el plugin de notificaciones con las configuraciones especificadas
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 }
