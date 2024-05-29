@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart'; // Importación de la biblioteca de almacenamiento de Firebase
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/screens/login.dart';
-import 'package:foodbuddy/screens/notifies.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -49,7 +48,7 @@ class _ProfilePageState extends State<ProfilePage> {
           'Perfil',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: <Widget>[
+        /*actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
             onPressed: () {
@@ -59,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             },
           )
-        ],
+        ],*/
       ),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: client,
