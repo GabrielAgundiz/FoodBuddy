@@ -1,11 +1,7 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'dart:io'; // Importación de la biblioteca para operaciones de entrada/salida
-import 'package:firebase_auth/firebase_auth.dart'; // Importación de la biblioteca de autenticación de Firebase
-import 'package:cloud_firestore/cloud_firestore.dart'; // Importación de la biblioteca Firestore de Firebase
 import 'package:firebase_storage/firebase_storage.dart'; // Importación de la biblioteca de almacenamiento de Firebase
 import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/screens/notifies.dart';
@@ -89,7 +85,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? NetworkImage(_photoUrl!)
                               : const NetworkImage(
                                       "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
-                                  as ImageProvider,
                                   as ImageProvider,
                         ),
                         const SizedBox(height: 16),
