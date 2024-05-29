@@ -48,6 +48,8 @@ dependencies:
   google_maps_flutter: ^2.6.1
   geocoding: ^2.0.0
   firebase_storage: ^11.7.7
+  flutter_local_notifications:
+  flutter_timezone:
 
 dev_dependencies:
   flutter_test:
