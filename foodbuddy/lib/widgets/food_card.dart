@@ -167,7 +167,7 @@ class _PlatilloState extends State<Platillo> {
 
   _scheduleNotificationFav() async {
     // Espera 5 segundos antes de mostrar la notificación
-    Timer(Duration(hours: 4), () {
+    Timer(Duration(seconds: 4), () {
       // Detalles específicos de la notificación para Android
       const AndroidNotificationDetails androidPlatformChannelSpecifics =
           AndroidNotificationDetails(

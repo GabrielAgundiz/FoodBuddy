@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Correcion de ortografia">
+    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Solucion de dependencias erroneas de notificaciones">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,7 +243,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716979982405</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Solucion de dependencias erroneas de notificaciones">
+      <option name="closed" value="true" />
+      <created>1716982702265</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1716982702266</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,7 +287,8 @@
     <MESSAGE value="Notificaciones locales" />
     <MESSAGE value="Configuracion de programacion de notificaciones" />
     <MESSAGE value="Correcion de ortografia" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correcion de ortografia" />
+    <MESSAGE value="Solucion de dependencias erroneas de notificaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Solucion de dependencias erroneas de notificaciones" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

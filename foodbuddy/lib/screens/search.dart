@@ -314,7 +314,7 @@ class _SearchPageState extends State<SearchPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Búsquedas Recomendadas",
+                        "Búsquedas Recientes",
                         style: Theme.of(context).textTheme.bodyText2!.copyWith(
                             color: Colors.black, fontWeight: FontWeight.w600),
                       ),
@@ -358,25 +358,130 @@ class _SearchPageState extends State<SearchPage> {
                     ],
                   ),
                 ),
-              if (showGridView)
-                Expanded(
-                  child: GridView.builder(
-                    itemCount: searchResults.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2, // Número de columnas en el GridView
-                      childAspectRatio:
-                          0.75, // Relación de aspecto de los hijos
-                    ),
-                    itemBuilder: (context, index) {
-                      Food food = searchResults[index];
-                      return GestureDetector(
-                        onTap: () => navigateToDescScreen(food),
-                        child: PlatilloWidget(food: food),
-                      );
-                    },
-                  ),
-                ),
+              Expanded(
+                child: showGridView
+                    ? ListView.builder(
+                        itemCount: searchResults.length,
+                        padding: EdgeInsets.zero,
+                        itemBuilder: (context, index) {
+                          final item = searchResults[index];
+                          return GestureDetector(
+                            onTap: () {
+                              navigateToDescScreen(item);
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 60,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                image: NetworkImage(item.image),
+                                                fit: BoxFit.fill,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.45,
+                                                ),
+                                                child: Text(
+                                                  item.name,
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.bold,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                  maxWidth:
+                                                      MediaQuery.of(context)
+                                                              .size
+                                                              .width *
+                                                          0.45,
+                                                ),
+                                                child: Text(
+                                                  "${item.restaurant} - ${item.category}",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    color: Colors.grey.shade400,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.local_fire_department,
+                                            size: 20,
+                                            color: Colors.grey.shade400,
+                                          ),
+                                          Text(
+                                            "${item.cal} Cal",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.grey.shade400,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Center(
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          1.15,
+                                      height: 2,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    : const Center(
+                        child: Text("Introduce un término de búsqueda"),
+                      ),
+              ),
             ],
           ),
         ),
