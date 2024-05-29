@@ -316,7 +316,7 @@ class _DescripcionState extends State<DescScreen> {
       flutterLocalNotificationsPlugin.show(
         0, // ID de la notificación
         "Sigue pidiendo", // Título de la notificación
-        "Recientemente has visitaste ${widget.food.name} regresa a completar tu pedido! ", // Cuerpo de la notificación
+        "Recientemente visitaste ${widget.food.name} regresa a completar tu pedido! ", // Cuerpo de la notificación
         platformChannelSpecifics, // Detalles específicos de la plataforma
       );
     });
