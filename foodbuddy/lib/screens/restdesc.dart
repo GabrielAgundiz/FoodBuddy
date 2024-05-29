@@ -139,6 +139,21 @@ class _RestDescScreenState extends State<RestDescScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  Center(
+                    child: SizedBox(
+                      height:
+                          250, // Ajusta la altura del mapa según sea necesario
+                      child: MapSample(
+                        widget.restaurants.address,
+                        widget.restaurants.name,
+                        gestureRecognizers: const {
+                          Factory<OneSequenceGestureRecognizer>(
+                              EagerGestureRecognizer.new),
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -152,20 +167,6 @@ class _RestDescScreenState extends State<RestDescScreen> {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  Center(
-                    child: SizedBox(
-                      height:
-                          300, // Ajusta la altura del mapa según sea necesario
-                      child: MapSample(
-                        widget.restaurants.address,
-                        widget.restaurants.name,
-                        gestureRecognizers: const {
-                          Factory<OneSequenceGestureRecognizer>(
-                              EagerGestureRecognizer.new),
-                        },
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

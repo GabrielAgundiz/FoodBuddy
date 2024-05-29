@@ -26,12 +26,9 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future<bool> _isUserAuthenticate(User user) async {
-    await user.reload();
-    return user.emailVerified;
-  }
 
-  Future<void> checkCurrentUser() async {
+Future<void> checkCurrentUser() async {
+  try {
     final user = FirebaseAuth.instance.currentUser;
     if (user != null && await _isUserAuthenticate(user)) {
       final credencial = user.uid;
@@ -39,7 +36,6 @@ class _LoginPageState extends State<LoginPage> {
           .collection('client')
           .doc(credencial)
           .get();
-      print(userDoc.id);
 
       if (userDoc.exists) {
         Navigator.pushAndRemoveUntil(
@@ -55,7 +51,21 @@ class _LoginPageState extends State<LoginPage> {
         );
       }
     }
+  } catch (e) {
+    print("Error checking current user: $e");
   }
+}
+
+Future<bool> _isUserAuthenticate(User user) async {
+  try {
+    await user.reload();
+    return user.emailVerified;
+  } catch (e) {
+    print("Error reloading user: $e");
+    return false;
+  }
+}
+
 
   @override
   void initState() {
@@ -113,6 +123,7 @@ class _LoginPageState extends State<LoginPage> {
               fontFamily: 'Roboto',
             ),
             child: Container(
+              margin:  EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.18 ),
               padding: const EdgeInsets.all(20.0),
               child: Form(
                 key: formKey,
