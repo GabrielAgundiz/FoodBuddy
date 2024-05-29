@@ -216,7 +216,7 @@ class _PlatillosPrevisualizacionState extends State<PlatillosPrevisualizacion> {
                             Container(
                               constraints: BoxConstraints(
                                 maxWidth:
-                                    MediaQuery.of(context).size.width * 0.5,
+                                    MediaQuery.of(context).size.width * 0.45,
                               ),
                               child: Text(
                                 item.name,

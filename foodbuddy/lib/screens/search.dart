@@ -8,7 +8,6 @@ import 'package:foodbuddy/screens/veganscreen.dart';
 import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/service/food_service.dart';
 import 'package:foodbuddy/widgets/ctfl.dart';
-import 'package:foodbuddy/widgets/keto.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

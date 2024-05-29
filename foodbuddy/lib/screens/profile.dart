@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:io'; // Importación de la biblioteca para operaciones de entrada/salida
 import 'package:firebase_auth/firebase_auth.dart'; // Importación de la biblioteca de autenticación de Firebase
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importación de la biblioteca Firestore de Firebase
+import 'package:firebase_storage/firebase_storage.dart'; // Importación de la biblioteca de almacenamiento de Firebase
 import 'package:foodbuddy/screens/login.dart';
 import 'package:foodbuddy/screens/notifies.dart'; // Importación de la pantalla de notificaciones
 import 'package:image_picker/image_picker.dart'; // Importación de la biblioteca para seleccionar imágenes desde el dispositivo
@@ -86,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           final clientData = snapshot.data!
               .data(); // Obtiene los datos del documento del usuario
-
+            _photoUrl = clientData?['photo'];
           return SingleChildScrollView(
             child: Form(
               key: _formKey,
@@ -99,23 +100,26 @@ class _ProfilePageState extends State<ProfilePage> {
                         CircleAvatar(
                           radius: 75,
                           backgroundImage: _photoUrl != null
-                              ? FileImage(File(
-                                  _photoUrl!)) // Si hay una URL de foto, carga la foto desde el archivo
+                              ? NetworkImage(_photoUrl!)
                               : const NetworkImage(
                                       "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
-                                  as ImageProvider, // De lo contrario, carga una imagen de perfil predeterminada
+                                  as ImageProvider,
                         ),
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
-                            final pickedFile = await picker.pickImage(
-                                source: ImageSource
-                                    .gallery); // Permite al usuario seleccionar una foto de la galería
+                            final pickedFile = await picker.pickImage(source: ImageSource.gallery);
                             if (pickedFile != null) {
-                              setState(() {
-                                _photoUrl = pickedFile
-                                    .path; // Actualiza la URL de la foto seleccionada
-                              });
+                              String? downloadUrl = await _uploadFile(File(pickedFile.path), user?.uid);
+                              if (downloadUrl != null) {
+                                setState(() {
+                                  _photoUrl = downloadUrl;
+                                });
+                                await FirebaseFirestore.instance
+                                    .collection('client')
+                                    .doc(user?.uid)
+                                    .update({'photo': _photoUrl});
+                              }
                             }
                           },
                           child: const Text('Seleccionar foto'),
@@ -124,7 +128,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             foregroundColor: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 16),
                         TextFormField(
                           initialValue: clientData?[
                               'name'], // Establece el valor inicial del campo con el nombre del cliente
@@ -146,7 +149,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           user?.email ??
                               'Correo', // Muestra el correo electrónico del usuario actual
                         ),
-
                         const SizedBox(height: 16),
                         TextFormField(
                           initialValue: clientData?[
@@ -181,7 +183,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           onSaved: (value) => _address =
                               value, // Guarda el valor ingresado en la variable _address
                         ),
-
                         const SizedBox(height: 16),
                         DropdownButtonFormField<String>(
                           value: clientData?[
@@ -302,5 +303,18 @@ class _ProfilePageState extends State<ProfilePage> {
         },
       ),
     );
+  }
+
+  Future<String?> _uploadFile(File file, String? userId) async {
+    try {
+      final storageRef = FirebaseStorage.instance.ref().child('profile_pictures/$userId.jpg');
+      await storageRef.putFile(file);
+      final downloadUrl = await storageRef.getDownloadURL();
+      print('Download URL: $downloadUrl');
+      return downloadUrl;
+    } catch (e) {
+      print('Error al subir el archivo: $e');
+      return null;
+    }
   }
 }
