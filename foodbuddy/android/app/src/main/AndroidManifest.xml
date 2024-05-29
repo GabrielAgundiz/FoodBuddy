@@ -3,6 +3,8 @@
         android:label="foodbuddy"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBU_R5fJE_EBSIqoAiXyTL5xOV9fIaJUQ0"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,6 +21,7 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
