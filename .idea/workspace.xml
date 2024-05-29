@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Notificaciones locales">
+    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Correcion de ortografia">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/foodbuddy/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/pubspec.yaml" afterDir="false" />
     </list>
@@ -228,7 +228,23 @@
       <option name="project" value="LOCAL" />
       <updated>1716976215669</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Configuracion de programacion de notificaciones">
+      <option name="closed" value="true" />
+      <created>1716979733350</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1716979733350</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Correcion de ortografia">
+      <option name="closed" value="true" />
+      <created>1716979982405</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1716979982405</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -262,7 +278,9 @@
     <MESSAGE value="Adicion de api de google maps, configuración del mapa para mostrar ubicacion inicial el restaurante" />
     <MESSAGE value="Correcion de la adicion de la api" />
     <MESSAGE value="Notificaciones locales" />
-    <option name="LAST_COMMIT_MESSAGE" value="Notificaciones locales" />
+    <MESSAGE value="Configuracion de programacion de notificaciones" />
+    <MESSAGE value="Correcion de ortografia" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcion de ortografia" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
