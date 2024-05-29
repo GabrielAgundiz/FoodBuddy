@@ -1,11 +1,15 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:io'; // Importación de la biblioteca para operaciones de entrada/salida
 import 'package:firebase_auth/firebase_auth.dart'; // Importación de la biblioteca de autenticación de Firebase
 import 'package:cloud_firestore/cloud_firestore.dart'; // Importación de la biblioteca Firestore de Firebase
 import 'package:firebase_storage/firebase_storage.dart'; // Importación de la biblioteca de almacenamiento de Firebase
 import 'package:foodbuddy/screens/login.dart';
-import 'package:foodbuddy/screens/notifies.dart'; // Importación de la pantalla de notificaciones
-import 'package:image_picker/image_picker.dart'; // Importación de la biblioteca para seleccionar imágenes desde el dispositivo
+import 'package:foodbuddy/screens/notifies.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,76 +17,58 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final _formKey = GlobalKey<FormState>(); // Clave global para el formulario
-  String? _name; // Variable para almacenar el nombre del usuario
-  String? _description; // Variable para almacenar la descripción del usuario
-  String? _address; // Variable para almacenar la dirección del usuario
-  String? _photoUrl; // Variable para almacenar la URL de la foto del usuario
-  bool _notifications =
-      false; // Variable para controlar la configuración de notificaciones
-  String? _preferences; // Variable para almacenar las preferencias del usuario
-
-  final picker =
-      ImagePicker(); // Instancia de la clase ImagePicker para seleccionar imágenes
+  final _formKey = GlobalKey<FormState>();
+  String? _name;
+  String? _description;
+  String? _address;
+  String? _photoUrl;
+  bool _notifications = false;
+  String? _preferences;
+  final picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-    final User? user = FirebaseAuth
-        .instance.currentUser; // Obtiene el usuario actualmente autenticado
-    final client = FirebaseFirestore
-        .instance // Obtiene la colección 'client' de Firestore
+    final User? user = FirebaseAuth.instance.currentUser;
+    final client = FirebaseFirestore.instance
         .collection('client')
-        .doc(user
-            ?.uid) // Obtiene el documento asociado al UID del usuario actual
-        .snapshots(); // Crea un flujo de instantáneas de datos del documento
+        .doc(user?.uid)
+        .snapshots();
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              if (FirebaseAuth.instance.currentUser != null) {
-                IconButton(
-                  icon: const Icon(Icons.logout),
-                  onPressed: () {
-                    // Implementa la función de cierre de sesión
-                    FirebaseAuth.instance.signOut();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                );
-              }
-            },
-            icon: const Icon(Icons.logout)),
+        leading: FirebaseAuth.instance.currentUser != null
+            ? IconButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                icon: const Icon(Icons.logout),
+              )
+            : null,
         title: const Text(
           'Perfil',
           style: TextStyle(fontWeight: FontWeight.bold),
-        ), // Título de la barra de la aplicación, que muestra "Perfil"
+        ),
         actions: <Widget>[
-          // Lista de acciones en la barra de la aplicación
           IconButton(
-            // Botón de icono
-            icon: const Icon(Icons.notifications), // Icono de notificaciones
+            icon: const Icon(Icons.notifications),
             onPressed: () {
-              // Acción cuando se presiona el botón de notificaciones
               Navigator.push(
-                // Navega a la página de notificaciones (NotifiesPage)
                 context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        NotifiesPage()), // Crea una ruta para la página de notificaciones
+                MaterialPageRoute(builder: (context) => NotifiesPage()),
               );
             },
           )
         ],
       ),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream:
-            client, // Utiliza el flujo de instantáneas del documento del usuario
+        stream: client,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const CircularProgressIndicator(); // Muestra un indicador de progreso si no hay datos disponibles
+            return const CircularProgressIndicator();
           }
 
           final clientData = snapshot.data!
@@ -103,6 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ? NetworkImage(_photoUrl!)
                               : const NetworkImage(
                                       "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg")
+                                  as ImageProvider,
                                   as ImageProvider,
                         ),
                         const SizedBox(height: 16),
@@ -129,20 +116,16 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         TextFormField(
-                          initialValue: clientData?[
-                              'name'], // Establece el valor inicial del campo con el nombre del cliente
-                          decoration: const InputDecoration(
-                              labelText:
-                                  'Nombre'), // Etiqueta del campo de entrada de texto
+                          initialValue: clientData?['name'],
+                          decoration:
+                              const InputDecoration(labelText: 'Nombre'),
                           validator: (value) {
-                            // Función de validación que verifica si se ingresó un nombre válido
                             if (value == null || value.isEmpty) {
                               return 'Por favor, ingresa tu nombre';
                             }
-                            return null; // Retorna nulo si el nombre es válido
+                            return null;
                           },
-                          onSaved: (value) => _name =
-                              value, // Guarda el valor ingresado en la variable _name
+                          onSaved: (value) => _name = value,
                         ),
                         const SizedBox(height: 8), // Espacio vertical
                         Text(
@@ -151,104 +134,74 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         const SizedBox(height: 16),
                         TextFormField(
-                          initialValue: clientData?[
-                              'description'], // Establece el valor inicial del campo con la descripción del cliente
-                          decoration: const InputDecoration(
-                              labelText:
-                                  'Descripción'), // Etiqueta del campo de entrada de texto
+                          initialValue: clientData?['description'],
+                          decoration:
+                              const InputDecoration(labelText: 'Descripción'),
                           validator: (value) {
-                            // Función de validación que verifica si se ingresó una descripción válida
                             if (value == null || value.isEmpty) {
                               return 'Por favor, ingresa una descripción';
                             }
-                            return null; // Retorna nulo si la descripción es válida
+                            return null;
                           },
-                          onSaved: (value) => _description =
-                              value, // Guarda el valor ingresado en la variable _description
+                          onSaved: (value) => _description = value,
                         ),
-                        const SizedBox(height: 16), // Espacio vertical
+                        const SizedBox(height: 16),
                         TextFormField(
-                          initialValue: clientData?[
-                              'address'], // Establece el valor inicial del campo con la dirección del cliente
-                          decoration: const InputDecoration(
-                              labelText:
-                                  'Dirección'), // Etiqueta del campo de entrada de texto
+                          initialValue: clientData?['address'],
+                          decoration:
+                              const InputDecoration(labelText: 'Dirección'),
                           validator: (value) {
-                            // Función de validación que verifica si se ingresó una dirección válida
                             if (value == null || value.isEmpty) {
                               return 'Por favor, ingresa tu dirección';
                             }
-                            return null; // Retorna nulo si la dirección es válida
+                            return null;
                           },
-                          onSaved: (value) => _address =
-                              value, // Guarda el valor ingresado en la variable _address
+                          onSaved: (value) => _address = value,
                         ),
                         const SizedBox(height: 16),
                         DropdownButtonFormField<String>(
-                          value: clientData?[
-                              'preferences'], // Establece el valor inicial del campo con las preferencias del cliente
+                          value: clientData?['preferences'],
                           decoration: const InputDecoration(
-                              labelText:
-                                  'Preferencias alimenticias' // Etiqueta del campo de selección desplegable
-                              ),
+                              labelText: 'Preferencias alimenticias'),
                           onChanged: (value) {
-                            // Función que se ejecuta cuando se selecciona una opción
                             setState(() {
-                              // Establece el estado con las nuevas preferencias seleccionadas
                               _preferences = value;
                             });
                           },
                           items: const [
-                            // Lista de elementos desplegables con las opciones de preferencias alimenticias
                             DropdownMenuItem(
-                              child: Text(
-                                  'Vegetariano'), // Etiqueta del elemento desplegable
-                              value:
-                                  'vegetarian', // Valor asociado al elemento desplegable
+                              child: Text('Vegetariano'),
+                              value: 'vegetarian',
                             ),
                             DropdownMenuItem(
-                              child: Text(
-                                  'Vegano'), // Etiqueta del elemento desplegable
-                              value:
-                                  'vegan', // Valor asociado al elemento desplegable
+                              child: Text('Vegano'),
+                              value: 'vegan',
                             ),
                             DropdownMenuItem(
-                              child: Text(
-                                  'Diabético'), // Etiqueta del elemento desplegable
-                              value:
-                                  'diabetic', // Valor asociado al elemento desplegable
+                              child: Text('Diabético'),
+                              value: 'diabetic',
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
                         SwitchListTile(
-                          title: const Text(
-                              'Notificaciones'), // Título del interruptor para las notificaciones
-                          value:
-                              _notifications, // Valor actual del interruptor (activado o desactivado)
+                          title: const Text('Notificaciones'),
+                          value: _notifications,
                           onChanged: (value) {
-                            // Función que se ejecuta cuando el usuario cambia el estado del interruptor
                             setState(() {
-                              // Establece el estado con el nuevo valor del interruptor
                               _notifications = value;
                             });
                           },
-                          activeTrackColor: Colors.green.withAlpha(
-                              50), // Color de la pista del interruptor cuando está activado
-                          activeColor: Colors
-                              .green, // Color del botón del interruptor cuando está activado
+                          activeTrackColor: Colors.green.withAlpha(50),
+                          activeColor: Colors.green,
                         ),
                         const SizedBox(height: 16),
                         ElevatedButton(
                           onPressed: () async {
-                            // Función que se ejecuta cuando se presiona el botón
                             if (_formKey.currentState!.validate()) {
-                              // Verifica si el formulario es válido
-                              _formKey.currentState!
-                                  .save(); // Guarda los valores del formulario
+                              _formKey.currentState!.save();
 
                               try {
-                                // Actualiza los datos del usuario en la base de datos
                                 await FirebaseFirestore.instance
                                     .collection('client')
                                     .doc(user?.uid)
@@ -261,14 +214,12 @@ class _ProfilePageState extends State<ProfilePage> {
                                   'preferences': _preferences,
                                 });
 
-                                // Muestra un mensaje de éxito al guardar los datos
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('Los datos se han guardado'),
                                   ),
                                 );
                               } catch (e) {
-                                // Muestra un mensaje de error si ocurre un problema al guardar los datos
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                     content: Text('Error al guardar los datos'),
@@ -277,13 +228,10 @@ class _ProfilePageState extends State<ProfilePage> {
                               }
                             }
                           },
-                          child:
-                              const Text('Guardar cambios'), // Texto del botón
+                          child: const Text('Guardar cambios'),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor:
-                                Colors.green, // Color de fondo del botón
-                            foregroundColor:
-                                Colors.white, // Color del texto del botón
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
                           ),
                         ),
                       ],

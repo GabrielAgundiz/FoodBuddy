@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:foodbuddy/models/food.dart';
-import 'package:foodbuddy/screens/catscreen.dart';
 import 'package:foodbuddy/screens/descripcion.dart';
-import 'package:foodbuddy/screens/diabeticscreen.dart';
-import 'package:foodbuddy/screens/ketoscreen.dart';
-import 'package:foodbuddy/screens/veganscreen.dart';
-import 'package:foodbuddy/screens/vegetarianscreen.dart';
 import 'package:foodbuddy/service/food_service.dart';
 import 'package:foodbuddy/widgets/ctfl.dart';
 
@@ -48,9 +43,29 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       searchResults = foods
           .where((food) =>
-              food.name.toLowerCase().contains(searchTerm.toLowerCase()))
+              food.name.toLowerCase().contains(searchTerm.toLowerCase()) &&
+              _applyCategoryFilter(food))
           .toList(); // Aplicar filtro
     });
+  }
+
+  bool _applyCategoryFilter(Food food) {
+    if (isAll) {
+      return true;
+    }
+    if (isVegan && food.category.toLowerCase() == 'vegano') {
+      return true;
+    }
+    if (isVegetarian && food.category.toLowerCase() == 'vegetariano') {
+      return true;
+    }
+    if (isDiabetic && food.category.toLowerCase() == 'diabetico') {
+      return true;
+    }
+    if (isKeto && food.category.toLowerCase() == 'keto') {
+      return true;
+    }
+    return false;
   }
 
   Future<List<Food>> buscarEnBaseDeDatos(String searchTerm) async {
@@ -165,6 +180,8 @@ class _SearchPageState extends State<SearchPage> {
                                     onTap: () {
                                       setState(() {
                                         isAll = !isAll;
+                                        _loadSearchResults(
+                                            searchController.text);
                                       });
                                     },
                                     child: Row(
@@ -174,6 +191,8 @@ class _SearchPageState extends State<SearchPage> {
                                           onChanged: (bool? value) {
                                             setState(() {
                                               isAll = value ?? false;
+                                              _loadSearchResults(
+                                                  searchController.text);
                                             });
                                           },
                                         ),
@@ -185,6 +204,8 @@ class _SearchPageState extends State<SearchPage> {
                                     onTap: () {
                                       setState(() {
                                         isVegan = !isVegan;
+                                        _loadSearchResults(
+                                            searchController.text);
                                       });
                                     },
                                     child: Row(
@@ -194,6 +215,8 @@ class _SearchPageState extends State<SearchPage> {
                                           onChanged: (bool? value) {
                                             setState(() {
                                               isVegan = value ?? false;
+                                              _loadSearchResults(
+                                                  searchController.text);
                                             });
                                           },
                                         ),
@@ -205,6 +228,8 @@ class _SearchPageState extends State<SearchPage> {
                                     onTap: () {
                                       setState(() {
                                         isVegetarian = !isVegetarian;
+                                        _loadSearchResults(
+                                            searchController.text);
                                       });
                                     },
                                     child: Row(
@@ -214,6 +239,8 @@ class _SearchPageState extends State<SearchPage> {
                                           onChanged: (bool? value) {
                                             setState(() {
                                               isVegetarian = value ?? false;
+                                              _loadSearchResults(
+                                                  searchController.text);
                                             });
                                           },
                                         ),
@@ -225,6 +252,8 @@ class _SearchPageState extends State<SearchPage> {
                                     onTap: () {
                                       setState(() {
                                         isDiabetic = !isDiabetic;
+                                        _loadSearchResults(
+                                            searchController.text);
                                       });
                                     },
                                     child: Row(
@@ -234,6 +263,8 @@ class _SearchPageState extends State<SearchPage> {
                                           onChanged: (bool? value) {
                                             setState(() {
                                               isDiabetic = value ?? false;
+                                              _loadSearchResults(
+                                                  searchController.text);
                                             });
                                           },
                                         ),
@@ -245,6 +276,8 @@ class _SearchPageState extends State<SearchPage> {
                                     onTap: () {
                                       setState(() {
                                         isKeto = !isKeto;
+                                        _loadSearchResults(
+                                            searchController.text);
                                       });
                                     },
                                     child: Row(
@@ -254,6 +287,8 @@ class _SearchPageState extends State<SearchPage> {
                                           onChanged: (bool? value) {
                                             setState(() {
                                               isKeto = value ?? false;
+                                              _loadSearchResults(
+                                                  searchController.text);
                                             });
                                           },
                                         ),
@@ -287,258 +322,83 @@ class _SearchPageState extends State<SearchPage> {
                         height: 24,
                       ),
                       SingleChildScrollView(
-                        scrollDirection: Axis
-                            .horizontal, // Establecemos la dirección del scroll en horizontal
+                        scrollDirection:
+                            Axis.horizontal, // Cambia la dirección del scroll
                         child: Row(
-                          children: [
-                            searchSuggestionsItem("Vegetarianos"),
-                            searchSuggestionsItem("Veganos"),
-                            searchSuggestionsItem("Diabéticos"),
-                            searchSuggestionsItem("Antojos"),
-                            searchSuggestionsItem("Keto"),
-                          ],
+                          children: previousSearches.map((search) {
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  searchController.text = search;
+                                  isAll = true; // Establecer isAll en true
+                                  buscarEnBaseDeDatos(
+                                      search); // Realiza la búsqueda al hacer clic en la recomendación
+                                  showGridView =
+                                      true; // Muestra los resultados de búsqueda en el GridView
+                                  showRecommendations =
+                                      false; // Oculta las recomendaciones
+                                });
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                margin: const EdgeInsets.only(right: 8),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  search,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 16,
                       ),
                     ],
                   ),
                 ),
-              Expanded(
-                child: showGridView
-                    ? ListView.builder(
-                        itemCount: searchResults.length,
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (context, index) {
-                          final item = searchResults[index];
-                          return GestureDetector(
-                            onTap: () {
-                              navigateToDescScreen(item);
-                            },
-                            child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 60,
-                                            height: 60,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              image: DecorationImage(
-                                                image: NetworkImage(item.image),
-                                                fit: BoxFit.fill,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.45,
-                                                ),
-                                                child: Text(
-                                                  item.name,
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.bold,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.45,
-                                                ),
-                                                child: Text(
-                                                  "${item.restaurant} - ${item.category}",
-                                                  style: TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    color: Colors.grey.shade400,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.local_fire_department,
-                                            size: 20,
-                                            color: Colors.grey.shade400,
-                                          ),
-                                          Text(
-                                            "${item.cal} Cal",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.grey.shade400,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Center(
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.15,
-                                      height: 2,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      )
-                    : Center(
-                        child: Container(
-                            padding: const EdgeInsets.only(bottom: 60),
-                            child: Text(
-                              "Introduce un término de búsqueda",
-                              style: TextStyle(color: Colors.grey.shade500),
-                            )),
-                      ),
-              ),
+              if (showGridView)
+                Expanded(
+                  child: GridView.builder(
+                    itemCount: searchResults.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, // Número de columnas en el GridView
+                      childAspectRatio:
+                          0.75, // Relación de aspecto de los hijos
+                    ),
+                    itemBuilder: (context, index) {
+                      Food food = searchResults[index];
+                      return GestureDetector(
+                        onTap: () => navigateToDescScreen(food),
+                        child: PlatilloWidget(food: food),
+                      );
+                    },
+                  ),
+                ),
             ],
           ),
         ),
       ),
     );
   }
+}
 
-  Widget previousSearchesItem(int index, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        onTap: () {
-          // Al hacer clic en el elemento, navegar a DescScreen con el elemento de búsqueda seleccionado
-          String selectedSearch = previousSearches[index];
-          Food selectedFood = searchResults.firstWhere(
-              (food) => food.name == selectedSearch,
-              orElse: () => Food('', '', '', '', '', 0, 0, 0, 0, '', ''));
-          navigateToDescScreen(selectedFood);
-        },
-        child: Dismissible(
-          key: ValueKey<int>(index),
-          onDismissed: (DismissDirection dir) {
-            setState(() {});
-            previousSearches.removeAt(index);
-          },
-          child: Row(
-            children: [
-              const Icon(
-                Icons.restore,
-                color: Colors.grey,
-              ),
-              const SizedBox(width: 10),
-              Text(
-                previousSearches[index],
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2!
-                    .copyWith(color: Colors.black),
-              ),
-              const Spacer(),
-              const Icon(
-                Icons.call_made_outlined,
-                color: Colors.grey,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+class PlatilloWidget extends StatelessWidget {
+  final Food food;
 
-  Widget searchSuggestionsItem(String text) {
-    return GestureDetector(
-      onTap: () {
-        // Aquí debes manejar la navegación a la pantalla correspondiente
-        switch (text) {
-          case "Vegetarianos":
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const VegetarianScreen()),
-            );
-            break;
-          case "Veganos":
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const VeganScreen()),
-            );
-            break;
-          case "Diabéticos":
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const DiabeticScreen()),
-            );
-            break;
-          case "Antojos":
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const CategoryScreen()),
-            );
-            break;
-          case "Keto":
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const KetoScreen()),
-            );
-            break;
-          default:
-            // Por si acaso, no debería entrar aquí
-            break;
-        }
-      },
-      child: Container(
-        margin: const EdgeInsets.only(left: 8),
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: Text(
-          text,
-          style: Theme.of(context)
-              .textTheme
-              .bodyText2!
-              .copyWith(color: Colors.green),
-        ),
+  PlatilloWidget({required this.food});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          Image.network(food.image),
+          Text(food.name),
+          Text(food.category),
+        ],
       ),
     );
   }
