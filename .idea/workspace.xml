@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Configuracion notificaciones horas">
+    <list default="true" id="5560e784-ecf7-47c7-bbaa-2d4485ffb0b4" name="Changes" comment="Correcciones diseño profile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/descripcion.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/screens/profile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/foodbuddy/lib/widgets/food_card.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -267,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716983849501</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Correcciones diseño profile">
+      <option name="closed" value="true" />
+      <created>1716984619504</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1716984619504</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -306,7 +313,8 @@
     <MESSAGE value="Solucion de dependencias erroneas de notificaciones" />
     <MESSAGE value="Correccion apartado busqueda" />
     <MESSAGE value="Configuracion notificaciones horas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Configuracion notificaciones horas" />
+    <MESSAGE value="Correcciones diseño profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcciones diseño profile" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

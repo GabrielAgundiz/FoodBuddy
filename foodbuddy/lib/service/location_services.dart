@@ -3,7 +3,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 class LocationService {
-  final String key = 'AIzaSyBU_R5fJE_EBSIqoAiXyTL5xOV9fIaJUQ0';
+  final String key = 'Api-key';
 
   Future<String> getLugarId(String input) async {
     final String url =

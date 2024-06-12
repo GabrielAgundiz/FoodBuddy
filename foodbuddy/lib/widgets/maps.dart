@@ -42,7 +42,7 @@ class MapSampleState extends State<MapSample> {
   Future<void> _setInitialLocation() async {
     String placeId = await _locationService.getLugarId(widget.lugar);
     var response = await http.get(Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=AIzaSyBU_R5fJE_EBSIqoAiXyTL5xOV9fIaJUQ0'));
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=APIKEY'));
     var json = convert.jsonDecode(response.body);
     var places = json['result'] as Map<String, dynamic>;
 
